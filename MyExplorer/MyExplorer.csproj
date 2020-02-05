@@ -103,16 +103,21 @@
     <Compile Include="Model\DesSecurity.cs" />
     <Compile Include="Model\RegEditor.cs" />
     <Compile Include="Model\Users.cs" />
+    <Compile Include="ProcessWindow.xaml.cs">
+      <DependentUpon>ProcessWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\FileLogger.cs" />
     <Compile Include="Services\JsonSerializer.cs" />
+    <Compile Include="Model\MainWorker.cs" />
     <Compile Include="Services\Navigator.cs" />
     <Compile Include="Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Journal.cs" />
     <Compile Include="ViewModel\Main.cs" />
-    <Compile Include="ViewModel\MainWindow.cs" />
+    <Compile Include="ViewModel\SettingWindow.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
+    <Compile Include="ViewModel\ProcessWindow.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\Settings.cs" />
     <Compile Include="ViewModel\StatusBar.cs" />
@@ -137,7 +142,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="ProcessWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -148,8 +157,8 @@
     <Compile Include="Controls\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="SettingWindow.xaml.cs">
+      <DependentUpon>SettingWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Splash.xaml">

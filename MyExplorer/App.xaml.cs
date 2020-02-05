@@ -12,14 +12,15 @@ namespace MyExplorer
             LoadSettings();
             Model.Users.LoadAll();
 
-            if (Model.Users.IsAdmin())
+            if (!Model.Users.IsAdmin())
             {
-                new MainWindow(new ViewModel.MainWindow());
+                new SettingWindow(new ViewModel.SettingWindow());
                 splash.Close();
             }
             else
             {
-
+                new ProcessWindow(new ViewModel.ProcessWindow());
+                splash.Close();
             }
         }
 

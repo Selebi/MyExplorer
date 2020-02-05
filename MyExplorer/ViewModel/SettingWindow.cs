@@ -2,9 +2,9 @@
 
 namespace MyExplorer.ViewModel
 {
-    internal class MainWindow : BaseVM
+    internal class SettingWindow : BaseVM
     {
-        public MainWindow()
+        public SettingWindow()
         {
             Services.Navigator.NewFrame += (c) => { Pages = new Frame() { Content = c }; };
             Services.Navigator.SetFrame(Services.Navigator.FrameName.Main);

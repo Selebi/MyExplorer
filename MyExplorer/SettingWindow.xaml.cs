@@ -4,9 +4,9 @@ using System.Windows.Input;
 
 namespace MyExplorer
 {
-    public partial class MainWindow : Window
+    public partial class SettingWindow : Window
     {
-        public MainWindow(object ViewModel)
+        public SettingWindow(object ViewModel)
         {
             InitializeComponent();
             DataContext = ViewModel;
