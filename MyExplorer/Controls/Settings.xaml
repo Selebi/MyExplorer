@@ -21,16 +21,16 @@
                        Text="Настройки домена" FontSize="14"/>
                 <TextBlock Margin="10,24,10,0" TextWrapping="NoWrap" Text="Домен" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
                 <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding DomainName}" 
-                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}"/>
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
                 <TextBlock Margin="10,70,10,0" TextWrapping="NoWrap" Text="Логин" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
                 <TextBox Height="23" Margin="10,85,10,0" TextWrapping="NoWrap" Text="{Binding DomainLogin}" 
-                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}"/>
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
                 <TextBlock Margin="10,116,10,0" TextWrapping="NoWrap" Text="Пароль" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
                 <TextBox Height="23" Margin="10,131,10,0" TextWrapping="NoWrap" Text="{Binding DomainPassword}" 
-                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}"/>
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
                 <TextBlock Margin="10,162,10,0" TextWrapping="NoWrap" Text="Имя группы администраторов домена" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
                 <TextBox Height="23" Margin="10,177,10,0" TextWrapping="NoWrap" Text="{Binding DoaminAdminGroup}" 
-                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}"/>
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
             </Grid>
         </Border>
         <Border HorizontalAlignment="Left" Height="75" Margin="276,148,0,0" 
@@ -43,7 +43,7 @@
                        Text="Локальные настройки" FontSize="14"/>
                 <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Имя группы администраторов" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
                 <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding LocalAdminGroup}" 
-                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}"/>
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
             </Grid>
         </Border>
         <Border HorizontalAlignment="Left" Height="115" Margin="276,10,0,0" 
@@ -56,7 +56,7 @@
                        Text="Настройки программы" FontSize="14"/>
                 <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Файл логов" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
                 <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding LogFile}" 
-                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}"/>
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
                 <CheckBox Content="Писать логи в файл" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Foreground="#FF5D5D5D"
                           Style="{DynamicResource CheckBoxStyle}" IsChecked="{Binding LogEnabled}"/>
             </Grid>

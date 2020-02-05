@@ -2,6 +2,14 @@
 {
     internal class Main : BaseVM
     {
+        public Main()
+        {
+            if (Model.RegEditor.ExplorerRegistred)
+                _regButtonContent = "Разрегистрировать";
+            else
+                _regButtonContent = "Зарегистрировать";
+        }
+
         string _helloText = "Место для вашей рекламы!";
         public string HelloText
         {
@@ -13,14 +21,14 @@
             }
         }
 
+        string _regButtonContent;
         public string RegButtonContent
         {
-            get
+            get => _regButtonContent;
+            set
             {
-                if (Model.RegEditor.ExplorerRegistred)
-                    return "Разрегистрировать";
-                else
-                    return "Зарегистрировать";
+                _regButtonContent = value;
+                OnPropertyChanged();
             }
         }
 
@@ -55,12 +63,13 @@
                 if (Model.RegEditor.ExplorerRegistred)
                 {
                     Model.RegEditor.RegWindowsExplorer();
+                    RegButtonContent = "Зарегистрировать";
                 }
                 else
                 {
                     Model.RegEditor.RegSintekExplorer();
+                    RegButtonContent = "Разрегистрировать";
                 }
-                OnPropertyChanged(RegButtonContent);
             });
         }
     }
