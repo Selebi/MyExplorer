@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:MyExplorer.Themes">
+    <SolidColorBrush x:Key="BorderCard.Static.BorderBrush" Color="#FF006EB2"/>
+    <Style x:Key="BorderCard" TargetType="{x:Type Border}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderCard.Static.BorderBrush}"/>
+        <Setter Property="Background" Value="White"/>
+    </Style>
+
+</ResourceDictionary>

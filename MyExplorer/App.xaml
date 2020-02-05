@@ -1,0 +1,19 @@
+﻿<Application x:Class="MyExplorer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:MyExplorer">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/ButtonBlueStyle.xaml" />
+                <ResourceDictionary Source="Themes/ButtonWhiteStyle.xaml" />
+                <ResourceDictionary Source="Themes/ListBoxStyle.xaml" />
+                <ResourceDictionary Source="Themes/ButtonMenuStyle.xaml" />
+                <ResourceDictionary Source="Themes/LabelStyle.xaml" />
+                <ResourceDictionary Source="Themes/TextBoxStyle.xaml" />
+                <ResourceDictionary Source="Themes/BorderCardStyle.xaml" />
+                <ResourceDictionary Source="Themes/CheckBoxStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
