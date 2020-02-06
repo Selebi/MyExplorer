@@ -14,7 +14,7 @@ namespace MyExplorer
             LoadSettings();
             Model.Users.LoadAll();
 
-            if (!Model.Users.IsAdmin())
+            if (Model.Users.IsAdmin())
             {
                 new SettingWindow(new ViewModel.SettingWindow());
                 splash.Close();

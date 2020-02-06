@@ -23,6 +23,9 @@
                 <Button Margin="8, 4" Style="{StaticResource ButtonsBlue}" Command="{Binding RegExplorer}">
                     <TextBlock Text="{Binding RegButtonContent}"/>
                 </Button>
+                <Button Margin="8, 4" Style="{StaticResource ButtonsBlue}" Command="{Binding StartStopExplorer}">
+                    <TextBlock Text="{Binding StartStopExplorerButtonContent}"/>
+                </Button>
             </StackPanel>
             <Border BorderBrush="Black" CornerRadius="2" Grid.Column="1" HorizontalAlignment="Stretch" Margin="2, 8" VerticalAlignment="Stretch" Background="#FF9DA4B8"/>
             <TextBlock Grid.Column="2" Margin="8" TextWrapping="NoWrap" HorizontalAlignment="Stretch" Text="Добро пожаловать" TextAlignment="Center" VerticalAlignment="Top" FontSize="32"/>
