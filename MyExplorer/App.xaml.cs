@@ -4,6 +4,8 @@ namespace MyExplorer
 {
     public partial class App : Application
     {
+        Services.HotkeyLocker hotkeyLocker;
+
         protected override void OnStartup(StartupEventArgs e)
         {
             Splash splash = new Splash();
@@ -22,6 +24,8 @@ namespace MyExplorer
                 new ProcessWindow(new ViewModel.ProcessWindow());
                 splash.Close();
             }
+            hotkeyLocker = new Services.HotkeyLocker();
+            hotkeyLocker.SetHook();
         }
 
         void LoadSettings()
