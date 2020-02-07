@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace MyExplorer.Converters
 {
-    public class DataUserConverter : IValueConverter
+    class DataUserConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

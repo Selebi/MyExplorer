@@ -1,24 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace MyExplorer.Converters
 {
-    class ColorConverter : IValueConverter
+    class RegExplorerConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool state)
+            if(value is bool v)
             {
-                if (state)
-                {
-                    return new SolidColorBrush(Colors.LightGreen);
-                }
+                if (v)
+                    return "Разрегистрировать";
                 else
-                {
-                    return new SolidColorBrush(Colors.Red);
-                }
+                    return "Зарегистрировать";
             }
             return null;
         }

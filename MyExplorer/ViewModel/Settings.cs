@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace MyExplorer.ViewModel
 {
@@ -74,8 +75,21 @@ namespace MyExplorer.ViewModel
         string _localAdminGroup = "Администраторы";
         string _domainName = "intranet-sintek.net";
         string _domainAdminGroup = "Администраторы домена";
-        string _domainLogin = "v.nikitin";
-        string _domainPassword = "Fifilafume3108";
+        string _domainLogin = "login";
+        string _domainPassword = "pass";
+        List<string> _hotKeys = new List<string>(new string[] { "Alt+Tab", "Alt+F4", "Ctrl+C", "Ctrl+V", "Win+Shift+S" });
+
+        [DataMember]
+        public List<string> HotKeys 
+        {
+            get => _hotKeys;
+            set
+            {
+                _hotKeys = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         [DataMember]
         public bool LogEnabled

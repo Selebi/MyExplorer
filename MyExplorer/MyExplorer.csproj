@@ -98,6 +98,8 @@
     </Compile>
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\DataUserConverter.cs" />
+    <Compile Include="Converters\RegExplorerConverter.cs" />
+    <Compile Include="Converters\WinExplorerConverter.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Model\DesSecurity.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Services\JsonSerializer.cs" />
     <Compile Include="Model\MainWorker.cs" />
     <Compile Include="Services\Navigator.cs" />
+    <Compile Include="Services\Timers.cs" />
     <Compile Include="Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>

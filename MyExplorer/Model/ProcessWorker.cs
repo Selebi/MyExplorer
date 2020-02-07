@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyExplorer.Model
@@ -22,6 +23,19 @@ namespace MyExplorer.Model
         public static void StartProcess(string file)
         {
             Process.Start(file);
+        }
+
+        public static void StartExplorer()
+        {
+            if (RegEditor.IsSintekExplorerRegistred())
+            {
+                RegEditor.RegWindowsExplorer();
+                Process.Start(@"C:\Windows\explorer.exe");
+                Thread.Sleep(500); // Костыли, переписать!
+                RegEditor.RegSintekExplorer();
+            }
+            else
+                Process.Start(@"C:\Windows\explorer.exe");
         }
     }
 }

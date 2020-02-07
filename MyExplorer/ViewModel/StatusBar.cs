@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyExplorer.ViewModel
+﻿namespace MyExplorer.ViewModel
 {
     internal class StatusBar : BaseVM
     {
         public StatusBar()
         {
+            WinExplorerStatus = Model.ProcessWorker.IsProcessWork("explorer");
             RegStatus = Model.RegEditor.IsSintekExplorerRegistred();
-            Model.RegEditor.RegistredChanged += b => { RegStatus = b; };
+
+            Services.Timers.RegExplorerChange += b => { RegStatus = b; };
+            Services.Timers.WinExplorerChange += b => { WinExplorerStatus = b; };
         }
 
         bool _regstatus;
@@ -21,6 +18,17 @@ namespace MyExplorer.ViewModel
             set
             {
                 _regstatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+        bool _winExplorerStatus;
+        public bool WinExplorerStatus
+        {
+            get => _winExplorerStatus;
+            set
+            {
+                _winExplorerStatus = value;
                 OnPropertyChanged();
             }
         }

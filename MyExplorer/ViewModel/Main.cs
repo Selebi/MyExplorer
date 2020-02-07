@@ -4,14 +4,11 @@
     {
         public Main()
         {
-            if (Model.RegEditor.ExplorerRegistred)
-                _regButtonContent = "Разрегистрировать";
-            else
-                _regButtonContent = "Зарегистрировать";
-            if (Model.ProcessWorker.IsProcessWork("explorer"))
-                _startStopExplorerButtonContent = "Убить проводник";
-            else
-                _startStopExplorerButtonContent = "Запустить проводник";
+            _regButtonState = Model.RegEditor.ExplorerRegistred;
+            _startStopExplorerButtonState = Model.ProcessWorker.IsProcessWork("explorer");
+
+            Services.Timers.RegExplorerChange += s => { RegButtonState = s; };
+            Services.Timers.WinExplorerChange += s => { StartStopExplorerButtonState = s; };
         }
 
         string _helloText = "Место для вашей рекламы!";
@@ -25,24 +22,24 @@
             }
         }
 
-        string _regButtonContent;
-        public string RegButtonContent
+        bool _regButtonState;
+        public bool RegButtonState
         {
-            get => _regButtonContent;
+            get => _regButtonState;
             set
             {
-                _regButtonContent = value;
+                _regButtonState = value;
                 OnPropertyChanged();
             }
         }
 
-        string _startStopExplorerButtonContent;
-        public string StartStopExplorerButtonContent
+        bool _startStopExplorerButtonState;
+        public bool StartStopExplorerButtonState
         {
-            get => _startStopExplorerButtonContent;
+            get => _startStopExplorerButtonState;
             set
             {
-                _startStopExplorerButtonContent = value;
+                _startStopExplorerButtonState = value;
                 OnPropertyChanged();
             }
         }
@@ -78,12 +75,10 @@
                 if (Model.RegEditor.ExplorerRegistred)
                 {
                     Model.RegEditor.RegWindowsExplorer();
-                    RegButtonContent = "Зарегистрировать";
                 }
                 else
                 {
                     Model.RegEditor.RegSintekExplorer();
-                    RegButtonContent = "Разрегистрировать";
                 }
             });
         }
@@ -95,12 +90,10 @@
                 if (Model.ProcessWorker.IsProcessWork("explorer"))
                 {
                     Model.ProcessWorker.KillProcess("explorer");
-                    StartStopExplorerButtonContent = "Запустить проводник";
                 }
                 else
                 {
-                    Model.ProcessWorker.StartProcess(@"C:\Windows\explorer.exe");
-                    StartStopExplorerButtonContent = "Убить проводник";
+                    Model.ProcessWorker.StartExplorer();
                 }
             });
         }

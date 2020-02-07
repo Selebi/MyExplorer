@@ -26,6 +26,9 @@ namespace MyExplorer
             }
             hotkeyLocker = new Services.HotkeyLocker();
             hotkeyLocker.SetHook();
+
+            Services.Timers.StartRegExplorerTimer(500);
+            Services.Timers.StartWinExplorerTimer(500);
         }
 
         void LoadSettings()

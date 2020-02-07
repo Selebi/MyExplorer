@@ -7,6 +7,13 @@ namespace MyExplorer.Services
 {
     public class HotkeyLocker
     {
+        public HotkeyLocker()
+        {
+            settings = ViewModel.Settings.GetInstance();
+        }
+
+        private ViewModel.Settings settings;
+
         private const int WH_KEYBOARD_LL = 13;
 
         private LowLevelKeyboardProcDelegate m_callback;
@@ -47,9 +54,20 @@ namespace MyExplorer.Services
             { 39, "Right" },
             { 40, "Down" },
             { 44, "PrtSc" },
+            { 45, "Insert" },
             { 46, "Delete" },
             { 91, "Win" },
             { 93, "Menu" },
+            { 96, "Num0" },
+            { 97, "Num1" },
+            { 98, "Num2" },
+            { 99, "Num3" },
+            { 100, "Num4" },
+            { 101, "Num5" },
+            { 102, "Num6" },
+            { 103, "Num7" },
+            { 104, "Num8" },
+            { 105, "Num9" },
             { 107, "+" },
             { 109, "-" },
             { 112, "F1" },
@@ -86,21 +104,14 @@ namespace MyExplorer.Services
 
         private IntPtr LowLevelKeyboardHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            if (nCode < 0)
-            {
-                return CallNextHookEx(m_hHook, nCode, wParam, lParam);
-            }
+            if (nCode < 0) return CallNextHookEx(m_hHook, nCode, wParam, lParam);
             else
             {
-                var khs = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
-
-                Debug.Print($"{khs.VirtualKeyCode.ToString()}, {wParam}, {khs.ScanCode}, {(char)khs.VirtualKeyCode}");
-
-                if (khs.VirtualKeyCode == 9 && wParam.ToInt32() == 260 && khs.ScanCode == 15) //alt+tab
+                int KeyCode = ((KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct))).VirtualKeyCode;
+                
+                if (true) 
                 {
-                    System.Console.WriteLine("Alt+Tab pressed!");
-                    IntPtr val = new IntPtr(1);
-                    return val;
+                    return new IntPtr(1);
                 }
                 else
                 {
