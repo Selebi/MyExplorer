@@ -36,7 +36,7 @@ namespace MyExplorer.Services
         [DllImport("user32.dll", SetLastError = true)]
         private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
 
-        private Dictionary<int, string> keys = new Dictionary<int, string>()
+        private static Dictionary<int, string> Keykeys = new Dictionary<int, string>()
         {
             { 8, "BackSpace" },
             { 9, "Tab" },
@@ -102,13 +102,39 @@ namespace MyExplorer.Services
             { 222, "\"" },
         };
 
+        static class hotkeyState 
+        {
+            static Stack<string> keys = new Stack<string>(4);
+            public static void AddKey(int keycode)
+            {
+                string buf = "";
+                if (keycode >= 65 && keycode <= 90)
+                    buf += (char)keycode;
+                else
+                {
+                    if (Keykeys.TryGetValue(keycode, out string val))
+                    {
+                        buf = val;
+                    }
+                }
+                if (keys.Count == 0 || buf != keys.Peek())
+                    keys.Push(buf);
+            }
+
+            public static string GetKeys()
+            {
+                return "";
+            }
+        }
+
         private IntPtr LowLevelKeyboardHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            if (nCode < 0) return CallNextHookEx(m_hHook, nCode, wParam, lParam);
+            if (nCode < 0 || wParam.ToInt32() == 257 || wParam.ToInt32() == 261) return CallNextHookEx(m_hHook, nCode, wParam, lParam);
             else
             {
-                int KeyCode = ((KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct))).VirtualKeyCode;
-                
+                var key = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
+                int KeyCode = (key).VirtualKeyCode;
+                hotkeyState.AddKey(KeyCode);
                 if (true) 
                 {
                     return new IntPtr(1);
