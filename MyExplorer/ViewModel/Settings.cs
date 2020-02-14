@@ -13,6 +13,7 @@ namespace MyExplorer.ViewModel
         Settings()
         {
             Serializer = new Services.JsonSerializer<Settings>();
+            HotKeys = _hotKeys;
         }
         static Settings _instance;
         public static Settings GetInstance()
@@ -68,6 +69,13 @@ namespace MyExplorer.ViewModel
             PasswordChanged = false;
         }
 
+        #region HelpingData
+
+        public List<string> HotkeysEnds { get; set; }
+        public List<List<string>> HotkeysElements { get; set; }
+
+        #endregion
+
         #region JsonParams
 
         bool _logEnabled = true;
@@ -77,8 +85,8 @@ namespace MyExplorer.ViewModel
         string _domainAdminGroup = "Администраторы домена";
         string _domainLogin = "login";
         string _domainPassword = "pass";
-        List<string> _hotKeys = new List<string>(new string[] { "Alt+Tab", "Alt+F4", "Ctrl+C", "Ctrl+V", "Win+Shift+S" });
-
+        List<string> _hotKeys = new List<string>(new string[] { "Alt+Tab", "Alt+F4", "Ctrl+C", "Ctrl+V", "Win+Shift+S", "F1" });
+        
         [DataMember]
         public List<string> HotKeys 
         {
@@ -86,6 +94,22 @@ namespace MyExplorer.ViewModel
             set
             {
                 _hotKeys = value;
+                HotkeysEnds = new List<string>();
+                HotkeysElements = new List<List<string>>();
+                _hotKeys.ForEach(h =>
+                {
+                    if (h.Contains("+"))
+                    {
+                        int count = h.Split(new char[] { '+' }).Length;
+                        HotkeysEnds.Add(h.Split(new char[] { '+' })[count - 1]);
+                        HotkeysElements.Add(new List<string>(h.Split(new char[] { '+' })));
+                    }
+                    else
+                    {
+                        HotkeysEnds.Add(h);
+                        HotkeysElements.Add(new List<string>(new string[] { h }));
+                    }
+                });
                 OnPropertyChanged();
             }
         }

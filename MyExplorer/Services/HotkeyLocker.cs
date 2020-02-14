@@ -31,19 +31,27 @@ namespace MyExplorer.Services
 
         private IntPtr LowLevelKeyboardHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            if (nCode < 0 || wParam.ToInt32() == 257 || wParam.ToInt32() == 261) return CallNextHookEx(m_hHook, nCode, wParam, lParam);
+            if (nCode < 0)
+                return CallNextHookEx(m_hHook, nCode, wParam, lParam);
             else
             {
                 var key = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
                 int KeyCode = (key).VirtualKeyCode;
-                Model.HotkeyProcessor.AddKey(KeyCode);
-                if (true) 
+                if (wParam.ToInt32() == 257 || wParam.ToInt32() == 261)
                 {
-                    return new IntPtr(1);
+                    Model.HotkeyProcessor.RemoveKey(KeyCode);
+                    return CallNextHookEx(m_hHook, nCode, wParam, lParam);
                 }
                 else
                 {
-                    return CallNextHookEx(m_hHook, nCode, wParam, lParam);
+                    if (Model.HotkeyProcessor.AddKey(KeyCode))
+                    {
+                        return new IntPtr(1);
+                    }
+                    else
+                    {
+                        return CallNextHookEx(m_hHook, nCode, wParam, lParam);
+                    }
                 }
             }
         }

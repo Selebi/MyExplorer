@@ -1,6 +1,7 @@
 ﻿using MyExplorer.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,53 @@ namespace MyExplorer.Model
         static FileLogger fl = FileLogger.GetInstance(ViewModel.Settings.GetInstance().LogFile);
         static List<string> keys = new List<string>();
 
-        public static void AddKey(int keycode)
+        static void DebugOut()
+        {
+            string keysStr = "";
+            keys.ForEach(k => { keysStr += $"{k}+"; });
+            if (keysStr == "")
+                Debug.WriteLine("Пусто");
+            else
+                Debug.WriteLine(keysStr);
+        }
+
+        public static bool AddKey(int keycode)
+        {
+            string key = Decode(keycode);
+
+            if (key == "NaN") return false;
+
+            if (keys.Count == 0 || key != keys[keys.Count - 1])
+            {
+                if (keys.Count == 4)
+                {
+                    keys.RemoveAt(0);
+                }
+                keys.Add(key);
+            }
+
+            DebugOut();
+
+            if (Check())
+            {
+                Debug.WriteLine("Goth!");
+                return true;
+            }
+            return false;
+        }
+
+        public static void RemoveKey(int keycode)
+        {
+            string key = Decode(keycode);
+
+            if (key == "NaN") return;
+
+            keys.RemoveAll(k => k == key);
+
+            DebugOut();
+        }
+
+        static string Decode(int keycode)
         {
             string buf = "";
             if (keycode >= 65 && keycode <= 90)
@@ -27,27 +74,38 @@ namespace MyExplorer.Model
                 else
                 {
                     fl.Write($"Нажата неизвестная клавиша. Код - {keycode}", Enums.LogType.Warning);
-                    return;
+                    return "NaN";
                 }
             }
-
-            if (keys.Count == 0 || buf != keys[keys.Count - 1])
-            {
-                if (keys.Count == 4)
-                {
-                    keys.RemoveAt(0);
-                }
-                keys.Add(buf);
-            }
-
-            if (Check())
-            {
-
-            }
+            return buf;
         }
 
+        // Адовый алгоритм
         static bool Check()
         {
+            foreach (var h in settings.HotkeysEnds)
+            {
+                if (keys[keys.Count - 1] == h)
+                {
+                    bool containsFlag;
+                    foreach (var hke in settings.HotkeysElements)
+                    {
+                        containsFlag = true;
+                        foreach (var hk in hke)
+                        {
+                            if (!keys.Contains(hk))
+                            {
+                                containsFlag = false;
+                                break;
+                            }
+                        }
+                        if (containsFlag)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
             return false;
         }
 
@@ -99,11 +157,11 @@ namespace MyExplorer.Model
             { 123, "F12" },
             { 144, "Num" },
             { 160, "Shift" },
-            { 161, "Shift" },
+            { 161, "RShift" },
             { 162, "Ctrl" },
-            { 163, "Ctrl" },
+            { 163, "RCtrl" },
             { 164, "Alt" },
-            { 165, "Alt" },
+            { 165, "RAlt" },
             { 186, ";" },
             { 187, "=" },
             { 188, "<" },
