@@ -103,6 +103,7 @@
     <Compile Include="Data\User.cs" />
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Model\DesSecurity.cs" />
+    <Compile Include="Model\HotKeyProcessor.cs" />
     <Compile Include="Model\ProcessWorker.cs" />
     <Compile Include="Model\RegEditor.cs" />
     <Compile Include="Model\Users.cs" />
