@@ -51,6 +51,13 @@
                 Services.Navigator.SetFrame(Services.Navigator.FrameName.Settings);
             });
         }
+        public RelayCommand OpenHotKeys
+        {
+            get => new RelayCommand(o =>
+            {
+                Services.Navigator.SetFrame(Services.Navigator.FrameName.Hotkeys);
+            });
+        }
 
         public RelayCommand OpenUsers
         { 

@@ -84,8 +84,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\AddHotKey.xaml.cs">
+      <DependentUpon>AddHotKey.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HotKey.xaml.cs">
+      <DependentUpon>HotKey.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Journal.xaml.cs">
       <DependentUpon>Journal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\HotKeys.xaml.cs">
+      <DependentUpon>HotKeys.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -110,6 +119,11 @@
     <Compile Include="ProcessWindow.xaml.cs">
       <DependentUpon>ProcessWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\FileLogger.cs" />
     <Compile Include="Services\HotkeyLocker.cs" />
     <Compile Include="Services\JsonSerializer.cs" />
@@ -119,6 +133,9 @@
     <Compile Include="Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddHotKey.cs" />
+    <Compile Include="ViewModel\HotKey.cs" />
+    <Compile Include="ViewModel\HotKeys.cs" />
     <Compile Include="ViewModel\Journal.cs" />
     <Compile Include="ViewModel\Main.cs" />
     <Compile Include="ViewModel\SettingWindow.cs" />
@@ -128,6 +145,14 @@
     <Compile Include="ViewModel\Settings.cs" />
     <Compile Include="ViewModel\StatusBar.cs" />
     <Compile Include="ViewModel\Users.cs" />
+    <Page Include="Controls\AddHotKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HotKey.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Journal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +160,10 @@
     <Page Include="Controls\Main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\HotKeys.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Settings.xaml">
       <SubType>Designer</SubType>
@@ -183,6 +212,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\ButtonRoundStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\ButtonWhiteStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,11 +241,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -235,6 +263,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\SintekBack.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\del.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,6 +22,7 @@
             <StackPanel Orientation="Vertical">
                 <Label Content="Меню" Margin="8, 16, 8, 8" Style="{DynamicResource LabelStyle}" FontSize="16"/>
                 <Button Content="Настройки" Margin="8, 8, 8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenSettings}"/>
+                <Button Content="Хоткеи" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenHotKeys}"/>
                 <Button Content="Пользователи" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenUsers}"/>
                 <Button Content="Журнал" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenJournal}"/>
                 <Border Height="2" CornerRadius="2" Background="#FF9DA4B8" Margin="8,4"/>

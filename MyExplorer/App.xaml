@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Themes/TextBoxStyle.xaml" />
                 <ResourceDictionary Source="Themes/BorderCardStyle.xaml" />
                 <ResourceDictionary Source="Themes/CheckBoxStyle.xaml" />
+                <ResourceDictionary Source="Themes/ButtonRoundStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

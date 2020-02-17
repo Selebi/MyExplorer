@@ -7,6 +7,8 @@ namespace MyExplorer.Services
     internal static class Navigator
     {
         public static event Action<object> NewFrame;
+        public static event Action<object> ShowMsg;
+        public static event Action<object> CloseMsg;
 
         static Stack<FrameName> previousFrame = new Stack<FrameName>();
         static FrameName currentFrame = FrameName.Main;
@@ -18,7 +20,9 @@ namespace MyExplorer.Services
             Main,
             Settings,
             Users,
-            Journal
+            Journal,
+            Hotkeys,
+            AddHotKey
         }
 
         static Dictionary<FrameName, object> Frames = new Dictionary<FrameName, object>()
@@ -26,7 +30,9 @@ namespace MyExplorer.Services
             {FrameName.Main, new Controls.Main(new ViewModel.Main())},
             {FrameName.Settings, new Controls.Settings(ViewModel.Settings.GetInstance())},
             {FrameName.Users, new Controls.Users(new ViewModel.Users())},
-            {FrameName.Journal, new Controls.Journal(new ViewModel.Journal())}
+            {FrameName.Journal, new Controls.Journal(new ViewModel.Journal())},
+            {FrameName.Hotkeys, new Controls.HotKeys(new ViewModel.HotKeys())},
+            {FrameName.AddHotKey, new Controls.AddHotKey(new ViewModel.AddHotKey())}
         };
 
         #endregion
@@ -48,6 +54,22 @@ namespace MyExplorer.Services
             {
                 NewFrame?.Invoke(value);
                 currentFrame = frame;
+            }
+        }
+
+        public static void ShowMessage(FrameName frameName)
+        {
+            if (Frames.TryGetValue(frameName, out object value))
+            {
+                ShowMsg?.Invoke(value);
+            }
+        }
+
+        public static void CloseMessage(FrameName frameName)
+        {
+            if (Frames.TryGetValue(frameName, out object value))
+            {
+                CloseMsg?.Invoke(value);
             }
         }
     }
