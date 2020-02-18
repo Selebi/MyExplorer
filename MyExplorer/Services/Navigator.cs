@@ -1,17 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MyExplorer.Services
 {
-    internal static class Navigator
+    internal class Navigator
     {
-        public static event Action<object> NewFrame;
-        public static event Action<object> ShowMsg;
-        public static event Action<object> CloseMsg;
+        public WindowName currentWindow = WindowName.Null;
+        public Grid currentgrid;
+        static List<Navigator> navigators = new List<Navigator>();
 
-        static Stack<FrameName> previousFrame = new Stack<FrameName>();
-        static FrameName currentFrame = FrameName.Main;
+        Navigator() { }
+
+        public static Navigator GetInstance(WindowName window)
+        {
+            if (navigators.Any(n => { return n.currentWindow == window; }))
+                return navigators.Find(n => { return n.currentWindow == window; });
+            else
+                return null;
+        }
+
+        public static void CreateInstance(WindowName window, Grid container)
+        {
+            if (navigators.Any(n => { return n.currentWindow == window; }))
+            {
+                navigators.RemoveAll(n => { return n.currentWindow == window; });
+            }
+            navigators.Add(new Navigator() { currentWindow = window, currentgrid = container });
+        }
+
+        Stack<FrameName> previousFrame = new Stack<FrameName>();
+        FrameName currentContent = FrameName.Main;
 
         #region Frames
 
@@ -23,6 +44,13 @@ namespace MyExplorer.Services
             Journal,
             Hotkeys,
             AddHotKey
+        }
+
+        public enum WindowName
+        {
+            Null,
+            Settings,
+            Process
         }
 
         static Dictionary<FrameName, object> Frames = new Dictionary<FrameName, object>()
@@ -37,39 +65,43 @@ namespace MyExplorer.Services
 
         #endregion
 
-        public static void SetFrame(FrameName frameName)
+        public void SetFrame(FrameName frameName)
         {
             if (Frames.TryGetValue(frameName, out object value))
             {
-                NewFrame?.Invoke(value);
-                previousFrame.Push(currentFrame);
-                currentFrame = frameName;
+                currentgrid.Children.Clear();
+                currentgrid.Children.Add((System.Windows.UIElement)value);
+                previousFrame.Push(currentContent);
+                currentContent = frameName;
             }
         }
 
-        public static void SetPreviousFrame()
+        public void SetPreviousFrame()
         {
             var frame = previousFrame.Pop(); // Отсылка к warframe
             if (Frames.TryGetValue(frame, out object value))
             {
-                NewFrame?.Invoke(value);
-                currentFrame = frame;
+                currentgrid.Children.Clear();
+                currentgrid.Children.Add((System.Windows.UIElement)value);
+                currentContent = frame;
             }
         }
 
-        public static void ShowMessage(FrameName frameName)
+        public void ShowMessage(FrameName frameName)
         {
             if (Frames.TryGetValue(frameName, out object value))
             {
-                ShowMsg?.Invoke(value);
+                currentgrid.Children[currentgrid.Children.Count - 1].IsEnabled = false;
+                currentgrid.Children.Add((System.Windows.UIElement)value);
             }
         }
 
-        public static void CloseMessage(FrameName frameName)
+        public void CloseMessage()
         {
-            if (Frames.TryGetValue(frameName, out object value))
+            if (currentgrid.Children.Count >= 2)
             {
-                CloseMsg?.Invoke(value);
+                currentgrid.Children.RemoveAt(currentgrid.Children.Count - 1);
+                currentgrid.Children[currentgrid.Children.Count - 1].IsEnabled = true;
             }
         }
     }

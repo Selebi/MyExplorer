@@ -48,14 +48,14 @@
         {
             get => new RelayCommand(o =>
             {
-                Services.Navigator.SetFrame(Services.Navigator.FrameName.Settings);
+                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Settings);
             });
         }
         public RelayCommand OpenHotKeys
         {
             get => new RelayCommand(o =>
             {
-                Services.Navigator.SetFrame(Services.Navigator.FrameName.Hotkeys);
+                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Hotkeys);
             });
         }
 
@@ -63,7 +63,7 @@
         { 
             get => new RelayCommand(o =>
             {
-                Services.Navigator.SetFrame(Services.Navigator.FrameName.Users);
+                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Users);
             });
         }
 
@@ -71,7 +71,7 @@
         {
             get => new RelayCommand(o =>
             {
-                Services.Navigator.SetFrame(Services.Navigator.FrameName.Journal);
+                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Journal);
             });
         }
 

@@ -6,13 +6,13 @@ namespace MyExplorer.ViewModel
     {
         public SettingWindow()
         {
-            Services.Navigator.NewFrame += (c) => { Pages = new Frame() { Content = c }; };
-            Services.Navigator.SetFrame(Services.Navigator.FrameName.Main);
+            Services.Navigator.CreateInstance(Services.Navigator.WindowName.Settings, Pages);
+            Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Main);
             Statusbar = new Frame() { Content = new Controls.StatusBar(new StatusBar()) };
         }
 
-        Frame _pages;
-        public Frame Pages
+        Grid _pages = new Grid();
+        public Grid Pages
         {
             get => _pages;
             set

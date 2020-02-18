@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MyExplorer.Services;
 
 namespace MyExplorer.ViewModel
 {
@@ -12,7 +8,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand((o) =>
             {
-                Services.Navigator.SetPreviousFrame();
+                Navigator.GetInstance(Navigator.WindowName.Settings).SetPreviousFrame();
             });
         }
 
@@ -20,7 +16,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand((o) =>
             {
-                Services.Navigator.SetPreviousFrame();
+                Navigator.GetInstance(Navigator.WindowName.Settings).ShowMessage(Navigator.FrameName.AddHotKey);
             });
         }
     }

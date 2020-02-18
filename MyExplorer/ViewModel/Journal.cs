@@ -23,7 +23,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand((o) =>
             {
-                Services.Navigator.SetPreviousFrame();
+                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetPreviousFrame();
             });
         }
 
