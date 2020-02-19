@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:MyExplorer.Controls"
              xmlns:convert="clr-namespace:MyExplorer.Converters"
              mc:Ignorable="d" 
+             SnapsToDevicePixels="True" UseLayoutRounding ="True"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <convert:DataUserConverter x:Key="UserConverter" />

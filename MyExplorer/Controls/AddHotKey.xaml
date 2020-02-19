@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyExplorer.Controls"
              mc:Ignorable="d" Height="160" Width="320"
+             SnapsToDevicePixels="True" UseLayoutRounding ="True"
              d:DesignHeight="160" d:DesignWidth="320">
     <Border Style="{DynamicResource BorderCard}">
         <Border.Effect>
@@ -12,7 +13,13 @@
         </Border.Effect>
         <Grid>
             <Label Content="Зажмите комбинацию" Style="{StaticResource LabelStyle}" Margin="40,10,40,0" Height="25" VerticalAlignment="Top" FontSize="14"/>
-            <TextBlock Text="{Binding Hotkey}" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="66" />
+            <TextBlock Text="{Binding Hotkey}" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10, 66">
+                <TextBlock.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Очистить" Command="{Binding Clean}"/>
+                    </ContextMenu>
+                </TextBlock.ContextMenu>
+            </TextBlock>
             <Button Style="{StaticResource ButtonsBlue}" Content="Отмена" Margin="0,0,10,10" Height="23" VerticalAlignment="Bottom" 
                     HorizontalAlignment="Right" Width="120" Command="{Binding Cancel}"/>
             <Button Style="{StaticResource ButtonsBlue}" Content="Добавить" Margin="10,0,0,10" Height="23" VerticalAlignment="Bottom" 

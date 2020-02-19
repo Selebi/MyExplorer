@@ -14,14 +14,24 @@ namespace MyExplorer.Model
         static FileLogger fl = FileLogger.GetInstance(ViewModel.Settings.GetInstance().LogFile);
         static List<string> keys = new List<string>();
 
-        static void DebugOut()
+        static public event Action<string> CurrentHotKeyChanged;
+        static public bool locked = false;
+
+        static void Out()
         {
             string keysStr = "";
             keys.ForEach(k => { keysStr += $"{k}+"; });
+            keysStr = keysStr.Trim(new char[] { '+' });
             if (keysStr == "")
-                Debug.WriteLine("Пусто");
+            {
+                Debug.WriteLine("");
+                CurrentHotKeyChanged?.Invoke("");
+            }
             else
+            {
                 Debug.WriteLine(keysStr);
+                CurrentHotKeyChanged?.Invoke(keysStr);
+            }
         }
 
         public static bool AddKey(int keycode)
@@ -39,9 +49,9 @@ namespace MyExplorer.Model
                 keys.Add(key);
             }
 
-            DebugOut();
+            Out();
 
-            if (Check())
+            if (locked || Check())
             {
                 Debug.WriteLine("Goth!");
                 return true;
@@ -57,7 +67,14 @@ namespace MyExplorer.Model
 
             keys.RemoveAll(k => k == key);
 
-            DebugOut();
+            Out();
+        }
+
+        public static void RemoveAllKeys()
+        {
+            keys.Clear();
+
+            Out();
         }
 
         static string Decode(int keycode)
@@ -129,6 +146,16 @@ namespace MyExplorer.Model
             { 44, "PrtSc" },
             { 45, "Insert" },
             { 46, "Delete" },
+            { 48, "0" },
+            { 49, "1" },
+            { 50, "2" },
+            { 51, "3" },
+            { 52, "4" },
+            { 53, "5" },
+            { 54, "6" },
+            { 55, "7" },
+            { 56, "8" },
+            { 57, "9" },
             { 91, "Win" },
             { 93, "Menu" },
             { 96, "Num0" },

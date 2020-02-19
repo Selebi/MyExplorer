@@ -5,6 +5,7 @@
         WindowState="Normal"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
+        SnapsToDevicePixels="True" UseLayoutRounding ="True"
         Title="Splash" Height="200" Width="500">
     <Grid>
         <Grid.Background>

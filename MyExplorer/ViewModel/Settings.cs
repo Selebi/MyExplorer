@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace MyExplorer.ViewModel
@@ -9,6 +10,8 @@ namespace MyExplorer.ViewModel
         Services.JsonSerializer<Settings> Serializer;
         bool LoginChanged;
         bool PasswordChanged;
+
+        public event Action<List<string>> HotkeysChanged;
 
         Settings()
         {
@@ -53,6 +56,7 @@ namespace MyExplorer.ViewModel
                 DomainPassword = loaded.DomainPassword;
                 LoginChanged = false;
                 PasswordChanged = false;
+                HotKeys = loaded.HotKeys;
             }
             else
             {
@@ -67,6 +71,20 @@ namespace MyExplorer.ViewModel
             Serializer.WriteToFile(_instance, "Settings.json");
             LoginChanged = false;
             PasswordChanged = false;
+        }
+
+        public void AddHotkey(string hotkey)
+        {
+            HotKeys.Add(hotkey);
+            HotKeys = HotKeys;
+            Save();
+        }
+
+        public void DelHotkey(string hotkey)
+        {
+            HotKeys.RemoveAll(h => { return h == hotkey; });
+            HotKeys = HotKeys;
+            Save();
         }
 
         #region HelpingData
@@ -85,7 +103,7 @@ namespace MyExplorer.ViewModel
         string _domainAdminGroup = "Администраторы домена";
         string _domainLogin = "login";
         string _domainPassword = "pass";
-        List<string> _hotKeys = new List<string>(new string[] { "Alt+Tab", "Alt+F4", "Ctrl+C", "Ctrl+V", "Win+Shift+S", "F1" });
+        List<string> _hotKeys = new List<string>();
         
         [DataMember]
         public List<string> HotKeys 
@@ -110,6 +128,7 @@ namespace MyExplorer.ViewModel
                         HotkeysElements.Add(new List<string>(new string[] { h }));
                     }
                 });
+                HotkeysChanged?.Invoke(_hotKeys);
                 OnPropertyChanged();
             }
         }

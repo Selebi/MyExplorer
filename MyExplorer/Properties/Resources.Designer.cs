@@ -91,6 +91,16 @@ namespace MyExplorer.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap off {
+            get {
+                object obj = ResourceManager.GetObject("off", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на 0f99c671-62f3-497f-bbd2-af5f266edb94.
         /// </summary>
         internal static string pickles {

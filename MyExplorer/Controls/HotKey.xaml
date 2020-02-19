@@ -4,15 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyExplorer.Controls"
-             mc:Ignorable="d" Height="56" 
+             mc:Ignorable="d" Height="50" Margin="4" HorizontalAlignment="Stretch"
+             SnapsToDevicePixels="True" UseLayoutRounding ="True"
              d:DesignHeight="56" d:DesignWidth="500">
-    <Border Style="{DynamicResource BorderCard}">
+    <Border Style="{DynamicResource BorderCard}" HorizontalAlignment="Stretch" Background="White">
         <Border.Effect>
             <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
         </Border.Effect>
         <Grid>
-            <TextBlock Text="{Binding HotkeyText}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="NoWrap" TextAlignment="Center" Margin="10,12,100,12"/>
-            <Button HorizontalAlignment="Right" Width="36" Height="36" Margin="0,6,52,6" Style="{StaticResource ButtonsRound}" Command="{Binding Edit}">
+            <TextBlock Text="{Binding HotkeyText}" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="NoWrap" TextAlignment="Center" Margin="10, 0, 100, 0"/>
+            <Button Visibility="Collapsed" HorizontalAlignment="Right" Width="36" Height="36" Margin="0,6,52,6" Style="{StaticResource ButtonsRound}" Command="{Binding Edit}">
                 <Image Source="/MyExplorer;component/Resources/edit.png" Width="24" Stretch="None" />
             </Button>
             <Button HorizontalAlignment="Right" Width="36" Height="36" Margin="6" Style="{StaticResource ButtonsRound}" Command="{Binding Delete}">

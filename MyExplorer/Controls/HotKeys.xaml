@@ -5,9 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyExplorer.Controls"
              mc:Ignorable="d" 
+             SnapsToDevicePixels="True" UseLayoutRounding ="True"
              d:DesignHeight="316" d:DesignWidth="674">
     <Grid Background="White">
-        <ListBox Margin="10,60,10,42" ItemsSource="{Binding ForbiddenHotkeys}" />
+        <ListBox Margin="10,60,10,42" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding ForbiddenHotkeys}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
         <Label Content="Запрещённые комбинации" Style="{StaticResource LabelStyle}" HorizontalAlignment="Stretch" Margin="20,20,20,0" MaxWidth="200" VerticalAlignment="Top" Height="27" FontSize="14"/>
         <Button Content="Назад" HorizontalAlignment="Right" Margin="0,0,10,10" 
             VerticalAlignment="Bottom" Width="160" Style="{StaticResource ButtonsMenu}" Command="{Binding Back}"/>
