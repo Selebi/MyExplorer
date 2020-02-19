@@ -47,7 +47,6 @@ namespace MyExplorer.ViewModel
             });
         }
 
-        ObservableCollection<Data.User> _userList;
         public ObservableCollection<Data.User> UserList { get; set; }
 
         string _user;
