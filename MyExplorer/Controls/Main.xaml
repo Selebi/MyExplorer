@@ -11,6 +11,7 @@
     <UserControl.Resources>
         <Convert:RegExplorerConverter x:Key="RegExplorerConverter"/>
         <Convert:WinExplorerConverter x:Key="WinExplorerConverter"/>
+        <Convert:HotkeyBlockConverter x:Key="HotkeyBlockConverter"/>
     </UserControl.Resources>
     <Border Background="White">
         <Grid>
@@ -32,6 +33,9 @@
                 </Button>
                 <Button Margin="8, 4" Style="{StaticResource ButtonsBlue}" Command="{Binding StartStopExplorer}">
                     <TextBlock Text="{Binding StartStopExplorerButtonState, Converter={StaticResource WinExplorerConverter}}"/>
+                </Button>
+                <Button Margin="8, 4" Style="{StaticResource ButtonsBlue}" Command="{Binding StartStopBlockHotkeys}">
+                    <TextBlock Text="{Binding StartStopBlockHotkeysState, Converter={StaticResource HotkeyBlockConverter}}"/>
                 </Button>
             </StackPanel>
             <Border BorderBrush="Black" CornerRadius="2" Grid.Column="1" HorizontalAlignment="Stretch" Margin="2, 8" VerticalAlignment="Stretch" Background="#FF9DA4B8"/>

@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="Converters\DataUserConverter.cs" />
+    <Compile Include="Converters\HotkeyBlockConverter.cs" />
     <Compile Include="Converters\RegExplorerConverter.cs" />
     <Compile Include="Converters\WinExplorerConverter.cs" />
     <Compile Include="Data\User.cs" />
@@ -276,6 +277,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\FullR.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

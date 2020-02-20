@@ -1,4 +1,8 @@
-﻿namespace MyExplorer.ViewModel
+﻿using MyExplorer.Properties;
+using System;
+using System.Drawing;
+
+namespace MyExplorer.ViewModel
 {
     internal class Main : BaseVM
     {
@@ -9,6 +13,7 @@
 
             Services.Timers.RegExplorerChange += s => { RegButtonState = s; };
             Services.Timers.WinExplorerChange += s => { StartStopExplorerButtonState = s; };
+            Model.HotkeyProcessor.LockedStatusChanged += s => { StartStopBlockHotkeysState = s; };
         }
 
         string _helloText = "Место для вашей рекламы!";
@@ -40,6 +45,17 @@
             set
             {
                 _startStopExplorerButtonState = value;
+                OnPropertyChanged();
+            }
+        }
+
+        bool _startStopBlockHotkeysState = true;
+        public bool StartStopBlockHotkeysState
+        {
+            get => _startStopBlockHotkeysState;
+            set
+            {
+                _startStopBlockHotkeysState = value;
                 OnPropertyChanged();
             }
         }
@@ -101,6 +117,21 @@
                 else
                 {
                     Model.ProcessWorker.StartExplorer();
+                }
+            });
+        }
+
+        public RelayCommand StartStopBlockHotkeys
+        {
+            get => new RelayCommand(o =>
+            {
+                if (Model.HotkeyProcessor.Locked)
+                {
+                    Model.HotkeyProcessor.Locked = false;
+                }
+                else
+                {
+                    Model.HotkeyProcessor.Locked = true;
                 }
             });
         }

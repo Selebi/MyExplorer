@@ -21,7 +21,7 @@ namespace MyExplorer.ViewModel
             {
                 hotkey = "";
                 Model.HotkeyProcessor.RemoveAllKeys();
-                Model.HotkeyProcessor.locked = false;
+                Model.HotkeyProcessor.LockedAll = false;
                 Navigator.GetInstance(Navigator.WindowName.Settings).CloseMessage();
             });
         }
@@ -32,7 +32,7 @@ namespace MyExplorer.ViewModel
                 Settings.GetInstance().AddHotkey(hotkey);
                 hotkey = "";
                 Model.HotkeyProcessor.RemoveAllKeys();
-                Model.HotkeyProcessor.locked = false;
+                Model.HotkeyProcessor.LockedAll = false;
                 Navigator.GetInstance(Navigator.WindowName.Settings).CloseMessage();
             },
                 o => { return hotkey != "" && !Settings.GetInstance().HotKeys.Any(h => { return h == hotkey; } ); });

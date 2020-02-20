@@ -15,7 +15,31 @@ namespace MyExplorer.Model
         static List<string> keys = new List<string>();
 
         static public event Action<string> CurrentHotKeyChanged;
-        static public bool locked = false;
+        static public event Action<bool> LockedStatusChanged;
+        static public event Action<bool> LockedAllStatusChanged;
+
+        static bool _lockedAll = false;
+        static public bool LockedAll
+        {
+            get => _lockedAll;
+            set
+            {
+                _lockedAll = value;
+                LockedAllStatusChanged?.Invoke(_lockedAll);
+            }
+        }
+
+        static bool _locked = true;
+        static public bool Locked
+        {
+            get => _locked;
+            set
+            {
+                _locked = value;
+                LockedStatusChanged?.Invoke(_locked);
+            }
+        }
+
 
         static void Out()
         {
@@ -51,7 +75,9 @@ namespace MyExplorer.Model
 
             Out();
 
-            if (locked || Check())
+            if (!LockedAll && !Locked)
+                return false;
+            if (LockedAll || Check())
             {
                 Debug.WriteLine("Goth!");
                 return true;

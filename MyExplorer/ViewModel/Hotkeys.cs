@@ -33,7 +33,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand((o) =>
             {
-                Model.HotkeyProcessor.locked = true;
+                Model.HotkeyProcessor.LockedAll = true;
                 Navigator.GetInstance(Navigator.WindowName.Settings).ShowMessage(Navigator.FrameName.AddHotKey);
             });
         }
