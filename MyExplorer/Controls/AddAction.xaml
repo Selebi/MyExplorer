@@ -30,14 +30,27 @@
             </Grid>
 
             <Grid Grid.ColumnSpan="2" Margin="10,90,10,40" Visibility="{Binding ElementName=program, Path=IsChecked, Converter={StaticResource vconv}}">
-                <TextBlock Text="Путь:" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,7,0,0"/>
-                <TextBox VerticalAlignment="Top" Margin="38,5,60,0" Height="24" BorderBrush="#FF006EB2">
+                <TextBlock Text="Путь:" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,7,0,0" Width="82"/>
+                <TextBox VerticalAlignment="Top" Margin="82,5,66,0" Height="24" BorderBrush="#FF006EB2" VerticalContentAlignment="Center">
                     <TextBox.Effect>
                         <DropShadowEffect BlurRadius="2"  ShadowDepth="0" Color="#FF006EB2"/>
                     </TextBox.Effect>
                 </TextBox>
-                <Button Style="{StaticResource ButtonsBlueSquare}" Content="Обзор"  Margin="0,5,0,0" Height="24" 
-                        VerticalAlignment="Top" HorizontalAlignment="Right" Width="61" FontSize="14"/>
+                <Button Style="{StaticResource ButtonsBlueSquare}" Content="Обзор..."  Margin="0,5,0,0" Height="24" 
+                        VerticalAlignment="Top" HorizontalAlignment="Right" Width="66" FontSize="14"/>
+                <TextBlock Text="Параметры:" Margin="0,38,0,0" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
+                <TextBox VerticalAlignment="Top" Margin="82,36,66,0" Height="107" BorderBrush="#FF006EB2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
+                    <TextBox.Effect>
+                        <DropShadowEffect BlurRadius="2"  ShadowDepth="0" Color="#FF006EB2"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <TextBlock Text="Задержка:" Margin="0,152,0,0" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
+                <TextBox Text="1000" VerticalAlignment="Top" Margin="82,150,276,0" Height="24" BorderBrush="#FF006EB2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                    <TextBox.Effect>
+                        <DropShadowEffect BlurRadius="2"  ShadowDepth="0" Color="#FF006EB2"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <TextBlock Text="миллисекунд" Margin="187,152,0,0" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="95"/>
             </Grid>
 
             <Button Style="{StaticResource ButtonsBlue}" Content="Отмена" Margin="0,0,10,10" Height="23" VerticalAlignment="Bottom" 
