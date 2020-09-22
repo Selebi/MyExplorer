@@ -85,6 +85,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\Action.xaml.cs">
+      <DependentUpon>Action.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Actions.xaml.cs">
+      <DependentUpon>Actions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AddAction.xaml.cs">
+      <DependentUpon>AddAction.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AddHotKey.xaml.cs">
       <DependentUpon>AddHotKey.xaml</DependentUpon>
     </Compile>
@@ -110,6 +119,7 @@
     <Compile Include="Converters\DataUserConverter.cs" />
     <Compile Include="Converters\HotkeyBlockConverter.cs" />
     <Compile Include="Converters\RegExplorerConverter.cs" />
+    <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="Converters\WinExplorerConverter.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Enums\LogType.cs" />
@@ -135,6 +145,8 @@
     <Compile Include="Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Actions.cs" />
+    <Compile Include="ViewModel\AddAction.cs" />
     <Compile Include="ViewModel\AddHotKey.cs" />
     <Compile Include="ViewModel\HotKey.cs" />
     <Compile Include="ViewModel\HotKeys.cs" />
@@ -147,6 +159,18 @@
     <Compile Include="ViewModel\Settings.cs" />
     <Compile Include="ViewModel\StatusBar.cs" />
     <Compile Include="ViewModel\Users.cs" />
+    <Page Include="Controls\Action.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Actions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AddAction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\AddHotKey.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -206,6 +230,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\ButtonBlueSquareStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\ButtonBlueStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -231,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\ListBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\RadioButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -83,6 +83,14 @@ namespace MyExplorer.ViewModel
             });
         }
 
+        public RelayCommand OpenActions
+        {
+            get => new RelayCommand(o =>
+            {
+                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Actions);
+            });
+        }
+
         public RelayCommand OpenJournal
         {
             get => new RelayCommand(o =>

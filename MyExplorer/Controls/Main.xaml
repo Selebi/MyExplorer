@@ -26,6 +26,7 @@
                 <Button Content="Настройки" Margin="8, 8, 8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenSettings}"/>
                 <Button Content="Хоткеи" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenHotKeys}"/>
                 <Button Content="Пользователи" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenUsers}"/>
+                <Button Content="Сценарий запуска" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenActions}"/>
                 <Button Content="Журнал" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenJournal}"/>
                 <Border Height="2" CornerRadius="2" Background="#FF9DA4B8" Margin="8,4"/>
                 <Button Margin="8, 4" Style="{StaticResource ButtonsBlue}" Command="{Binding RegExplorer}">

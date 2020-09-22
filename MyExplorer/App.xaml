@@ -6,6 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ButtonBlueStyle.xaml" />
+                <ResourceDictionary Source="Themes/ButtonBlueSquareStyle.xaml" />
                 <ResourceDictionary Source="Themes/ButtonWhiteStyle.xaml" />
                 <ResourceDictionary Source="Themes/ListBoxStyle.xaml" />
                 <ResourceDictionary Source="Themes/ButtonMenuStyle.xaml" />
@@ -14,6 +15,7 @@
                 <ResourceDictionary Source="Themes/BorderCardStyle.xaml" />
                 <ResourceDictionary Source="Themes/CheckBoxStyle.xaml" />
                 <ResourceDictionary Source="Themes/ButtonRoundStyle.xaml" />
+                <ResourceDictionary Source="Themes/RadioButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
