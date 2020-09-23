@@ -16,15 +16,9 @@ namespace MyExplorer.ViewModel
             Model.HotkeyProcessor.LockedStatusChanged += s => { StartStopBlockHotkeysState = s; };
         }
 
-        string _helloText = "Место для вашей рекламы!";
         public string HelloText
         {
-            get => _helloText;
-            set
-            {
-                _helloText = value;
-                OnPropertyChanged();
-            }
+            get => Properties.Resources.Help;
         }
 
         bool _regButtonState;

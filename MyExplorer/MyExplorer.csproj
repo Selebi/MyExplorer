@@ -317,7 +317,7 @@
     <Resource Include="Resources\off.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\FullR.gif" />
+    <Resource Include="Resources\Help.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -20,7 +20,6 @@
                 <ColumnDefinition Width="6"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image HorizontalAlignment="Right" Height="135" VerticalAlignment="Bottom" Width="160" Source="/MyExplorer;component/Resources/Всратый кот.png" Stretch="None" Grid.Column="2"/>
             <StackPanel Orientation="Vertical">
                 <Label Content="Меню" Margin="8, 16, 8, 8" Style="{DynamicResource LabelStyle}" FontSize="16"/>
                 <Button Content="Настройки" Margin="8, 8, 8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenSettings}"/>
@@ -40,8 +39,13 @@
                 </Button>
             </StackPanel>
             <Border BorderBrush="Black" CornerRadius="2" Grid.Column="1" HorizontalAlignment="Stretch" Margin="2, 8" VerticalAlignment="Stretch" Background="#FF9DA4B8"/>
-            <TextBlock Grid.Column="2" Margin="8" TextWrapping="NoWrap" HorizontalAlignment="Stretch" Text="Добро пожаловать" TextAlignment="Center" VerticalAlignment="Top" FontSize="32"/>
-            <TextBlock Grid.Column="2" Margin="10,64" TextWrapping="Wrap" Text="{Binding HelloText}" VerticalAlignment="Top" HorizontalAlignment="Stretch" FontSize="14"/>
+            <TextBlock Grid.Column="2" Margin="6" TextWrapping="NoWrap" HorizontalAlignment="Stretch" Text="Добро пожаловать" TextAlignment="Center" VerticalAlignment="Top" FontSize="24"/>
+            <TextBox Text="{Binding HelloText, Mode=OneWay}" FontSize="14" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsReadOnly="True" Grid.Column="2" Margin="10,45,10,10" BorderBrush="#FF006EB2" Foreground="#FF010040" >
+                <TextBox.Effect>
+                    <DropShadowEffect BlurRadius="3"  ShadowDepth="0" Color="#FF006EB2"/>
+                </TextBox.Effect>
+            </TextBox>
+            <Image HorizontalAlignment="Right" Height="153" Margin="0 0 0 -10" VerticalAlignment="Bottom" Width="160" Source="/MyExplorer;component/Resources/Всратый кот.png" Stretch="Fill" Grid.Column="2"/>
         </Grid>
     </Border>
 </UserControl>
