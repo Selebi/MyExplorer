@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace MyExplorer.ViewModel
 {
     [DataContract]
-    class BaseVM : INotifyPropertyChanged
+    public class BaseVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected BaseVM() { }

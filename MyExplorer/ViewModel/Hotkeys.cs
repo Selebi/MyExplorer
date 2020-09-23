@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace MyExplorer.ViewModel
 {
-    internal class HotKeys : BaseVM
+    public class HotKeys : BaseVM
     {
         public HotKeys()
         {

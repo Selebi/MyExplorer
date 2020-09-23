@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace MyExplorer.Services
 {
-    internal class Navigator
+    public class Navigator
     {
         public WindowName currentWindow = WindowName.Null;
         public Grid currentgrid;

@@ -2,7 +2,7 @@
 
 namespace MyExplorer.ViewModel
 {
-    internal class SettingWindow : BaseVM
+    public class SettingWindow : BaseVM
     {
         public SettingWindow()
         {

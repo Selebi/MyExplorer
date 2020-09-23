@@ -67,6 +67,7 @@
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -119,6 +120,7 @@
     <Compile Include="Converters\DataUserConverter.cs" />
     <Compile Include="Converters\HotkeyBlockConverter.cs" />
     <Compile Include="Converters\RegExplorerConverter.cs" />
+    <Compile Include="Converters\UintConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="Converters\WinExplorerConverter.cs" />
     <Compile Include="Data\User.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Action.cs" />
     <Compile Include="ViewModel\Actions.cs" />
     <Compile Include="ViewModel\AddAction.cs" />
     <Compile Include="ViewModel\AddHotKey.cs" />

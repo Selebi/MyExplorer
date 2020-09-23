@@ -1,6 +1,6 @@
 ﻿namespace MyExplorer.ViewModel
 {
-    internal class StatusBar : BaseVM
+    public class StatusBar : BaseVM
     {
         public StatusBar()
         {

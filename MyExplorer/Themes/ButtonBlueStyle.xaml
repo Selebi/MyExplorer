@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:MyExplorer.Themes">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="Button.Static.Foreground" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="Button.Static.Background" Color="#FF006EB2"/>
     <SolidColorBrush x:Key="Button.Static.Border" Color="#FF006EB2"/>
@@ -28,7 +27,9 @@
                         <Border.Effect>
                             <DropShadowEffect x:Name="Shadow" BlurRadius="3"  ShadowDepth="0" Color="#FF006EB2"/>
                         </Border.Effect>
-                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="Center" 
+                                          RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true">

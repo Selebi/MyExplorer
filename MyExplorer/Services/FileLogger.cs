@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MyExplorer.Services
 {
-    internal class FileLogger
+    public class FileLogger
     {
         public string Path { get; private set; }
         public List<(string, Enums.LogType)> Journal { get; private set; }

@@ -1,6 +1,6 @@
 ﻿namespace MyExplorer.Enums
 {
-    internal enum LogType
+    public enum LogType
     {
         Info,
         Warning,

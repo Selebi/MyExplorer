@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyExplorer.ViewModel
 {
-    internal class Users : BaseVM
+    public class Users : BaseVM
     {
         public Users()
         {

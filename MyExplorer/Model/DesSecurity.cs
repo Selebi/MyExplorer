@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MyExplorer.Model
 {
-    internal static class DesSecurity
+    public static class DesSecurity
     {
         static Services.FileLogger fl = Services.FileLogger.GetInstance(ViewModel.Settings.GetInstance().LogFile);
 

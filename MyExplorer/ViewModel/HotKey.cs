@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyExplorer.ViewModel
 {
-    internal class HotKey : BaseVM
+    public class HotKey : BaseVM
     {
         public HotKey(string text)
         {

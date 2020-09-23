@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MyExplorer.ViewModel
 {
-    internal class AddHotKey : BaseVM
+    public class AddHotKey : BaseVM
     {
         public AddHotKey()
         {

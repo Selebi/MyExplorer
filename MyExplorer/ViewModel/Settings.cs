@@ -5,13 +5,14 @@ using System.Runtime.Serialization;
 namespace MyExplorer.ViewModel
 {
     [DataContract]
-    internal class Settings : BaseVM
+    public class Settings : BaseVM
     {
         Services.JsonSerializer<Settings> Serializer;
         bool LoginChanged;
         bool PasswordChanged;
 
         public event Action<List<string>> HotkeysChanged;
+        public event Action<List<Action>> ActionsChanged;
 
         Settings()
         {
@@ -57,6 +58,7 @@ namespace MyExplorer.ViewModel
                 LoginChanged = false;
                 PasswordChanged = false;
                 HotKeys = loaded.HotKeys;
+                Actions = loaded.Actions;
             }
             else
             {
@@ -87,6 +89,20 @@ namespace MyExplorer.ViewModel
             Save();
         }
 
+        public void AddAction(Action action)
+        {
+            Actions.Add(action);
+            Actions = Actions;
+            Save();
+        }
+
+        public void DelAction(Action action)
+        {
+            Actions.RemoveAll(a => { return a == action; });
+            Actions = Actions;
+            Save();
+        }
+
         #region HelpingData
 
         public List<string> HotkeysEnds { get; set; }
@@ -104,6 +120,8 @@ namespace MyExplorer.ViewModel
         string _domainLogin = "login";
         string _domainPassword = "pass";
         List<string> _hotKeys = new List<string>();
+        List<Action> _actions = new List<Action>();
+
         
         [DataMember]
         public List<string> HotKeys 
@@ -129,6 +147,18 @@ namespace MyExplorer.ViewModel
                     }
                 });
                 HotkeysChanged?.Invoke(_hotKeys);
+                OnPropertyChanged();
+            }
+        }
+
+        [DataMember]
+        public List<Action> Actions
+        {
+            get => _actions;
+            set
+            {
+                _actions = value;
+                ActionsChanged?.Invoke(_actions);
                 OnPropertyChanged();
             }
         }

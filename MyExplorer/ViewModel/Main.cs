@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace MyExplorer.ViewModel
 {
-    internal class Main : BaseVM
+    public class Main : BaseVM
     {
         public Main()
         {

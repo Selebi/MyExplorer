@@ -2,7 +2,7 @@
 
 namespace MyExplorer.ViewModel
 {
-    internal class Journal : BaseVM
+    public class Journal : BaseVM
     {
         public Journal()
         {

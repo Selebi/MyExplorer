@@ -3,7 +3,7 @@ using System;
 
 namespace MyExplorer.Model
 {
-    internal static class RegEditor
+    public static class RegEditor
     {
         static bool _explorerRegistred;
         public static bool ExplorerRegistred { get => _explorerRegistred; private set { _explorerRegistred = value; RegistredChanged?.Invoke(value); } }

@@ -12,7 +12,12 @@
             <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
         </Border.Effect>
         <Grid>
-            <TextBlock Text="Запуск службы %ИмяСлужбы%" FontSize="14" VerticalAlignment="top" HorizontalAlignment="Left" TextAlignment="Center" Margin="10 5"/>
+            <TextBlock Text="Запуск программы:" FontSize="14" VerticalAlignment="top" HorizontalAlignment="Left" TextAlignment="Center" Margin="10 5"/>
+            <TextBlock Text="Параметры запуска:" FontSize="14" VerticalAlignment="top" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,29,0,0"/>
+            <TextBlock Text="Задержка после:" FontSize="14" VerticalAlignment="top" HorizontalAlignment="Left" TextAlignment="Center" Margin="10,53,0,0"/>
+            <TextBlock Text="{Binding Path}" FontSize="14" VerticalAlignment="top" HorizontalAlignment="Left" TextAlignment="Center" Margin="160,5,0,0"/>
+            <TextBlock Text="{Binding Param}" FontSize="14" VerticalAlignment="top" HorizontalAlignment="Left" TextAlignment="Center" Margin="160,29,0,0"/>
+            <TextBlock Text="{Binding Delay}" FontSize="14" VerticalAlignment="top" HorizontalAlignment="Left" TextAlignment="Center" Margin="160,53,0,0"/>
             <Button Visibility="Collapsed" HorizontalAlignment="Right" Width="36" Height="36" Margin="0,6,52,6" Style="{StaticResource ButtonsRound}" Command="{Binding Edit}">
                 <Image Source="/MyExplorer;component/Resources/edit.png" Width="24" Stretch="None" />
             </Button>
