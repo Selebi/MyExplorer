@@ -5,12 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyExplorer.Controls"
              xmlns:conv="clr-namespace:MyExplorer.Converters"
-             mc:Ignorable="d"  Height="320" Width="480"
+             mc:Ignorable="d"  Height="360" Width="480"
              SnapsToDevicePixels="True" UseLayoutRounding ="True"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <conv:VisibilityConverter x:Key="vconv"/>
         <conv:UintConverter x:Key="uintconv"/>
+        <conv:ServiceConverter x:Key="servconv"/>
     </UserControl.Resources>
     <Border Style="{DynamicResource BorderCard}">
         <Border.Effect>
@@ -27,31 +28,49 @@
             <RadioButton x:Name="program" Content="Запуск программы" IsChecked="True" Margin="10,48,40,0" Height="32" FontSize="14" Grid.Column="1" Width="Auto" VerticalAlignment="Top"/>
 
             <Grid Grid.ColumnSpan="2" Margin="10,90,10,40" Visibility="{Binding ElementName=service, Path=IsChecked, Converter={StaticResource vconv}}">
-                <ListBox/>
+                <TextBlock Text="Поиск:" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" Margin="5 2"/>
+                <TextBox Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}" BorderBrush="#FF006EB2" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="59,2,10,0" Height="24">
+                    <TextBox.Effect>
+                        <DropShadowEffect BlurRadius="2"  ShadowDepth="0" Color="#FF006EB2"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <ListBox x:Name="ServiceListBox" ItemsSource="{Binding ServiceList}" SelectedItem="{Binding SelectedService}" Margin="0,32,0,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Path=ServiceName}"/>
+                                <Rectangle Margin="5 0" Fill="#FF0081CC" Width="1" VerticalAlignment="Stretch"/>
+                                <TextBlock Text="{Binding Path=DisplayName}"/>
+                                <Rectangle Margin="5 0" Fill="#FF0081CC" Width="1" VerticalAlignment="Stretch"/>
+                                <TextBlock Text="{Binding Path=Status}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Grid>
 
             <Grid Grid.ColumnSpan="2" Margin="10,90,10,40" Visibility="{Binding ElementName=program, Path=IsChecked, Converter={StaticResource vconv}}">
-                <TextBlock Text="Путь:" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,7,0,0" Width="82"/>
-                <TextBox Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="82,5,66,0" Height="24" BorderBrush="#FF006EB2" VerticalContentAlignment="Center">
+                <TextBlock Text="Путь:" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0" Width="82"/>
+                <TextBox x:Name="PathTextBox"  Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="82,13,66,0" Height="24" BorderBrush="#FF006EB2" VerticalContentAlignment="Center">
                     <TextBox.Effect>
                         <DropShadowEffect BlurRadius="2"  ShadowDepth="0" Color="#FF006EB2"/>
                     </TextBox.Effect>
                 </TextBox>
-                <Button Style="{StaticResource ButtonsBlueSquare}" Content="Обзор..."  Margin="0,5,0,0" Height="24" 
+                <Button Style="{StaticResource ButtonsBlueSquare}" Content="Обзор..."  Margin="0,13,0,0" Height="24" 
                         VerticalAlignment="Top" HorizontalAlignment="Right" Width="66" FontSize="14" Command="{Binding Browse}"/>
-                <TextBlock Text="Параметры:" Margin="0,38,0,0" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
-                <TextBox Text="{Binding Param}" VerticalAlignment="Top" Margin="82,36,66,0" Height="107" BorderBrush="#FF006EB2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
+                <TextBlock Text="Параметры:" Margin="0,56,0,0" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
+                <TextBox x:Name="ParamTextBox" Text="{Binding Param, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Margin="82,54,66,0" Height="107" BorderBrush="#FF006EB2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
                     <TextBox.Effect>
                         <DropShadowEffect BlurRadius="2"  ShadowDepth="0" Color="#FF006EB2"/>
                     </TextBox.Effect>
                 </TextBox>
-                <TextBlock Text="Задержка:" Margin="0,152,0,0" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
-                <TextBox Text="{Binding Delay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource uintconv}}" VerticalAlignment="Top" Margin="82,150,276,0" Height="24" BorderBrush="#FF006EB2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <TextBlock Text="Задержка:" Margin="0,180,0,0" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="82"/>
+                <TextBox Text="{Binding Delay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource uintconv}}" VerticalAlignment="Top" Margin="82,178,276,0" Height="24" BorderBrush="#FF006EB2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
                     <TextBox.Effect>
                         <DropShadowEffect BlurRadius="2"  ShadowDepth="0" Color="#FF006EB2"/>
                     </TextBox.Effect>
                 </TextBox>
-                <TextBlock Text="миллисекунд" Margin="187,152,0,0" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="95"/>
+                <TextBlock Text="миллисекунд" Margin="187,180,0,0" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Width="95"/>
             </Grid>
 
             <Button Style="{StaticResource ButtonsBlue}" Content="Отмена" Margin="0,0,10,10" Height="23" VerticalAlignment="Bottom" 

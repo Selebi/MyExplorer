@@ -67,6 +67,7 @@
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -120,6 +121,7 @@
     <Compile Include="Converters\DataUserConverter.cs" />
     <Compile Include="Converters\HotkeyBlockConverter.cs" />
     <Compile Include="Converters\RegExplorerConverter.cs" />
+    <Compile Include="Converters\ServiceConverter.cs" />
     <Compile Include="Converters\UintConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="Converters\WinExplorerConverter.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Model\HotKeyProcessor.cs" />
     <Compile Include="Model\ProcessWorker.cs" />
     <Compile Include="Model\RegEditor.cs" />
+    <Compile Include="Model\ServiceWorker.cs" />
     <Compile Include="Model\Users.cs" />
     <Compile Include="ProcessWindow.xaml.cs">
       <DependentUpon>ProcessWindow.xaml</DependentUpon>

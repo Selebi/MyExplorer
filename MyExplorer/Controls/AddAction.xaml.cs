@@ -8,6 +8,19 @@ namespace MyExplorer.Controls
         {
             InitializeComponent();
             DataContext = ViewModel;
+            Loaded += (o, e) => {
+                ServiceListBox.SelectedItem = null;
+                PathTextBox.Text = "";
+                ParamTextBox.Text = "";
+                service.Checked += (o1, e1) => {
+                    PathTextBox.Text = "";
+                    ParamTextBox.Text = "";
+                };
+                program.Checked += (o1, e1) =>
+                {
+                    ServiceListBox.SelectedItem = null;
+                };
+            };
         }
     }
 }

@@ -8,6 +8,26 @@ namespace MyExplorer.ViewModel
         string _path;
         string _param;
         uint _delay;
+        string _serviceName;
+
+        public RelayCommand Delete
+        {
+            get => new RelayCommand((o) =>
+            {
+                Settings.GetInstance().DelAction(this);
+            });
+        }
+
+        string _pathText;
+        public string PathText
+        {
+            get => _pathText;
+            set
+            {
+                _pathText = value;
+                OnPropertyChanged();
+            }
+        }
 
         [DataMember]
         public string Path
@@ -16,6 +36,21 @@ namespace MyExplorer.ViewModel
             set
             {
                 _path = value;
+                if (value != "")
+                    PathText = "Запуск программы:";
+                OnPropertyChanged();
+            }
+        }
+
+        [DataMember]
+        public string ServiceName
+        {
+            get => _serviceName;
+            set
+            {
+                _serviceName = value;
+                if (value != "")
+                    PathText = "Запуск службы:";
                 OnPropertyChanged();
             }
         }

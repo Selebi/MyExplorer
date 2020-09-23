@@ -25,7 +25,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand((o) =>
             {
-                // Мне реально лень это делать, да и нахуй оно не нужно =)
+                // Может быть потом
             });
         }
 
