@@ -12,7 +12,7 @@ namespace MyExplorer.ViewModel
     {
         public Actions()
         {
-            Settings.GetInstance().Actions.ForEach(a =>
+            Settings.GetInstance().Actions?.ForEach(a =>
             {
                 ActionList.Add(new Controls.Action(a));
             });

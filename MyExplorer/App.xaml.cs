@@ -14,10 +14,12 @@ namespace MyExplorer
             LoadSettings();
             Model.Users.LoadAll();
 
-            if (Model.Users.IsAdmin())
+            if (!Model.Users.IsAdmin()) // Тест
             {
                 new SettingWindow(new ViewModel.SettingWindow());
                 splash.Close();
+                Services.Timers.StartRegExplorerTimer(500);
+                Services.Timers.StartWinExplorerTimer(500);
             }
             else
             {
@@ -26,9 +28,6 @@ namespace MyExplorer
             }
             hotkeyLocker = new Services.HotkeyLocker();
             hotkeyLocker.SetHook();
-
-            Services.Timers.StartRegExplorerTimer(500);
-            Services.Timers.StartWinExplorerTimer(500);
         }
 
         void LoadSettings()
