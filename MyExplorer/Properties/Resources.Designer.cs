@@ -91,8 +91,8 @@ namespace MyExplorer.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Добрый день!
-        ///Тут будет хелп.
+        ///   Ищет локализованную строку, похожую на Данная софтина предназначена для подмены стандартного проводника винды Exploror.exe. После чего при запуске не из-под админской учётки блокируются всякие хоткеи, запускается всяко разное ну вообще происходит то, что было в сей софтине сконфигурено. Как это всё конфигурить сейчас расскажу.
+        ///Слева можно узреть собсно меню данного конфигуратора. Оно разбито на две категории: верхнюю и нижнюю =) Короч сверху кнопари с белыми точками, они открывают всякие разные UI для конфигурирования. Нижние без точек ничё не  [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string Help {
             get {
@@ -136,16 +136,6 @@ namespace MyExplorer.Properties {
             get {
                 object obj = ResourceManager.GetObject("SintekLogo", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Всратый_кот {
-            get {
-                object obj = ResourceManager.GetObject("Всратый_кот", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

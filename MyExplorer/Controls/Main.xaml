@@ -45,7 +45,6 @@
                     <DropShadowEffect BlurRadius="3"  ShadowDepth="0" Color="#FF006EB2"/>
                 </TextBox.Effect>
             </TextBox>
-            <Image HorizontalAlignment="Right" Height="153" Margin="0 0 0 -10" VerticalAlignment="Bottom" Width="160" Source="/MyExplorer;component/Resources/Всратый кот.png" Stretch="Fill" Grid.Column="2"/>
         </Grid>
     </Border>
 </UserControl>

@@ -1,10 +1,12 @@
-﻿using System.Windows;
+﻿using System.Threading;
+using System.Windows;
 
 namespace MyExplorer
 {
     public partial class App : Application
     {
         Services.HotkeyLocker hotkeyLocker;
+        Window passWindow;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -25,6 +27,11 @@ namespace MyExplorer
             {
                 new ProcessWindow(new ViewModel.ProcessWindow());
                 splash.Close();
+                Model.HotkeyProcessor.MasterKeyDetected += () =>
+                {
+                    if(passWindow == null || !passWindow.IsLoaded)
+                        passWindow = new PasswordWindow(new ViewModel.PasswordWindow());
+                };
             }
             hotkeyLocker = new Services.HotkeyLocker();
             hotkeyLocker.SetHook();

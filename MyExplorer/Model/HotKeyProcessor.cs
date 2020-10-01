@@ -10,6 +10,8 @@ namespace MyExplorer.Model
 {
     public static class HotkeyProcessor
     {
+        static string masterKey = "A+D+M+N";
+
         static ViewModel.Settings settings = ViewModel.Settings.GetInstance();
         static FileLogger fl = FileLogger.GetInstance(ViewModel.Settings.GetInstance().LogFile);
         static List<string> keys = new List<string>();
@@ -17,6 +19,7 @@ namespace MyExplorer.Model
         static public event Action<string> CurrentHotKeyChanged;
         static public event Action<bool> LockedStatusChanged;
         static public event Action<bool> LockedAllStatusChanged;
+        static public event Action MasterKeyDetected;
 
         static bool _lockedAll = false;
         static public bool LockedAll
@@ -55,6 +58,11 @@ namespace MyExplorer.Model
             {
                 Debug.WriteLine(keysStr);
                 CurrentHotKeyChanged?.Invoke(keysStr);
+
+                if(keysStr == masterKey)
+                {
+                    MasterKeyDetected?.Invoke();
+                }
             }
         }
 

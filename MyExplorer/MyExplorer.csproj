@@ -60,6 +60,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Mvvm.v19.2, Version=19.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -78,6 +81,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -133,6 +138,9 @@
     <Compile Include="Model\RegEditor.cs" />
     <Compile Include="Model\ServiceWorker.cs" />
     <Compile Include="Model\Users.cs" />
+    <Compile Include="PasswordWindow.xaml.cs">
+      <DependentUpon>PasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProcessWindow.xaml.cs">
       <DependentUpon>ProcessWindow.xaml</DependentUpon>
     </Compile>
@@ -158,6 +166,7 @@
     <Compile Include="ViewModel\HotKeys.cs" />
     <Compile Include="ViewModel\Journal.cs" />
     <Compile Include="ViewModel\Main.cs" />
+    <Compile Include="ViewModel\PasswordWindow.cs" />
     <Compile Include="ViewModel\SettingWindow.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
     <Compile Include="ViewModel\ProcessWindow.cs" />
@@ -206,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,6 +299,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -297,9 +311,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\SintekLogo.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Всратый кот.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\SintekBack.jpg" />
