@@ -12,7 +12,7 @@
     <SolidColorBrush x:Key="ButtonMenu.Disabled.Border" Color="#FF6996AF"/>
     <SolidColorBrush x:Key="ButtonMenu.Disabled.Foreground" Color="#FFFFFFFF"/>
     <Style x:Key="ButtonsMenu" TargetType="{x:Type Button}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        
         <Setter Property="Background" Value="{StaticResource ButtonMenu.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ButtonMenu.Static.Border}"/>
         <Setter Property="Foreground" Value="{StaticResource ButtonMenu.Static.Foreground}"/>

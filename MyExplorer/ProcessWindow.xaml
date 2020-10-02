@@ -9,6 +9,7 @@
         WindowState="Normal"
         AllowsTransparency="True"
         ResizeMode="NoResize"
+        Topmost="True"
         WindowStartupLocation="CenterScreen"
         SnapsToDevicePixels="True" UseLayoutRounding ="True"
         Title="MyExplorer v 0.1 Alpha" Height="500" Width="800">
@@ -17,7 +18,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Window}">
-                        <Border Background="#FF006EB2" CornerRadius="16, 16, 0, 16">
+                        <Border Background="#FF006EB2" CornerRadius="16, 16, 16, 16">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40"/>
@@ -43,13 +44,10 @@
                                     </Border.Effect>
                                     <Image Height="24" Width="24" Source="Resources/SintekLogo.ico" Margin="1,2,3,2" />
                                 </Border>
-                                <Border Grid.Row="1" Background="White" Margin="4,0,4,30" CornerRadius="5,5,15,15">
+                                <Border Grid.Row="1" Background="White" Margin="4,0,4,4" CornerRadius="5,5,15,15">
                                     <Border Margin="4,0,4,6">
                                         <Frame Content="{Binding Pages}" NavigationUIVisibility="Hidden"/>
                                     </Border>
-                                </Border>
-                                <Border Grid.Row="1" Background="#FF006EB2" Margin="15,0" Height="30" VerticalAlignment="Bottom">
-                                    <Frame Content="{Binding Statusbar}" NavigationUIVisibility="Hidden"/>
                                 </Border>
                             </Grid>
                         </Border>

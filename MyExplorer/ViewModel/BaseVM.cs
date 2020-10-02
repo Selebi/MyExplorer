@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace MyExplorer.ViewModel
 {
@@ -13,5 +15,6 @@ namespace MyExplorer.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public Dispatcher MainDispatcher { get; } = Application.Current.MainWindow.Dispatcher;
     }
 }

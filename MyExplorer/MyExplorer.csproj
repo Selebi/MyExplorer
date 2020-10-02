@@ -113,6 +113,9 @@
     <Compile Include="Controls\HotKeys.xaml.cs">
       <DependentUpon>HotKeys.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Process.xaml.cs">
+      <DependentUpon>Process.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -167,6 +170,7 @@
     <Compile Include="ViewModel\Journal.cs" />
     <Compile Include="ViewModel\Main.cs" />
     <Compile Include="ViewModel\PasswordWindow.cs" />
+    <Compile Include="ViewModel\Process.cs" />
     <Compile Include="ViewModel\SettingWindow.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
     <Compile Include="ViewModel\ProcessWindow.cs" />
@@ -205,6 +209,10 @@
     <Page Include="Controls\HotKeys.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Process.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Settings.xaml">
       <SubType>Designer</SubType>
@@ -304,6 +312,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

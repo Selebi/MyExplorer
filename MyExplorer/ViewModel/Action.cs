@@ -29,6 +29,28 @@ namespace MyExplorer.ViewModel
             }
         }
 
+        string _status;
+        public string Status
+        {
+            get => _status;
+            set
+            {
+                _status = value;
+                OnPropertyChanged();
+            }
+        }
+
+        string _error;
+        public string Error
+        {
+            get => _error;
+            set
+            {
+                _error = value;
+                OnPropertyChanged();
+            }
+        }
+
         [DataMember]
         public string Path
         {

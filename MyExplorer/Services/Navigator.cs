@@ -45,7 +45,8 @@ namespace MyExplorer.Services
             Journal,
             Hotkeys,
             AddHotKey,
-            AddAction
+            AddAction,
+            Process
         }
 
         public enum WindowName
@@ -64,7 +65,8 @@ namespace MyExplorer.Services
             {FrameName.Journal, new Controls.Journal(new ViewModel.Journal())},
             {FrameName.Hotkeys, new Controls.HotKeys(new ViewModel.HotKeys())},
             {FrameName.AddHotKey, new Controls.AddHotKey(new ViewModel.AddHotKey())},
-            {FrameName.AddAction, new Controls.AddAction(new ViewModel.AddAction())}
+            {FrameName.AddAction, new Controls.AddAction(new ViewModel.AddAction())},
+            {FrameName.Process, new Controls.Process(ViewModel.Process.GetInstance())}
         };
 
         #endregion
