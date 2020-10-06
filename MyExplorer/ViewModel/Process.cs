@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,7 +8,9 @@ namespace MyExplorer.ViewModel
 {
     public class Process : BaseVM
     {
-        public ObservableCollection<Action> Actions { get; set; }
+        Services.FileLogger fl = Services.FileLogger.GetInstance(ViewModel.Settings.GetInstance().LogFile);
+        public ObservableCollection<Action> ViewActions { get; set; } = new ObservableCollection<Action>();
+        public event System.Action Done;
 
         Process() { }
         static Process _instance;
@@ -21,28 +21,42 @@ namespace MyExplorer.ViewModel
             return _instance;
         }
 
-        public async Task Start()
+        public async Task Start(List<Action> Actions)
         {
             await Task.Run(() =>
             {
-                foreach(var a in Actions)
+                string error;
+                foreach (var a in Actions)
                 {
-                    MainDispatcher.Invoke(() => { a.Status = "Запуск..."; });
-                    if (a.Path != null && a.Path != "")
+                    try
                     {
-                        Model.ProcessWorker.StartProcess(a.Path);
-                        for (int i = 0; i < 100; i++)
+                        MainDispatcher.Invoke(() => { ViewActions.Insert(0, a); });
+                        MainDispatcher.Invoke(() => { a.Status = "Запуск..."; });
+                        if (a.Path != null && a.Path != "")
                         {
-                            Thread.Sleep(100);
-                            if (Model.ProcessWorker.IsStartedProcessWork(a.Path))
-                                break;
+                            error = Model.ProcessWorker.StartProcess(a.Path, a.Param);
+                            MainDispatcher.Invoke(() => { a.Error = error; });
+                            for (int i = 0; i < 100; i++)
+                            {
+                                Thread.Sleep(100);
+                                if (Model.ProcessWorker.IsStartedProcessWork(a.Path))
+                                    break;
+                            }
                         }
-                        a.Error = "Ебать, Ошибка!!!";
+                        MainDispatcher.Invoke(() => { a.Status = "Выполнено"; });
+                        fl.Write($"Запущено {(a.Path != "" ? a.Path : a.ServiceName)}", Enums.LogType.Info);
                     }
-                    MainDispatcher.Invoke(() => { a.Status = "Выполнено"; });
+                    catch (Exception ex)
+                    {
+                        MainDispatcher.Invoke(() => { a.Status = "Не выполнено"; });
+                        MainDispatcher.Invoke(() => { a.Error = $"Ошибка: {ex.Message}"; });
+                        fl.Write($"Ошибка при запуске {a.Path} - {ex.Message}", Enums.LogType.Info);
+                    }
                     Thread.Sleep((int)a.Delay);
                 }
+                Thread.Sleep(1000);
             });
+            Done?.Invoke();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using MyExplorer.Services;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -26,7 +27,8 @@ namespace MyExplorer
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.Shutdown();
+            Navigator.GetInstance(Navigator.WindowName.Settings).ReleaseFrames();
+            this.Close();
         }
         #endregion
 

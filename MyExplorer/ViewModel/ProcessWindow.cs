@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace MyExplorer.ViewModel
@@ -17,8 +12,14 @@ namespace MyExplorer.ViewModel
             Services.Navigator.CreateInstance(Services.Navigator.WindowName.Process, Pages);
             Services.Navigator.GetInstance(Services.Navigator.WindowName.Process).SetFrame(Services.Navigator.FrameName.Process);
 
-            Process.GetInstance().Actions = new ObservableCollection<Action>(settings.Actions);
-            Process.GetInstance().Start();
+            Process.GetInstance().Done += ProcessWindow_Done;
+            Process.GetInstance().Start(settings.Actions);
+
+        }
+
+        private void ProcessWindow_Done()
+        {
+            Visibility = Visibility.Collapsed;
         }
 
         Grid _pages = new Grid();
@@ -28,6 +29,17 @@ namespace MyExplorer.ViewModel
             set
             {
                 _pages = value;
+                OnPropertyChanged();
+            }
+        }
+
+        Visibility _visibility;
+        public Visibility Visibility
+        {
+            get => _visibility;
+            set
+            {
+                _visibility = value;
                 OnPropertyChanged();
             }
         }

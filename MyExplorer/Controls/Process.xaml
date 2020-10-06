@@ -7,10 +7,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListBox Margin="10" ItemsSource="{Binding Actions}">
+        <ListBox Margin="10" ItemsSource="{Binding ViewActions}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="#FF006EB2" BorderThickness="2" CornerRadius="5" Margin="5 5 5 0">
+                        <Border.Style>
+                            <Style>
+                                <Style.Triggers>
+                                    <EventTrigger RoutedEvent="Border.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="(Border.Opacity)" 
+                                                                 From="0" To="1" Duration="0:0:0.5" AutoReverse="False"  />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>

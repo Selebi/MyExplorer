@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -70,6 +71,11 @@ namespace MyExplorer.Services
         };
 
         #endregion
+
+        public void ReleaseFrames()
+        {
+            currentgrid.Children.Clear();
+        }
 
         public void SetFrame(FrameName frameName)
         {

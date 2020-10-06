@@ -30,9 +30,18 @@ namespace MyExplorer.Model
             new List<Process>(Process.GetProcessesByName(name)).ForEach(p => { p.Kill(); });
         }
 
-        public static void StartProcess(string file)
+        public static string StartProcess(string file, string param = "")
         {
-            StartedProcesses.Add(file, Process.Start(file));
+            if (StartedProcesses.ContainsKey(file))
+            {
+                Process.Start(file, param);
+                return "Копия";
+            }
+            else
+            {
+                StartedProcesses.Add(file, Process.Start(file, param));
+            }
+            return "";
         }
 
         public static void StartExplorer()

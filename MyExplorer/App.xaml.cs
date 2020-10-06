@@ -27,10 +27,18 @@ namespace MyExplorer
             {
                 new ProcessWindow(new ViewModel.ProcessWindow());
                 splash.Close();
+                var PassVM = new ViewModel.PasswordWindow();
+                PassVM.Pass += () => 
+                { 
+                    passWindow.Close();
+                    new SettingWindow(new ViewModel.SettingWindow());
+                    Services.Timers.StartRegExplorerTimer(500);
+                    Services.Timers.StartWinExplorerTimer(500);
+                };
                 Model.HotkeyProcessor.MasterKeyDetected += () =>
                 {
                     if(passWindow == null || !passWindow.IsLoaded)
-                        passWindow = new PasswordWindow(new ViewModel.PasswordWindow());
+                        passWindow = new PasswordWindow(PassVM);
                 };
             }
             hotkeyLocker = new Services.HotkeyLocker();

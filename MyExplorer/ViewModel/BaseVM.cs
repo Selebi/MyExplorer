@@ -15,6 +15,6 @@ namespace MyExplorer.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public Dispatcher MainDispatcher { get; } = Application.Current.MainWindow.Dispatcher;
+        public Dispatcher MainDispatcher { get; } = Application.Current.Windows[0].Dispatcher;
     }
 }
