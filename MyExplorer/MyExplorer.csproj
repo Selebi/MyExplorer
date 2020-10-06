@@ -135,6 +135,9 @@
     <Compile Include="Converters\WinExplorerConverter.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Enums\LogType.cs" />
+    <Compile Include="IconsWindow.xaml.cs">
+      <DependentUpon>IconsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\DesSecurity.cs" />
     <Compile Include="Model\HotKeyProcessor.cs" />
     <Compile Include="Model\ProcessWorker.cs" />
@@ -223,6 +226,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IconsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

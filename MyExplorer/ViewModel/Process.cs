@@ -43,6 +43,10 @@ namespace MyExplorer.ViewModel
                                     break;
                             }
                         }
+                        else
+                        {
+                            //Обработка запуска процессов
+                        }
                         MainDispatcher.Invoke(() => { a.Status = "Выполнено"; });
                         fl.Write($"Запущено {(a.Path != "" ? a.Path : a.ServiceName)}", Enums.LogType.Info);
                     }

@@ -20,8 +20,6 @@ namespace MyExplorer
             {
                 new SettingWindow(new ViewModel.SettingWindow());
                 splash.Close();
-                Services.Timers.StartRegExplorerTimer(500);
-                Services.Timers.StartWinExplorerTimer(500);
             }
             else
             {
@@ -32,8 +30,6 @@ namespace MyExplorer
                 { 
                     passWindow.Close();
                     new SettingWindow(new ViewModel.SettingWindow());
-                    Services.Timers.StartRegExplorerTimer(500);
-                    Services.Timers.StartWinExplorerTimer(500);
                 };
                 Model.HotkeyProcessor.MasterKeyDetected += () =>
                 {

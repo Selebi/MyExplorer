@@ -12,6 +12,8 @@ namespace MyExplorer
             InitializeComponent();
             DataContext = ViewModel;
             Show();
+            Timers.StartRegExplorerTimer(500);
+            Timers.StartWinExplorerTimer(500);
         }
 
         #region Header
@@ -28,6 +30,7 @@ namespace MyExplorer
         private void Close_Click(object sender, RoutedEventArgs e)
         {
             Navigator.GetInstance(Navigator.WindowName.Settings).ReleaseFrames();
+            Timers.StopTimers();
             this.Close();
         }
         #endregion

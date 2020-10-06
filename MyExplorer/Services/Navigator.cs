@@ -9,8 +9,10 @@ namespace MyExplorer.Services
 {
     public class Navigator
     {
-        public WindowName currentWindow = WindowName.Null;
-        public Grid currentgrid;
+        WindowName currentWindow = WindowName.Null;
+        Grid currentgrid;
+        Window window;
+        
         static List<Navigator> navigators = new List<Navigator>();
 
         Navigator() { }
@@ -31,6 +33,7 @@ namespace MyExplorer.Services
             }
             navigators.Add(new Navigator() { currentWindow = window, currentgrid = container });
         }
+
 
         Stack<FrameName> previousFrame = new Stack<FrameName>();
         FrameName currentContent = FrameName.Main;
