@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MyExplorer.Enums;
+using MyExplorer.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -10,9 +12,12 @@ namespace MyExplorer.Services
     public class Navigator
     {
         WindowName currentWindow = WindowName.Null;
-        Grid currentgrid;
-        Window window;
-        
+        Grid currentContainer;
+        Window Window;
+
+        Stack<FrameName> previousFrame = new Stack<FrameName>();
+        FrameName currentContent = FrameName.Main;
+
         static List<Navigator> navigators = new List<Navigator>();
 
         Navigator() { }
@@ -25,40 +30,33 @@ namespace MyExplorer.Services
                 return null;
         }
 
-        public static void CreateInstance(WindowName window, Grid container)
+        //public static void CreateInstance(WindowName windowName, Window window, Grid container)
+        //{
+        //    if (navigators.Any(n => { return n.currentWindow == windowName; }))
+        //    {
+        //        navigators.RemoveAll(n => { return n.currentWindow == windowName; });
+        //    }
+        //    navigators.Add(new Navigator(window) { currentWindow = windowName, currentgrid = container });
+        //}
+
+        public static void CreateInstance(WindowName windowName)
         {
-            if (navigators.Any(n => { return n.currentWindow == window; }))
+            if (navigators.Any(n => { return n.currentWindow == windowName; }))
             {
-                navigators.RemoveAll(n => { return n.currentWindow == window; });
+                navigators.RemoveAll(n => { return n.currentWindow == windowName; });
             }
-            navigators.Add(new Navigator() { currentWindow = window, currentgrid = container });
+            if (Windows.TryGetValue(windowName, out object window))
+            {
+                Navigator navigator = new Navigator();
+                navigator.currentWindow = windowName;
+                navigator.currentContainer = ((IExplorerWindow)window).ContainerFrame;
+            }
         }
 
 
-        Stack<FrameName> previousFrame = new Stack<FrameName>();
-        FrameName currentContent = FrameName.Main;
+
 
         #region Frames
-
-        public enum FrameName
-        {
-            Main,
-            Settings,
-            Users,
-            Actions,
-            Journal,
-            Hotkeys,
-            AddHotKey,
-            AddAction,
-            Process
-        }
-
-        public enum WindowName
-        {
-            Null,
-            Settings,
-            Process
-        }
 
         static Dictionary<FrameName, object> Frames = new Dictionary<FrameName, object>()
         {
@@ -73,19 +71,27 @@ namespace MyExplorer.Services
             {FrameName.Process, new Controls.Process(ViewModel.Process.GetInstance())}
         };
 
+        static Dictionary<WindowName, object> Windows = new Dictionary<WindowName, object>()
+        {
+            { WindowName.Settings, new SettingWindow(new ViewModel.SettingWindow()) },
+            { WindowName.Process, new ProcessWindow(new ViewModel.ProcessWindow()) },
+            { WindowName.Icons, new IconsWindow(new ViewModel.IconsWindow()) },
+            { WindowName.Password, new PasswordWindow(new ViewModel.PasswordWindow()) }
+        };
+
         #endregion
 
         public void ReleaseFrames()
         {
-            currentgrid.Children.Clear();
+            currentContainer.Children.Clear();
         }
 
         public void SetFrame(FrameName frameName)
         {
             if (Frames.TryGetValue(frameName, out object value))
             {
-                currentgrid.Children.Clear();
-                currentgrid.Children.Add((System.Windows.UIElement)value);
+                currentContainer.Children.Clear();
+                currentContainer.Children.Add((System.Windows.UIElement)value);
                 previousFrame.Push(currentContent);
                 currentContent = frameName;
             }
@@ -96,8 +102,8 @@ namespace MyExplorer.Services
             var frame = previousFrame.Pop(); // Отсылка к warframe
             if (Frames.TryGetValue(frame, out object value))
             {
-                currentgrid.Children.Clear();
-                currentgrid.Children.Add((System.Windows.UIElement)value);
+                currentContainer.Children.Clear();
+                currentContainer.Children.Add((System.Windows.UIElement)value);
                 currentContent = frame;
             }
         }
@@ -106,17 +112,17 @@ namespace MyExplorer.Services
         {
             if (Frames.TryGetValue(frameName, out object value))
             {
-                currentgrid.Children[currentgrid.Children.Count - 1].IsEnabled = false;
-                currentgrid.Children.Add((System.Windows.UIElement)value);
+                currentContainer.Children[currentContainer.Children.Count - 1].IsEnabled = false;
+                currentContainer.Children.Add((System.Windows.UIElement)value);
             }
         }
 
         public void CloseMessage()
         {
-            if (currentgrid.Children.Count >= 2)
+            if (currentContainer.Children.Count >= 2)
             {
-                currentgrid.Children.RemoveAt(currentgrid.Children.Count - 1);
-                currentgrid.Children[currentgrid.Children.Count - 1].IsEnabled = true;
+                currentContainer.Children.RemoveAt(currentContainer.Children.Count - 1);
+                currentContainer.Children[currentContainer.Children.Count - 1].IsEnabled = true;
             }
         }
     }

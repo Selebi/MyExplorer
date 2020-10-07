@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using MyExplorer.Enums;
+using System.Windows.Controls;
 
 namespace MyExplorer.ViewModel
 {
@@ -6,8 +7,7 @@ namespace MyExplorer.ViewModel
     {
         public SettingWindow()
         {
-            Services.Navigator.CreateInstance(Services.Navigator.WindowName.Settings, Pages);
-            Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Main);
+            Services.Navigator.GetInstance(WindowName.Settings).SetFrame(FrameName.Main);
             Statusbar = new Frame() { Content = new Controls.StatusBar(new StatusBar()) };
         }
 

@@ -1,12 +1,15 @@
-﻿using MyExplorer.Services;
+﻿using MyExplorer.Enums;
+using MyExplorer.Interfaces;
+using MyExplorer.Services;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MyExplorer
 {
-    public partial class SettingWindow : Window
+    public partial class SettingWindow : Window, IExplorerWindow
     {
+        public Grid ContainerFrame { get => Container; }
         public SettingWindow(object ViewModel)
         {
             InitializeComponent();
@@ -29,7 +32,7 @@ namespace MyExplorer
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Navigator.GetInstance(Navigator.WindowName.Settings).ReleaseFrames();
+            Navigator.GetInstance(WindowName.Settings).ReleaseFrames();
             Timers.StopTimers();
             this.Close();
         }
@@ -38,6 +41,7 @@ namespace MyExplorer
         #region Resize
         bool ResizeInProcess = false;
         int ResizePos = 4;
+
         private void Border_MouseLeftButtonDownResize(object sender, MouseButtonEventArgs e)
         {
             if (sender is Border senderRect)

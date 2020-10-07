@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using MyExplorer.Enums;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace MyExplorer.ViewModel
@@ -9,8 +10,8 @@ namespace MyExplorer.ViewModel
         public ProcessWindow()
         {
             settings = Settings.GetInstance();
-            Services.Navigator.CreateInstance(Services.Navigator.WindowName.Process, Pages);
-            Services.Navigator.GetInstance(Services.Navigator.WindowName.Process).SetFrame(Services.Navigator.FrameName.Process);
+            //Services.Navigator.CreateInstance(Services.Navigator.WindowName.Process, Pages);
+            Services.Navigator.GetInstance(WindowName.Process).SetFrame(FrameName.Process);
 
             Process.GetInstance().Done += ProcessWindow_Done;
             Process.GetInstance().Start(settings.Actions);

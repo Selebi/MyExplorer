@@ -134,10 +134,13 @@
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="Converters\WinExplorerConverter.cs" />
     <Compile Include="Data\User.cs" />
+    <Compile Include="Enums\FrameName.cs" />
     <Compile Include="Enums\LogType.cs" />
+    <Compile Include="Enums\WindowName.cs" />
     <Compile Include="IconsWindow.xaml.cs">
       <DependentUpon>IconsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IExplorerWindow.cs" />
     <Compile Include="Model\DesSecurity.cs" />
     <Compile Include="Model\HotKeyProcessor.cs" />
     <Compile Include="Model\ProcessWorker.cs" />
@@ -170,6 +173,7 @@
     <Compile Include="ViewModel\AddHotKey.cs" />
     <Compile Include="ViewModel\HotKey.cs" />
     <Compile Include="ViewModel\HotKeys.cs" />
+    <Compile Include="ViewModel\IconsWindow.cs" />
     <Compile Include="ViewModel\Journal.cs" />
     <Compile Include="ViewModel\Main.cs" />
     <Compile Include="ViewModel\PasswordWindow.cs" />
