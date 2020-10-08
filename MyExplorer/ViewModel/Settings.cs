@@ -31,7 +31,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand((o) =>
             {
-                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetPreviousFrame();
+                Services.Navigator.GetInstance(Enums.WindowName.Settings).SetPreviousFrame(Enums.ContainerType.Main);
             });
         }
 

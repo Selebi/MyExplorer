@@ -9,7 +9,7 @@
         WindowState="Normal"
         AllowsTransparency="True"
         ResizeMode="NoResize"
-        Topmost="True"
+        Topmost="True" Loaded="{Binding Loaded}"
         WindowStartupLocation="CenterScreen"
         SnapsToDevicePixels="True" UseLayoutRounding ="True"
         Title="MyExplorer v 0.1 Alpha" Height="500" Width="800" Visibility="{Binding Visibility, Mode=TwoWay}">

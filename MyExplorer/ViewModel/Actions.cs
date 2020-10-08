@@ -43,7 +43,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand((o) =>
             {
-                Navigator.GetInstance(Navigator.WindowName.Settings).SetPreviousFrame();
+                Navigator.GetInstance(Enums.WindowName.Settings).SetPreviousFrame(Enums.ContainerType.Main);
             });
         }
 
@@ -51,7 +51,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand((o) =>
             {
-                Navigator.GetInstance(Navigator.WindowName.Settings).ShowMessage(Navigator.FrameName.AddAction);
+                Navigator.GetInstance(Enums.WindowName.Settings).ShowMessage(Enums.ContainerType.Main, Enums.FrameName.AddAction);
             });
         }
     }

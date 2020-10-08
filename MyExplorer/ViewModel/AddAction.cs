@@ -100,7 +100,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand((o) =>
             {
-                Navigator.GetInstance(Navigator.WindowName.Settings).CloseMessage();
+                Navigator.GetInstance(Enums.WindowName.Settings).CloseMessage(Enums.ContainerType.Main);
             });
         }
 
@@ -111,7 +111,7 @@ namespace MyExplorer.ViewModel
 
                 var action = new Action() { Path = _path, Param = _param, Delay = _delay, ServiceName = _serviceName };
                 Settings.GetInstance().AddAction(action);
-                Navigator.GetInstance(Navigator.WindowName.Settings).CloseMessage();
+                Navigator.GetInstance(Enums.WindowName.Settings).CloseMessage(Enums.ContainerType.Main);
             },
                 o => { return _path != "" || _serviceName != ""; });
         }

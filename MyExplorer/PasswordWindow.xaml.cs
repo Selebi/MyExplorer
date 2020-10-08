@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using MyExplorer.Interfaces;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,7 +12,6 @@ namespace MyExplorer
         {
             InitializeComponent();
             DataContext = ViewModel;
-            Show();
 
             pb.Focus();
             Task.Run(() =>

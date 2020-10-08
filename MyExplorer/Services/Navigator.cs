@@ -1,22 +1,18 @@
-﻿using MyExplorer.Enums;
-using MyExplorer.Interfaces;
-using System;
+﻿using MyExplorer.Data;
+using MyExplorer.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace MyExplorer.Services
 {
     public class Navigator
     {
         WindowName currentWindow = WindowName.Null;
-        Grid currentContainer;
-        Window Window;
+        Window window;
 
-        Stack<FrameName> previousFrame = new Stack<FrameName>();
-        FrameName currentContent = FrameName.Main;
+        Dictionary<ContainerType, Container> containers = new Dictionary<ContainerType, Container>();
 
         static List<Navigator> navigators = new List<Navigator>();
 
@@ -30,15 +26,6 @@ namespace MyExplorer.Services
                 return null;
         }
 
-        //public static void CreateInstance(WindowName windowName, Window window, Grid container)
-        //{
-        //    if (navigators.Any(n => { return n.currentWindow == windowName; }))
-        //    {
-        //        navigators.RemoveAll(n => { return n.currentWindow == windowName; });
-        //    }
-        //    navigators.Add(new Navigator(window) { currentWindow = windowName, currentgrid = container });
-        //}
-
         public static void CreateInstance(WindowName windowName)
         {
             if (navigators.Any(n => { return n.currentWindow == windowName; }))
@@ -48,13 +35,12 @@ namespace MyExplorer.Services
             if (Windows.TryGetValue(windowName, out object window))
             {
                 Navigator navigator = new Navigator();
+                navigators.Add(navigator);
                 navigator.currentWindow = windowName;
-                navigator.currentContainer = ((IExplorerWindow)window).ContainerFrame;
+                navigator.window = (Window)window;
+                navigator.window.Show();
             }
         }
-
-
-
 
         #region Frames
 
@@ -68,7 +54,8 @@ namespace MyExplorer.Services
             {FrameName.Hotkeys, new Controls.HotKeys(new ViewModel.HotKeys())},
             {FrameName.AddHotKey, new Controls.AddHotKey(new ViewModel.AddHotKey())},
             {FrameName.AddAction, new Controls.AddAction(new ViewModel.AddAction())},
-            {FrameName.Process, new Controls.Process(ViewModel.Process.GetInstance())}
+            {FrameName.Process, new Controls.Process(ViewModel.Process.GetInstance())},
+            {FrameName.StatusBar, new Controls.StatusBar(new ViewModel.StatusBar())}
         };
 
         static Dictionary<WindowName, object> Windows = new Dictionary<WindowName, object>()
@@ -81,48 +68,73 @@ namespace MyExplorer.Services
 
         #endregion
 
-        public void ReleaseFrames()
+        public void AddContainer(ContainerType containerType, Grid containerUI)
         {
-            currentContainer.Children.Clear();
-        }
-
-        public void SetFrame(FrameName frameName)
-        {
-            if (Frames.TryGetValue(frameName, out object value))
+            if (!containers.ContainsKey(containerType))
             {
-                currentContainer.Children.Clear();
-                currentContainer.Children.Add((System.Windows.UIElement)value);
-                previousFrame.Push(currentContent);
-                currentContent = frameName;
+                Container container = new Container();
+                container.ContainerGrid = containerUI;
+                containers.Add(containerType, container);
             }
         }
 
-        public void SetPreviousFrame()
+        public void ReleaseFrames(ContainerType containerType)
         {
-            var frame = previousFrame.Pop(); // Отсылка к warframe
-            if (Frames.TryGetValue(frame, out object value))
+            if (containers.TryGetValue(containerType, out Container container))
             {
-                currentContainer.Children.Clear();
-                currentContainer.Children.Add((System.Windows.UIElement)value);
-                currentContent = frame;
+                container.ContainerGrid.Children.Clear();
             }
         }
 
-        public void ShowMessage(FrameName frameName)
+        public void SetFrame(FrameName frameName, ContainerType containerType)
         {
-            if (Frames.TryGetValue(frameName, out object value))
+            if (containers.TryGetValue(containerType, out Container container))
             {
-                currentContainer.Children[currentContainer.Children.Count - 1].IsEnabled = false;
-                currentContainer.Children.Add((System.Windows.UIElement)value);
+                if (Frames.TryGetValue(frameName, out object value))
+                {
+                    container.ContainerGrid.Children.Clear();
+                    container.ContainerGrid.Children.Add((UIElement)value);
+                    container.PreviousUI.Push(container.CurrentUI);
+                    container.CurrentUI = frameName;
+                }
             }
         }
 
-        public void CloseMessage()
+        public void SetPreviousFrame(ContainerType containerType)
         {
-            if (currentContainer.Children.Count >= 2)
+            if (containers.TryGetValue(containerType, out Container container))
             {
-                currentContainer.Children.RemoveAt(currentContainer.Children.Count - 1);
-                currentContainer.Children[currentContainer.Children.Count - 1].IsEnabled = true;
+                var frame = container.PreviousUI.Pop(); // Отсылка к warframe
+                if (Frames.TryGetValue(frame, out object value))
+                {
+                    container.ContainerGrid.Children.Clear();
+                    container.ContainerGrid.Children.Add((UIElement)value);
+                    container.CurrentUI = frame;
+                }
+            }
+        }
+
+        public void ShowMessage(ContainerType containerType, FrameName frameMessage)
+        {
+            if (containers.TryGetValue(containerType, out Container container))
+            {
+                if (Frames.TryGetValue(frameMessage, out object value))
+                {
+                    container.ContainerGrid.Children[container.ContainerGrid.Children.Count - 1].IsEnabled = false;
+                    container.ContainerGrid.Children.Add((UIElement)value);
+                }
+            }
+        }
+
+        public void CloseMessage(ContainerType containerType)
+        {
+            if (containers.TryGetValue(containerType, out Container container))
+            {
+                if (container.ContainerGrid.Children.Count >= 2)
+                {
+                    container.ContainerGrid.Children.RemoveAt(container.ContainerGrid.Children.Count - 1);
+                    container.ContainerGrid.Children[container.ContainerGrid.Children.Count - 1].IsEnabled = true;
+                }
             }
         }
     }

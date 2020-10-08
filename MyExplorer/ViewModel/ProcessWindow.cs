@@ -10,28 +10,20 @@ namespace MyExplorer.ViewModel
         public ProcessWindow()
         {
             settings = Settings.GetInstance();
-            //Services.Navigator.CreateInstance(Services.Navigator.WindowName.Process, Pages);
-            Services.Navigator.GetInstance(WindowName.Process).SetFrame(FrameName.Process);
 
             Process.GetInstance().Done += ProcessWindow_Done;
             Process.GetInstance().Start(settings.Actions);
 
         }
 
+        public void Loaded(object sender, object e)
+        {
+
+        }
+
         private void ProcessWindow_Done()
         {
             Visibility = Visibility.Collapsed;
-        }
-
-        Grid _pages = new Grid();
-        public Grid Pages
-        {
-            get => _pages;
-            set
-            {
-                _pages = value;
-                OnPropertyChanged();
-            }
         }
 
         Visibility _visibility;

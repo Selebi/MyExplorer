@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using MyExplorer.Services;
+using System.Threading;
 using System.Windows;
 
 namespace MyExplorer
@@ -18,18 +19,18 @@ namespace MyExplorer
 
             if (!Model.Users.IsAdmin()) // Тест
             {
-                new SettingWindow(new ViewModel.SettingWindow());
+                Navigator.CreateInstance(Enums.WindowName.Settings);
                 splash.Close();
             }
             else
             {
-                new ProcessWindow(new ViewModel.ProcessWindow());
+                Navigator.CreateInstance(Enums.WindowName.Process);
                 splash.Close();
                 var PassVM = new ViewModel.PasswordWindow();
                 PassVM.Pass += () => 
                 { 
                     passWindow.Close();
-                    new SettingWindow(new ViewModel.SettingWindow());
+                    Navigator.CreateInstance(Enums.WindowName.Settings);
                 };
                 Model.HotkeyProcessor.MasterKeyDetected += () =>
                 {

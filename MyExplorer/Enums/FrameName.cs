@@ -2,6 +2,7 @@
 {
     public enum FrameName
     {
+        Null,
         Main,
         Settings,
         Users,
@@ -10,6 +11,7 @@
         Hotkeys,
         AddHotKey,
         AddAction,
-        Process
+        Process,
+        StatusBar
     }
 }

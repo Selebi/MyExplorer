@@ -22,7 +22,7 @@ namespace MyExplorer.ViewModel
                 hotkey = "";
                 Model.HotkeyProcessor.RemoveAllKeys();
                 Model.HotkeyProcessor.LockedAll = false;
-                Navigator.GetInstance(Navigator.WindowName.Settings).CloseMessage();
+                Navigator.GetInstance(Enums.WindowName.Settings).CloseMessage(Enums.ContainerType.Main);
             });
         }
         public RelayCommand Add
@@ -33,7 +33,7 @@ namespace MyExplorer.ViewModel
                 hotkey = "";
                 Model.HotkeyProcessor.RemoveAllKeys();
                 Model.HotkeyProcessor.LockedAll = false;
-                Navigator.GetInstance(Navigator.WindowName.Settings).CloseMessage();
+                Navigator.GetInstance(Enums.WindowName.Settings).CloseMessage(Enums.ContainerType.Main);
             },
                 o => { return hotkey != "" && !Settings.GetInstance().HotKeys.Any(h => { return h == hotkey; } ); });
         }

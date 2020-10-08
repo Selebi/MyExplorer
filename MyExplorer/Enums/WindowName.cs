@@ -2,7 +2,6 @@
 {
     public enum WindowName
     {
-
         Null,
         Settings,
         Process,

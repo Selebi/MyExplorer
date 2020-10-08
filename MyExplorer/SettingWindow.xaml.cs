@@ -10,13 +10,23 @@ namespace MyExplorer
     public partial class SettingWindow : Window, IExplorerWindow
     {
         public Grid ContainerFrame { get => Container; }
+
+        Navigator navigator;
+
         public SettingWindow(object ViewModel)
         {
             InitializeComponent();
             DataContext = ViewModel;
-            Show();
+            Loaded += SettingWindow_Loaded;
             Timers.StartRegExplorerTimer(500);
             Timers.StartWinExplorerTimer(500);
+        }
+
+        private void SettingWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            navigator = Navigator.GetInstance(WindowName.Settings);
+            navigator.AddContainer(ContainerType.Main, Container);
+            navigator.SetFrame(FrameName.Main, ContainerType.Main);
         }
 
         #region Header
@@ -32,7 +42,7 @@ namespace MyExplorer
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Navigator.GetInstance(WindowName.Settings).ReleaseFrames();
+            Navigator.GetInstance(WindowName.Settings).ReleaseFrames(ContainerType.Main);
             Timers.StopTimers();
             this.Close();
         }

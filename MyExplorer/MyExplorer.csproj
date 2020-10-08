@@ -60,9 +60,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Mvvm.v19.2, Version=19.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -133,7 +130,9 @@
     <Compile Include="Converters\UintConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="Converters\WinExplorerConverter.cs" />
+    <Compile Include="Data\Container.cs" />
     <Compile Include="Data\User.cs" />
+    <Compile Include="Enums\ContainerType.cs" />
     <Compile Include="Enums\FrameName.cs" />
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Enums\WindowName.cs" />

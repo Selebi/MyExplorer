@@ -11,7 +11,6 @@ namespace MyExplorer
         {
             InitializeComponent();
             DataContext = ViewModel;
-            Show();
         }
     }
 }

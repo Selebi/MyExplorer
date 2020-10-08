@@ -18,15 +18,18 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Window}">
-                        <Border BorderBrush="#FF006EB2" Background="#33FFFFFF"  BorderThickness="10" CornerRadius="32">
+                        <Border BorderBrush="#FF006EB2" Background="#7FFFFFFF"  BorderThickness="5" CornerRadius="16">
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="24"  ShadowDepth="0" Color="#FF006EB2"/>
                             </Border.Effect>
-
+                            <AdornerDecorator>
+                                <ContentPresenter Margin="8"/>
+                            </AdornerDecorator>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>
+    <Grid x:Name="Container"/>
 </Window>

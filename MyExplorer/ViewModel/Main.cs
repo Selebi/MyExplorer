@@ -1,8 +1,4 @@
-﻿using MyExplorer.Properties;
-using System;
-using System.Drawing;
-
-namespace MyExplorer.ViewModel
+﻿namespace MyExplorer.ViewModel
 {
     public class Main : BaseVM
     {
@@ -58,22 +54,22 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand(o =>
             {
-                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Settings);
+                Services.Navigator.GetInstance(Enums.WindowName.Settings).SetFrame(Enums.FrameName.Settings, Enums.ContainerType.Main);
             });
         }
         public RelayCommand OpenHotKeys
         {
             get => new RelayCommand(o =>
             {
-                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Hotkeys);
+                Services.Navigator.GetInstance(Enums.WindowName.Settings).SetFrame(Enums.FrameName.Hotkeys, Enums.ContainerType.Main);
             });
         }
 
         public RelayCommand OpenUsers
-        { 
+        {
             get => new RelayCommand(o =>
             {
-                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Users);
+                Services.Navigator.GetInstance(Enums.WindowName.Settings).SetFrame(Enums.FrameName.Users, Enums.ContainerType.Main);
             });
         }
 
@@ -81,7 +77,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand(o =>
             {
-                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Actions);
+                Services.Navigator.GetInstance(Enums.WindowName.Settings).SetFrame(Enums.FrameName.Actions, Enums.ContainerType.Main);
             });
         }
 
@@ -89,7 +85,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand(o =>
             {
-                Services.Navigator.GetInstance(Services.Navigator.WindowName.Settings).SetFrame(Services.Navigator.FrameName.Journal);
+                Services.Navigator.GetInstance(Enums.WindowName.Settings).SetFrame(Enums.FrameName.Journal, Enums.ContainerType.Main);
             });
         }
 
