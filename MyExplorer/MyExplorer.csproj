@@ -139,7 +139,6 @@
     <Compile Include="IconsWindow.xaml.cs">
       <DependentUpon>IconsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IExplorerWindow.cs" />
     <Compile Include="Model\DesSecurity.cs" />
     <Compile Include="Model\HotKeyProcessor.cs" />
     <Compile Include="Model\ProcessWorker.cs" />
@@ -347,6 +346,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Help.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

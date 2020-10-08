@@ -1,5 +1,4 @@
 ﻿using MyExplorer.Enums;
-using MyExplorer.Interfaces;
 using MyExplorer.Services;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,10 +6,8 @@ using System.Windows.Input;
 
 namespace MyExplorer
 {
-    public partial class SettingWindow : Window, IExplorerWindow
+    public partial class SettingWindow : Window
     {
-        public Grid ContainerFrame { get => Container; }
-
         Navigator navigator;
 
         public SettingWindow(object ViewModel)

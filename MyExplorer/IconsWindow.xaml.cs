@@ -1,12 +1,9 @@
-﻿using MyExplorer.Interfaces;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace MyExplorer
 {
-    public partial class IconsWindow : Window, IExplorerWindow
+    public partial class IconsWindow : Window
     {
-        public Grid ContainerFrame { get => Container; }
         public IconsWindow(object ViewModel)
         {
             InitializeComponent();

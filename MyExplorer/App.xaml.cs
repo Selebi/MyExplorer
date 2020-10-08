@@ -17,14 +17,16 @@ namespace MyExplorer
             LoadSettings();
             Model.Users.LoadAll();
 
-            if (!Model.Users.IsAdmin()) // Тест
+            if (Model.Users.IsAdmin()) // Тест
             {
                 Navigator.CreateInstance(Enums.WindowName.Settings);
+                Navigator.ShowWindow(Enums.WindowName.Settings);
                 splash.Close();
             }
             else
             {
                 Navigator.CreateInstance(Enums.WindowName.Process);
+                Navigator.ShowWindow(Enums.WindowName.Process);
                 splash.Close();
                 var PassVM = new ViewModel.PasswordWindow();
                 PassVM.Pass += () => 

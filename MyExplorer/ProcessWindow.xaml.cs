@@ -1,12 +1,9 @@
-﻿using MyExplorer.Interfaces;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace MyExplorer
 {
-    public partial class ProcessWindow : Window, IExplorerWindow
+    public partial class ProcessWindow : Window
     {
-        public Grid ContainerFrame { get => Container; }
         public ProcessWindow(object ViewModel)
         {
             InitializeComponent();

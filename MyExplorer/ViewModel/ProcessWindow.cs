@@ -9,10 +9,10 @@ namespace MyExplorer.ViewModel
         Settings settings;
         public ProcessWindow()
         {
-            settings = Settings.GetInstance();
+            //settings = Settings.GetInstance();
 
-            Process.GetInstance().Done += ProcessWindow_Done;
-            Process.GetInstance().Start(settings.Actions);
+            //Process.GetInstance().Done += ProcessWindow_Done;
+            //Process.GetInstance().Start(settings.Actions);
 
         }
 

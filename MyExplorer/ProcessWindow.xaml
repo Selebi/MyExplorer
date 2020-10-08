@@ -9,10 +9,19 @@
         WindowState="Normal"
         AllowsTransparency="True"
         ResizeMode="NoResize"
-        Topmost="True" Loaded="{Binding Loaded}"
+        Topmost="True"
         WindowStartupLocation="CenterScreen"
         SnapsToDevicePixels="True" UseLayoutRounding ="True"
         Title="MyExplorer v 0.1 Alpha" Height="500" Width="800" Visibility="{Binding Visibility, Mode=TwoWay}">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
     <Window.Resources>
         <Style TargetType="{x:Type local:ProcessWindow}" >
             <Setter Property="Template">

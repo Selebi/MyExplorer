@@ -38,7 +38,14 @@ namespace MyExplorer.Services
                 navigators.Add(navigator);
                 navigator.currentWindow = windowName;
                 navigator.window = (Window)window;
-                navigator.window.Show();
+            }
+        }
+
+        public static void ShowWindow(WindowName windowName)
+        {
+            if (Windows.TryGetValue(windowName, out object window))
+            {
+                ((Window)window).Show();
             }
         }
 
