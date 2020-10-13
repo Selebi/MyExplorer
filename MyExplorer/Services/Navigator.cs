@@ -1,4 +1,5 @@
-﻿using MyExplorer.Data;
+﻿using MyExplorer.Controls;
+using MyExplorer.Data;
 using MyExplorer.Enums;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,52 +27,75 @@ namespace MyExplorer.Services
                 return null;
         }
 
-        public static void CreateInstance(WindowName windowName)
+        public static Navigator CreateInstance(WindowName windowName)
         {
             if (navigators.Any(n => { return n.currentWindow == windowName; }))
             {
                 navigators.RemoveAll(n => { return n.currentWindow == windowName; });
             }
+            Navigator navigator = new Navigator();
+            navigators.Add(navigator);
+            navigator.currentWindow = windowName;
             if (Windows.TryGetValue(windowName, out object window))
             {
-                Navigator navigator = new Navigator();
-                navigators.Add(navigator);
-                navigator.currentWindow = windowName;
                 navigator.window = (Window)window;
             }
+            return navigator;
         }
 
-        public static void ShowWindow(WindowName windowName)
+        public void ShowWindow(WindowName windowName)
         {
-            if (Windows.TryGetValue(windowName, out object window))
+            if (Windows.TryGetValue(windowName, out object _window))
             {
-                ((Window)window).Show();
+                ((Window)_window).Show();
+            }
+            else
+            {
+                object w = getWindow(windowName);
+                if(w != null)
+                {
+                    Windows.Add(windowName, w);
+                    window = (Window)w;
+                    window.Show();
+                }
             }
         }
 
         #region Frames
 
-        static Dictionary<FrameName, object> Frames = new Dictionary<FrameName, object>()
-        {
-            {FrameName.Main, new Controls.Main(new ViewModel.Main())},
-            {FrameName.Settings, new Controls.Settings(ViewModel.Settings.GetInstance())},
-            {FrameName.Users, new Controls.Users(new ViewModel.Users())},
-            {FrameName.Actions, new Controls.Actions(new ViewModel.Actions())},
-            {FrameName.Journal, new Controls.Journal(new ViewModel.Journal())},
-            {FrameName.Hotkeys, new Controls.HotKeys(new ViewModel.HotKeys())},
-            {FrameName.AddHotKey, new Controls.AddHotKey(new ViewModel.AddHotKey())},
-            {FrameName.AddAction, new Controls.AddAction(new ViewModel.AddAction())},
-            {FrameName.Process, new Controls.Process(ViewModel.Process.GetInstance())},
-            {FrameName.StatusBar, new Controls.StatusBar(new ViewModel.StatusBar())}
-        };
+        static Dictionary<FrameName, object> Frames = new Dictionary<FrameName, object>();
 
-        static Dictionary<WindowName, object> Windows = new Dictionary<WindowName, object>()
+        static Dictionary<WindowName, object> Windows = new Dictionary<WindowName, object>();
+
+        static object getFrame(FrameName name)
         {
-            { WindowName.Settings, new SettingWindow(new ViewModel.SettingWindow()) },
-            { WindowName.Process, new ProcessWindow(new ViewModel.ProcessWindow()) },
-            { WindowName.Icons, new IconsWindow(new ViewModel.IconsWindow()) },
-            { WindowName.Password, new PasswordWindow(new ViewModel.PasswordWindow()) }
-        };
+            switch (name)
+            {
+                case FrameName.Actions: return new Actions(new ViewModel.Actions());
+                case FrameName.AddAction: return new AddAction(new ViewModel.AddAction());
+                case FrameName.AddHotKey: return new AddHotKey(new ViewModel.AddHotKey());
+                case FrameName.Hotkeys: return new HotKeys(new ViewModel.HotKeys());
+                case FrameName.Journal: return new Journal(new ViewModel.Journal());
+                case FrameName.Main: return new Main(new ViewModel.Main());
+                case FrameName.Settings: return new Settings(ViewModel.Settings.GetInstance());
+                case FrameName.Process: return new Process(ViewModel.Process.GetInstance());
+                case FrameName.StatusBar: return new StatusBar(new ViewModel.StatusBar());
+                case FrameName.Users: return new Users(new ViewModel.Users());
+            }
+            return null;
+        }
+
+        static object getWindow(WindowName name)
+        {
+            switch (name)
+            {
+                case WindowName.Settings: return new SettingWindow(new ViewModel.SettingWindow());
+                case WindowName.Process: return new ProcessWindow(new ViewModel.ProcessWindow());
+                case WindowName.Icons: return new IconsWindow(new ViewModel.IconsWindow());
+                case WindowName.Password: return new PasswordWindow(new ViewModel.PasswordWindow());
+            }
+            return null;
+        }
 
         #endregion
 
@@ -101,6 +125,15 @@ namespace MyExplorer.Services
                 {
                     container.ContainerGrid.Children.Clear();
                     container.ContainerGrid.Children.Add((UIElement)value);
+                    container.PreviousUI.Push(container.CurrentUI);
+                    container.CurrentUI = frameName;
+                }
+                else
+                {
+                    var frame = getFrame(frameName);
+                    Frames.Add(frameName, frame);
+                    container.ContainerGrid.Children.Clear();
+                    container.ContainerGrid.Children.Add((UIElement)frame);
                     container.PreviousUI.Push(container.CurrentUI);
                     container.CurrentUI = frameName;
                 }

@@ -12,7 +12,7 @@
         Topmost="True"
         WindowStartupLocation="CenterScreen"
         SnapsToDevicePixels="True" UseLayoutRounding ="True"
-        Title="MyExplorer v 0.1 Alpha" Height="500" Width="800" Visibility="{Binding Visibility, Mode=TwoWay}">
+        Title="Explorer Process" Height="500" Width="800">
     <Window.Triggers>
         <EventTrigger RoutedEvent="Loaded">
             <BeginStoryboard>

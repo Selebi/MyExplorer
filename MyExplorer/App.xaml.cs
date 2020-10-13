@@ -19,14 +19,14 @@ namespace MyExplorer
 
             if (Model.Users.IsAdmin()) // Тест
             {
-                Navigator.CreateInstance(Enums.WindowName.Settings);
-                Navigator.ShowWindow(Enums.WindowName.Settings);
+                var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
+                navigator.ShowWindow(Enums.WindowName.Settings);
                 splash.Close();
             }
             else
             {
-                Navigator.CreateInstance(Enums.WindowName.Process);
-                Navigator.ShowWindow(Enums.WindowName.Process);
+                var navigator = Navigator.CreateInstance(Enums.WindowName.Process);
+                navigator.ShowWindow(Enums.WindowName.Process);
                 splash.Close();
                 var PassVM = new ViewModel.PasswordWindow();
                 PassVM.Pass += () => 
