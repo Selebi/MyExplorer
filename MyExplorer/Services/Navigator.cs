@@ -171,10 +171,16 @@ namespace MyExplorer.Services
         {
             if (containers.TryGetValue(containerType, out Container container))
             {
+                container.ContainerGrid.Children[container.ContainerGrid.Children.Count - 1].IsEnabled = false;
                 if (Frames.TryGetValue(frameMessage, out object value))
                 {
-                    container.ContainerGrid.Children[container.ContainerGrid.Children.Count - 1].IsEnabled = false;
                     container.ContainerGrid.Children.Add((UIElement)value);
+                }
+                else
+                {
+                    var frame = getFrame(frameMessage);
+                    Frames.Add(frameMessage, frame);
+                    container.ContainerGrid.Children.Add((UIElement)frame);
                 }
             }
         }

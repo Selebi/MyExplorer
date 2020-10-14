@@ -11,6 +11,20 @@ namespace MyExplorer.Model
         public static event Action<bool> RegistredChanged;
         public static event Action SecurityException;
 
+        public static bool CanUseRegistry()
+        {
+            try
+            {
+                var view64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+                RegistryKey key = view64.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
+            }
+            catch (System.Security.SecurityException se)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public static void RegSintekExplorer()
         {
             try

@@ -17,7 +17,7 @@ namespace MyExplorer
             LoadSettings();
             Model.Users.LoadAll();
 
-            if (Model.Users.IsAdmin()) // Тест
+            if (!Model.Users.IsAdmin()) // Тест
             {
                 var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
                 navigator.ShowWindow(Enums.WindowName.Settings);
@@ -36,8 +36,11 @@ namespace MyExplorer
                 };
                 Model.HotkeyProcessor.MasterKeyDetected += () =>
                 {
-                    if(passWindow == null || !passWindow.IsLoaded)
+                    if (passWindow == null || !passWindow.IsLoaded)
+                    {
                         passWindow = new PasswordWindow(PassVM);
+                        passWindow.Show();
+                    }
                 };
             }
             hotkeyLocker = new Services.HotkeyLocker();

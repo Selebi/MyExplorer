@@ -59,6 +59,7 @@ namespace MyExplorer.ViewModel
                 PasswordChanged = false;
                 HotKeys = loaded.HotKeys;
                 Actions = loaded.Actions;
+                MasterKey = loaded.MasterKey;
             }
             else
             {
@@ -119,6 +120,7 @@ namespace MyExplorer.ViewModel
         string _domainAdminGroup = "Администраторы домена";
         string _domainLogin = "login";
         string _domainPassword = "pass";
+        string _masterKey = "A+D+M+N";
         List<string> _hotKeys = new List<string>();
         List<Action> _actions = new List<Action>();
 
@@ -148,6 +150,16 @@ namespace MyExplorer.ViewModel
                 });
                 HotkeysChanged?.Invoke(_hotKeys);
                 OnPropertyChanged();
+            }
+        }
+
+        [DataMember]
+        public string MasterKey
+        {
+            get => _masterKey;
+            set
+            {
+                _masterKey = value;
             }
         }
 

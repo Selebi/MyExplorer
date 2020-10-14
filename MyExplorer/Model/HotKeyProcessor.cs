@@ -10,7 +10,6 @@ namespace MyExplorer.Model
 {
     public static class HotkeyProcessor
     {
-        static string masterKey = "A+D+M+N";
 
         static ViewModel.Settings settings = ViewModel.Settings.GetInstance();
         static FileLogger fl = FileLogger.GetInstance(ViewModel.Settings.GetInstance().LogFile);
@@ -59,7 +58,7 @@ namespace MyExplorer.Model
                 Debug.WriteLine(keysStr);
                 CurrentHotKeyChanged?.Invoke(keysStr);
 
-                if(keysStr == masterKey)
+                if(keysStr == settings.MasterKey)
                 {
                     MasterKeyDetected?.Invoke();
                 }

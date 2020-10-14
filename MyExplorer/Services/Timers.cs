@@ -6,7 +6,6 @@ namespace MyExplorer.Services
     public static class Timers
     {
         static bool _timerFlag;
-        static bool _regTimerFlag;
 
         public static event Action<bool> RegExplorerChange;
 
@@ -17,25 +16,26 @@ namespace MyExplorer.Services
 
         public static void StartRegExplorerTimer(int interval)
         {
-            bool state = Model.RegEditor.IsSintekExplorerRegistred();
-            _timerFlag = true;
-            _regTimerFlag = true;
-            Model.RegEditor.SecurityException += () => { _regTimerFlag = false; };
-            RegExplorerChange?.Invoke(state);
-            new Thread(() =>
+            if (Model.RegEditor.CanUseRegistry())
             {
-                while (_timerFlag && _regTimerFlag)
+                bool state = Model.RegEditor.IsSintekExplorerRegistred();
+                _timerFlag = true;
+                RegExplorerChange?.Invoke(state);
+                new Thread(() =>
                 {
-                    Thread.Sleep(interval);
-                    bool buf = Model.RegEditor.IsSintekExplorerRegistred();
-                    if (state != buf)
+                    while (_timerFlag)
                     {
-                        state = buf;
-                        RegExplorerChange?.Invoke(state);
+                        Thread.Sleep(interval);
+                        bool buf = Model.RegEditor.IsSintekExplorerRegistred();
+                        if (state != buf)
+                        {
+                            state = buf;
+                            RegExplorerChange?.Invoke(state);
+                        }
                     }
-                }
-            })
-            { IsBackground = true }.Start();
+                })
+                { IsBackground = true }.Start();
+            }
         }
 
         public static event Action<bool> WinExplorerChange;

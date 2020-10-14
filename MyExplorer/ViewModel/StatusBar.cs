@@ -5,7 +5,10 @@
         public StatusBar()
         {
             WinExplorerStatus = Model.ProcessWorker.IsProcessWork("explorer");
-            RegStatus = Model.RegEditor.IsSintekExplorerRegistred();
+            if (Model.RegEditor.CanUseRegistry())
+                RegStatus = Model.RegEditor.IsSintekExplorerRegistred();
+            else
+                RegStatus = false;
 
             Services.Timers.RegExplorerChange += b => { RegStatus = b; };
             Services.Timers.WinExplorerChange += b => { WinExplorerStatus = b; };
