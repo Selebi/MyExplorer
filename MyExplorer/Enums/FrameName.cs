@@ -12,6 +12,7 @@
         AddHotKey,
         AddAction,
         Process,
-        StatusBar
+        StatusBar,
+        Message
     }
 }

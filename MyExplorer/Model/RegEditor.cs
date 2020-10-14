@@ -9,25 +9,42 @@ namespace MyExplorer.Model
         static bool _explorerRegistred;
         public static bool ExplorerRegistred { get => _explorerRegistred; private set { _explorerRegistred = value; RegistredChanged?.Invoke(value); } }
         public static event Action<bool> RegistredChanged;
+        public static event Action SecurityException;
 
         public static void RegSintekExplorer()
         {
-            var view64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            RegistryKey key = view64.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
-            key.SetValue("Shell", "MyExplorer.exe", RegistryValueKind.String);
-            view64.Close();
-            key.Close();
-            ExplorerRegistred = true;
+            try
+            {
+                var view64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+                RegistryKey key = view64.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
+                key.SetValue("Shell", "MyExplorer.exe", RegistryValueKind.String);
+                view64.Close();
+                key.Close();
+                ExplorerRegistred = true;
+            }
+            catch (System.Security.SecurityException se)
+            {
+                fl.Write("У пользователя нет прав на изменение реестра.", Enums.LogType.Info);
+                SecurityException?.Invoke();
+            }
         }
 
         public static void RegWindowsExplorer()
         {
-            var view64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
-            RegistryKey key = view64.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
-            key.SetValue("Shell", "Explorer.exe", RegistryValueKind.String);
-            view64.Close();
-            key.Close();
-            ExplorerRegistred = false;
+            try
+            {
+                var view64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+                RegistryKey key = view64.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
+                key.SetValue("Shell", "Explorer.exe", RegistryValueKind.String);
+                view64.Close();
+                key.Close();
+                ExplorerRegistred = false;
+            }
+            catch (System.Security.SecurityException se)
+            {
+                fl.Write("У пользователя нет прав на изменение реестра.", Enums.LogType.Info);
+                SecurityException?.Invoke();
+            }
         }
 
         public static bool IsSintekExplorerRegistred()
@@ -43,6 +60,7 @@ namespace MyExplorer.Model
             catch(System.Security.SecurityException se)
             {
                 fl.Write("У пользователя нет прав на чтение реестра.", Enums.LogType.Info);
+                SecurityException?.Invoke();
             }
             return ExplorerRegistred;
         }

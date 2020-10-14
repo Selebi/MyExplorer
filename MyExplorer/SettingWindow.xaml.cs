@@ -23,7 +23,9 @@ namespace MyExplorer
         {
             navigator = Navigator.GetInstance(WindowName.Settings);
             navigator.AddContainer(ContainerType.Main, Container);
+            navigator.AddContainer(ContainerType.StatusBar, StatusBar);
             navigator.SetFrame(FrameName.Main, ContainerType.Main);
+            navigator.SetFrame(FrameName.StatusBar, ContainerType.StatusBar);
         }
 
         #region Header

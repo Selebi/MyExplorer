@@ -10,6 +10,10 @@
             Services.Timers.RegExplorerChange += s => { RegButtonState = s; };
             Services.Timers.WinExplorerChange += s => { StartStopExplorerButtonState = s; };
             Model.HotkeyProcessor.LockedStatusChanged += s => { StartStopBlockHotkeysState = s; };
+            Model.RegEditor.SecurityException += () =>
+            {
+                Services.Navigator.GetInstance(Enums.WindowName.Settings).ShowModalMessage(Enums.ContainerType.Main, Enums.MessageType.Error, "Ошибка доступа к реестру", "Пользователь не имеет прав для чтения и записи реестра.");
+            };
         }
 
         public string HelloText

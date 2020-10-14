@@ -6,6 +6,7 @@ namespace MyExplorer.Services
     public static class Timers
     {
         static bool _timerFlag;
+        static bool _regTimerFlag;
 
         public static event Action<bool> RegExplorerChange;
 
@@ -18,10 +19,12 @@ namespace MyExplorer.Services
         {
             bool state = Model.RegEditor.IsSintekExplorerRegistred();
             _timerFlag = true;
+            _regTimerFlag = true;
+            Model.RegEditor.SecurityException += () => { _regTimerFlag = false; };
             RegExplorerChange?.Invoke(state);
             new Thread(() =>
             {
-                while (_timerFlag)
+                while (_timerFlag && _regTimerFlag)
                 {
                     Thread.Sleep(interval);
                     bool buf = Model.RegEditor.IsSintekExplorerRegistred();

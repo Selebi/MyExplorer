@@ -91,12 +91,32 @@ namespace MyExplorer.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Error {
+            get {
+                object obj = ResourceManager.GetObject("Error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Данная софтина предназначена для подмены стандартного проводника винды Exploror.exe. После чего при запуске не из-под админской учётки блокируются всякие хоткеи, запускается всяко разное ну вообще происходит то, что было в сей софтине сконфигурено. Как это всё конфигурить сейчас расскажу.
         ///Слева можно узреть собсно меню данного конфигуратора. Оно разбито на две категории: верхнюю и нижнюю =) Короч сверху кнопари с белыми точками, они открывают всякие разные UI для конфигурирования. Нижние без точек ничё не  [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string Help {
             get {
                 return ResourceManager.GetString("Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Info {
+            get {
+                object obj = ResourceManager.GetObject("Info", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -136,6 +156,16 @@ namespace MyExplorer.Properties {
             get {
                 object obj = ResourceManager.GetObject("SintekLogo", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Warning {
+            get {
+                object obj = ResourceManager.GetObject("Warning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

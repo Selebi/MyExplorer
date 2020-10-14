@@ -34,7 +34,7 @@ namespace MyExplorer.ViewModel
             get => new RelayCommand((o) =>
             {
                 Model.HotkeyProcessor.LockedAll = true;
-                Navigator.GetInstance(Enums.WindowName.Settings).ShowMessage(Enums.ContainerType.Main, Enums.FrameName.AddHotKey);
+                Navigator.GetInstance(Enums.WindowName.Settings).ShowModalFrame(Enums.ContainerType.Main, Enums.FrameName.AddHotKey);
             });
         }
 

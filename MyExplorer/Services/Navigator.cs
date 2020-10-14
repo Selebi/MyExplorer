@@ -17,6 +17,8 @@ namespace MyExplorer.Services
 
         static List<Navigator> navigators = new List<Navigator>();
 
+        static Stack<(Navigator navigator, ContainerType container)> OpenedMessages = new Stack<(Navigator navigator, ContainerType container)>();
+
         Navigator() { }
 
         public static Navigator GetInstance(WindowName window)
@@ -154,7 +156,18 @@ namespace MyExplorer.Services
             }
         }
 
-        public void ShowMessage(ContainerType containerType, FrameName frameMessage)
+        public void ShowModalMessage(ContainerType containerType, MessageType messageType, string headerText, string MessageText)
+        {
+            if (containers.TryGetValue(containerType, out Container container))
+            {
+                Message message = new Message(new ViewModel.Message(headerText, MessageText, messageType));
+                OpenedMessages.Push((this, containerType));
+                container.ContainerGrid.Children[container.ContainerGrid.Children.Count - 1].IsEnabled = false;
+                container.ContainerGrid.Children.Add(message);
+            }
+        }
+
+        public void ShowModalFrame(ContainerType containerType, FrameName frameMessage)
         {
             if (containers.TryGetValue(containerType, out Container container))
             {
@@ -166,9 +179,22 @@ namespace MyExplorer.Services
             }
         }
 
-        public void CloseMessage(ContainerType containerType)
+        public void CloseModal(ContainerType containerType)
         {
             if (containers.TryGetValue(containerType, out Container container))
+            {
+                if (container.ContainerGrid.Children.Count >= 2)
+                {
+                    container.ContainerGrid.Children.RemoveAt(container.ContainerGrid.Children.Count - 1);
+                    container.ContainerGrid.Children[container.ContainerGrid.Children.Count - 1].IsEnabled = true;
+                }
+            }
+        }
+
+        static public void ClodeLastModal()
+        {
+            var lastMessage = OpenedMessages.Pop();
+            if (lastMessage.navigator.containers.TryGetValue(lastMessage.container, out Container container))
             {
                 if (container.ContainerGrid.Children.Count >= 2)
                 {

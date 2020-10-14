@@ -51,7 +51,7 @@ namespace MyExplorer.ViewModel
         {
             get => new RelayCommand((o) =>
             {
-                Navigator.GetInstance(Enums.WindowName.Settings).ShowMessage(Enums.ContainerType.Main, Enums.FrameName.AddAction);
+                Navigator.GetInstance(Enums.WindowName.Settings).ShowModalFrame(Enums.ContainerType.Main, Enums.FrameName.AddAction);
             });
         }
     }
