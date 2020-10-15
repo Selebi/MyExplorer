@@ -10,6 +10,7 @@ namespace MyExplorer.ViewModel
         Services.JsonSerializer<Settings> Serializer;
         bool LoginChanged;
         bool PasswordChanged;
+        bool MasterPassChanged;
 
         public event Action<List<string>> HotkeysChanged;
         public event Action<List<Action>> ActionsChanged;
@@ -57,9 +58,11 @@ namespace MyExplorer.ViewModel
                 DomainPassword = loaded.DomainPassword;
                 LoginChanged = false;
                 PasswordChanged = false;
+                MasterPassChanged = false;
                 HotKeys = loaded.HotKeys;
                 Actions = loaded.Actions;
                 MasterKey = loaded.MasterKey;
+                MasterPass = loaded.MasterPass;
             }
             else
             {
@@ -69,11 +72,13 @@ namespace MyExplorer.ViewModel
 
         public void Save()
         {
-            if(LoginChanged) DomainLogin = Model.DesSecurity.Encrypt(DomainLogin);
-            if(PasswordChanged) DomainPassword = Model.DesSecurity.Encrypt(DomainPassword);
+            if (LoginChanged) DomainLogin = Model.DesSecurity.Encrypt(DomainLogin);
+            if (PasswordChanged) DomainPassword = Model.DesSecurity.Encrypt(DomainPassword);
+            if (MasterPassChanged) MasterPass = Model.Hash.CreateHash(MasterPass);
             Serializer.WriteToFile(_instance, "Settings.json");
             LoginChanged = false;
             PasswordChanged = false;
+            MasterPassChanged = false;
         }
 
         public void AddHotkey(string hotkey)
@@ -121,6 +126,7 @@ namespace MyExplorer.ViewModel
         string _domainLogin = "login";
         string _domainPassword = "pass";
         string _masterKey = "A+D+M+N";
+        string _masterPass = "65a9a0c386330869187cc08ba9717c42b354b1daaa0ad388c2e735bab9e67a7f";
         List<string> _hotKeys = new List<string>();
         List<Action> _actions = new List<Action>();
 
@@ -160,6 +166,19 @@ namespace MyExplorer.ViewModel
             set
             {
                 _masterKey = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [DataMember]
+        public string MasterPass
+        {
+            get => _masterPass;
+            set
+            {
+                _masterPass = value;
+                MasterPassChanged = true;
+                OnPropertyChanged();
             }
         }
 

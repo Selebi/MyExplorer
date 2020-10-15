@@ -45,22 +45,38 @@ namespace MyExplorer.Services
             return navigator;
         }
 
-        public void ShowWindow(WindowName windowName)
+        public void ShowWindow()
         {
-            if (Windows.TryGetValue(windowName, out object _window))
+            if (Windows.TryGetValue(currentWindow, out object _window))
             {
                 ((Window)_window).Show();
             }
             else
             {
-                object w = getWindow(windowName);
+                object w = getWindow(currentWindow);
                 if(w != null)
                 {
-                    Windows.Add(windowName, w);
+                    Windows.Add(currentWindow, w);
                     window = (Window)w;
                     window.Show();
                 }
             }
+        }
+
+        public void CloseWindow()
+        {
+            Windows.Remove(currentWindow);
+            window.Close();
+        }
+
+        public void HideWindow()
+        {
+            window.Visibility = Visibility.Collapsed;
+        }
+
+        public bool IsLoaded()
+        {
+            return window.IsLoaded;
         }
 
         #region Frames

@@ -145,6 +145,7 @@
       <DependentUpon>IconsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\DesSecurity.cs" />
+    <Compile Include="Model\Hash.cs" />
     <Compile Include="Model\HotKeyProcessor.cs" />
     <Compile Include="Model\ProcessWorker.cs" />
     <Compile Include="Model\RegEditor.cs" />

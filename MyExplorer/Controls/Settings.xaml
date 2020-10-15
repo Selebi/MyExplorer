@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:MyExplorer.Controls"
              mc:Ignorable="d" 
              SnapsToDevicePixels="True" UseLayoutRounding ="True"
-             d:DesignHeight="316" d:DesignWidth="550">
+             d:DesignHeight="380" d:DesignWidth="550">
     <Grid Background="White">
         <Button Content="Назад" HorizontalAlignment="Right" Margin="0,0,10,10" 
             VerticalAlignment="Bottom" Width="160" Style="{StaticResource ButtonsMenu}" Command="{Binding Back}"/>
@@ -60,6 +60,25 @@
                          VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
                 <CheckBox Content="Писать логи в файл" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Foreground="#FF5D5D5D"
                           Style="{DynamicResource CheckBoxStyle}" IsChecked="{Binding LogEnabled}"/>
+            </Grid>
+        </Border>
+        <Border Style="{DynamicResource BorderCard}" Margin="10,237,0,0" Height="75" VerticalAlignment="Top" HorizontalAlignment="Left" Width="513">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                       Text="Настройки доступа" FontSize="14" Grid.ColumnSpan="2"/>
+                <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Комбинация клавиш для ввода мастер-ключа" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
+                <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding MasterKey}" 
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
+                <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Мастер-ключ" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D" Grid.Column="1"/>
+                <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding MasterPass}" 
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center" Grid.Column="1"/>
             </Grid>
         </Border>
     </Grid>

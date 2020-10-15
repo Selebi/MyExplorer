@@ -7,7 +7,7 @@ namespace MyExplorer
     public partial class App : Application
     {
         Services.HotkeyLocker hotkeyLocker;
-        Window passWindow;
+        Navigator passNavigator;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -20,26 +20,21 @@ namespace MyExplorer
             if (!Model.Users.IsAdmin()) // Тест
             {
                 var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
-                navigator.ShowWindow(Enums.WindowName.Settings);
+                navigator.ShowWindow();
                 splash.Close();
             }
             else
             {
                 var navigator = Navigator.CreateInstance(Enums.WindowName.Process);
-                navigator.ShowWindow(Enums.WindowName.Process);
+                navigator.ShowWindow();
                 splash.Close();
-                var PassVM = new ViewModel.PasswordWindow();
-                PassVM.Pass += () => 
-                { 
-                    passWindow.Close();
-                    Navigator.CreateInstance(Enums.WindowName.Settings);
-                };
+
                 Model.HotkeyProcessor.MasterKeyDetected += () =>
                 {
-                    if (passWindow == null || !passWindow.IsLoaded)
+                    if (passNavigator == null || !passNavigator.IsLoaded())
                     {
-                        passWindow = new PasswordWindow(PassVM);
-                        passWindow.Show();
+                        passNavigator = Navigator.CreateInstance(Enums.WindowName.Password);
+                        passNavigator.ShowWindow();
                     }
                 };
             }

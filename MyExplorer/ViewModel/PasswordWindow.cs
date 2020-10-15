@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyExplorer.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,6 @@ namespace MyExplorer.ViewModel
 {
     public class PasswordWindow : BaseVM
     {
-        public event System.Action Pass;
-
         string _pass = "";
         public string Password
         {
@@ -28,10 +27,12 @@ namespace MyExplorer.ViewModel
             {
                 if(o is PasswordBox pb)
                 {
-                    if(pb.Password == "Adrenalin123")
+                    if(Model.Hash.CreateHash(pb.Password) == Settings.GetInstance().MasterPass)
                     {
-                        Pass?.Invoke();
+                        var settingNav = Navigator.CreateInstance(Enums.WindowName.Settings);
+                        settingNav.ShowWindow();
                     }
+                    Navigator.GetInstance(Enums.WindowName.Password).CloseWindow();
                 }
             });
         }

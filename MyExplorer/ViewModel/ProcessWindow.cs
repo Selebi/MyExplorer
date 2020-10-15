@@ -1,6 +1,5 @@
 ﻿using MyExplorer.Enums;
-using System.Windows;
-using System.Windows.Controls;
+using MyExplorer.Services;
 
 namespace MyExplorer.ViewModel
 {
@@ -9,32 +8,16 @@ namespace MyExplorer.ViewModel
         Settings settings;
         public ProcessWindow()
         {
-            //settings = Settings.GetInstance();
+            settings = Settings.GetInstance();
 
-            //Process.GetInstance().Done += ProcessWindow_Done;
-            //Process.GetInstance().Start(settings.Actions);
-
-        }
-
-        public void Loaded(object sender, object e)
-        {
+            Process.GetInstance().Done += ProcessWindow_Done;
+            Process.GetInstance().Start(settings.Actions);
 
         }
 
         private void ProcessWindow_Done()
         {
-            Visibility = Visibility.Collapsed;
-        }
-
-        Visibility _visibility;
-        public Visibility Visibility
-        {
-            get => _visibility;
-            set
-            {
-                _visibility = value;
-                OnPropertyChanged();
-            }
+            Navigator.GetInstance(WindowName.Process).HideWindow();
         }
     }
 }
