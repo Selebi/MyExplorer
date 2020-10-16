@@ -17,6 +17,7 @@ namespace MyExplorer.ViewModel
         private void ProcessWindow_Done()
         {
             Navigator.GetInstance(WindowName.Process).HideWindow();
+            Navigator.CreateInstance(WindowName.Icons).ShowWindow();
         }
     }
 }

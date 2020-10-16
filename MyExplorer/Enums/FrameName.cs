@@ -13,6 +13,7 @@
         AddAction,
         Process,
         StatusBar,
-        Message
+        Message,
+        Icons
     }
 }

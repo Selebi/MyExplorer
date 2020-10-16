@@ -14,11 +14,11 @@ namespace MyExplorer.Converters
                 switch (type)
                 {
                     case MessageType.Error:
-                        return "/MyExplorer;component/Resources/Error.png";
+                        return "/Sintek Explorer;component/Resources/Error.png";
                     case MessageType.Warning:
-                        return "/MyExplorer;component/Resources/Warning.png";
+                        return "/Sintek Explorer;component/Resources/Warning.png";
                     case MessageType.Info:
-                        return "/MyExplorer;component/Resources/Info.png";
+                        return "/Sintek Explorer;component/Resources/Info.png";
                 }
             }
             return null;

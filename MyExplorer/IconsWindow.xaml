@@ -9,16 +9,16 @@
         WindowState="Normal"
         AllowsTransparency="True"
         ResizeMode="NoResize"
-        Topmost="True"
+        Topmost="False"
         WindowStartupLocation="CenterScreen"
         SnapsToDevicePixels="True" UseLayoutRounding ="True"
-        Title="Explorer Icons" Height="450" Width="800">
+        Title="Explorer Icons" Height="500" Width="680">
     <Window.Resources>
         <Style TargetType="{x:Type local:IconsWindow}" >
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Window}">
-                        <Border BorderBrush="#FF006EB2" Background="#7FFFFFFF"  BorderThickness="5" CornerRadius="16">
+                        <Border BorderBrush="#FF006EB2" Background="#7FFFFFFF"  BorderThickness="5" CornerRadius="16" Margin="18">
                             <Border.Effect>
                                 <DropShadowEffect BlurRadius="24"  ShadowDepth="0" Color="#FF006EB2"/>
                             </Border.Effect>

@@ -106,6 +106,7 @@ namespace MyExplorer.Services
                 case FrameName.Process: return new Process(ViewModel.Process.GetInstance());
                 case FrameName.StatusBar: return new StatusBar(new ViewModel.StatusBar());
                 case FrameName.Users: return new Users(new ViewModel.Users());
+                case FrameName.Icons: return new Icons(new ViewModel.Icons());
             }
             return null;
         }
