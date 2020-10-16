@@ -1,6 +1,7 @@
 ﻿using MyExplorer.Controls;
 using MyExplorer.Data;
 using MyExplorer.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -49,17 +50,23 @@ namespace MyExplorer.Services
         {
             if (Windows.TryGetValue(currentWindow, out object _window))
             {
-                ((Window)_window).Show();
-            }
-            else
-            {
-                object w = getWindow(currentWindow);
-                if(w != null)
+                try
                 {
-                    Windows.Add(currentWindow, w);
-                    window = (Window)w;
-                    window.Show();
+                    ((Window)_window).Show();
+                    return;
                 }
+                catch (InvalidOperationException ioe)
+                {
+                    Windows.Remove(currentWindow);
+                }
+            }
+
+            object w = getWindow(currentWindow);
+            if (w != null)
+            {
+                Windows.Add(currentWindow, w);
+                window = (Window)w;
+                window.Show();
             }
         }
 

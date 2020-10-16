@@ -56,13 +56,15 @@ namespace MyExplorer.ViewModel
                 DoaminAdminGroup = loaded.DoaminAdminGroup;
                 DomainLogin = loaded.DomainLogin;
                 DomainPassword = loaded.DomainPassword;
-                LoginChanged = false;
-                PasswordChanged = false;
-                MasterPassChanged = false;
                 HotKeys = loaded.HotKeys;
                 Actions = loaded.Actions;
                 MasterKey = loaded.MasterKey;
                 MasterPass = loaded.MasterPass;
+
+
+                LoginChanged = false;
+                PasswordChanged = false;
+                MasterPassChanged = false;
             }
             else
             {

@@ -41,9 +41,10 @@ namespace MyExplorer
 
         private void Close_Click(object sender, RoutedEventArgs e)
         {
-            Navigator.GetInstance(WindowName.Settings).ReleaseFrames(ContainerType.Main);
+            navigator.ReleaseFrames(ContainerType.Main);
+            navigator.ReleaseFrames(ContainerType.StatusBar);
             Timers.StopTimers();
-            this.Close();
+            navigator.CloseWindow();
         }
         #endregion
 
