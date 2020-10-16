@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyExplorer.Model
 {
@@ -58,7 +55,7 @@ namespace MyExplorer.Model
                 Debug.WriteLine(keysStr);
                 CurrentHotKeyChanged?.Invoke(keysStr);
 
-                if(keysStr == settings.MasterKey)
+                if (keysStr == settings.MasterKey)
                 {
                     MasterKeyDetected?.Invoke();
                 }

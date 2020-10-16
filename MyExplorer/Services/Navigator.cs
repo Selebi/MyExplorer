@@ -55,7 +55,7 @@ namespace MyExplorer.Services
                     ((Window)_window).Show();
                     return;
                 }
-                catch (InvalidOperationException ioe)
+                catch (InvalidOperationException)
                 {
                     Windows.Remove(currentWindow);
                 }

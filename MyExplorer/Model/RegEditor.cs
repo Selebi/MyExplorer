@@ -18,7 +18,7 @@ namespace MyExplorer.Model
                 var view64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
                 RegistryKey key = view64.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
             }
-            catch (System.Security.SecurityException se)
+            catch (System.Security.SecurityException)
             {
                 return false;
             }
@@ -36,7 +36,7 @@ namespace MyExplorer.Model
                 key.Close();
                 ExplorerRegistred = true;
             }
-            catch (System.Security.SecurityException se)
+            catch (System.Security.SecurityException)
             {
                 fl.Write("У пользователя нет прав на изменение реестра.", Enums.LogType.Info);
                 SecurityException?.Invoke();
@@ -54,7 +54,7 @@ namespace MyExplorer.Model
                 key.Close();
                 ExplorerRegistred = false;
             }
-            catch (System.Security.SecurityException se)
+            catch (System.Security.SecurityException)
             {
                 fl.Write("У пользователя нет прав на изменение реестра.", Enums.LogType.Info);
                 SecurityException?.Invoke();
@@ -71,7 +71,7 @@ namespace MyExplorer.Model
                 view64.Close();
                 key.Close();
             }
-            catch(System.Security.SecurityException se)
+            catch(System.Security.SecurityException)
             {
                 fl.Write("У пользователя нет прав на чтение реестра.", Enums.LogType.Info);
                 SecurityException?.Invoke();

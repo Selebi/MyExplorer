@@ -165,7 +165,6 @@
     <Compile Include="Services\FileLogger.cs" />
     <Compile Include="Services\HotkeyLocker.cs" />
     <Compile Include="Services\JsonSerializer.cs" />
-    <Compile Include="Model\MainWorker.cs" />
     <Compile Include="Services\Navigator.cs" />
     <Compile Include="Services\Timers.cs" />
     <Compile Include="Splash.xaml.cs">

@@ -12,7 +12,6 @@ namespace MyExplorer.ViewModel
 
             Process.GetInstance().Done += ProcessWindow_Done;
             Process.GetInstance().Start(settings.Actions);
-
         }
 
         private void ProcessWindow_Done()

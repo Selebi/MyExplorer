@@ -7,19 +7,7 @@ namespace MyExplorer.ViewModel
     {
         public SettingWindow()
         {
-            //Services.Navigator.GetInstance(WindowName.Settings).SetFrame(FrameName.Main);
-            //Statusbar = new Frame() { Content = new Controls.StatusBar(new StatusBar()) };
-        }
 
-        //Frame _statusbar;
-        //public Frame Statusbar
-        //{
-        //    get => _statusbar;
-        //    set
-        //    {
-        //        _statusbar = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        }
     }
 }
