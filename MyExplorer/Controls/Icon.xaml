@@ -4,69 +4,89 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyExplorer.Controls"
-             mc:Ignorable="d" Margin="6"
-             Height="128" Width="72">
-    <Border Background="White" BorderThickness="2" BorderBrush="#FF006EB2" CornerRadius="6">
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="10" ShadowDepth="0" Color="#FF006EB2"/>
-        </Border.Effect>
-        <Border.Style>
-            <Style>
+             mc:Ignorable="d">
+    <Button Command="{Binding Start}">
+        <Button.Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="6 6"/>
+                <Setter Property="Height" Value="128"/>
+                <Setter Property="Width" Value="72"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Border x:Name="Bord" Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="#FF006EB2" CornerRadius="6">
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="MyAnimatedScaleTransform" ScaleX="1" ScaleY="1"  />
+                                </Border.RenderTransform>
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
+                                </Border.Effect>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="68"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Image Source="{Binding ImagePath}" Width="64" Height="64"/>
+                                    <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Text}" Margin="2" TextAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis">
+                                        <TextBlock.ToolTip>
+                                            <ToolTip Content="{Binding ToolTip}"/>
+                                        </TextBlock.ToolTip>
+                                    </TextBlock>
+                                </Grid>
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="MouseDown">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="MyAnimatedScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleX)" From="1" To="1.04" Duration="0:0:0.1" AutoReverse="True"/>
+                                                <DoubleAnimation Storyboard.TargetName="MyAnimatedScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="1" To="1.04" Duration="0:0:0.1" AutoReverse="True"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Border.Triggers>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
                 <Style.Triggers>
-                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                    <EventTrigger RoutedEvent="MouseEnter">
                         <EventTrigger.Actions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                                    To="#FFCEE2EE" Duration="0:0:0.3"/>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FFCEE2EE" Duration="0:0:0.3"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
                     </EventTrigger>
-                    <EventTrigger RoutedEvent="Border.MouseLeave">
+                    <EventTrigger RoutedEvent="MouseLeave">
                         <EventTrigger.Actions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                                    To="White" Duration="0:0:0.3"/>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="White" Duration="0:0:0.3"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
                     </EventTrigger>
-                    <EventTrigger RoutedEvent="Border.MouseDown">
+                    <EventTrigger RoutedEvent="PreviewMouseLeftButtonDown">
                         <EventTrigger.Actions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                                    To="#FF9CC2E8" Duration="0:0:0.1"/>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF9CC2E8" Duration="0:0:0.1"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
                     </EventTrigger>
-                    <EventTrigger RoutedEvent="Border.MouseUp">
+                    <EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
                         <EventTrigger.Actions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="Background.Color"
-                                    To="#FFCEE2EE" Duration="0:0:0.2"/>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FFCEE2EE" Duration="0:0:0.2"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger.Actions>
                     </EventTrigger>
                 </Style.Triggers>
             </Style>
-        </Border.Style>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="68"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Image Source="{Binding ImagePath}" Width="64" Height="64"/>
-            <TextBlock Grid.Row="1" TextWrapping="Wrap" Text="{Binding Text}" Margin="2" TextAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis">
-                <TextBlock.ToolTip>
-                    <ToolTip Content="{Binding ToolTip}"/>
-                </TextBlock.ToolTip>
-            </TextBlock>
-        </Grid>
-    </Border>
+        </Button.Style>
+    </Button>
 </UserControl>

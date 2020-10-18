@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -28,14 +29,23 @@ namespace MyExplorer.Model
 
         public static string StartProcess(string file, string param = "")
         {
-            if (StartedProcesses.ContainsKey(file))
+            if (file == "")
+                return $"Файл не указан";
+            try
             {
-                Process.Start(file, param);
-                return "Копия";
+                if (StartedProcesses.ContainsKey(file))
+                {
+                    Process.Start(file, param);
+                    //return "Копия";
+                }
+                else
+                {
+                    StartedProcesses.Add(file, Process.Start(file, param));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                StartedProcesses.Add(file, Process.Start(file, param));
+                return $"{ex.Message} : {file}";
             }
             return "";
         }

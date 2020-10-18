@@ -58,9 +58,9 @@ namespace MyExplorer.ViewModel
                 DomainPassword = loaded.DomainPassword;
                 HotKeys = loaded.HotKeys;
                 Actions = loaded.Actions;
+                Icons = loaded.Icons;
                 MasterKey = loaded.MasterKey;
                 MasterPass = loaded.MasterPass;
-
 
                 LoginChanged = false;
                 PasswordChanged = false;
@@ -131,8 +131,8 @@ namespace MyExplorer.ViewModel
         string _masterPass = "65a9a0c386330869187cc08ba9717c42b354b1daaa0ad388c2e735bab9e67a7f";
         List<string> _hotKeys = new List<string>();
         List<Action> _actions = new List<Action>();
+        List<Icon> _icons = new List<Icon>();
 
-        
         [DataMember]
         public List<string> HotKeys 
         {
@@ -196,6 +196,16 @@ namespace MyExplorer.ViewModel
             }
         }
 
+        [DataMember]
+        public List<Icon> Icons
+        {
+            get => _icons;
+            set
+            {
+                _icons = value;
+                OnPropertyChanged();
+            }
+        }
 
         [DataMember]
         public bool LogEnabled

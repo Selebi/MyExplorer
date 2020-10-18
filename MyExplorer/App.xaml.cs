@@ -17,7 +17,7 @@ namespace MyExplorer
             LoadSettings();
             Model.Users.LoadAll();
 
-            if (!Model.Users.IsAdmin()) // Тест
+            if (Model.Users.IsAdmin()) // Тест
             {
                 var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
                 navigator.ShowWindow();

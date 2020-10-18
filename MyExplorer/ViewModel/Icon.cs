@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using MyExplorer.Services;
+using System.Runtime.Serialization;
 
 namespace MyExplorer.ViewModel
 {
@@ -8,6 +9,16 @@ namespace MyExplorer.ViewModel
         public string ToolTip
         {
             get => Text;
+        }
+
+        public RelayCommand Start
+        {
+            get => new RelayCommand((o) =>
+            {
+                string error = Model.ProcessWorker.StartProcess(AppPath, Param);
+                if (error != "")
+                    Navigator.GetInstance(Enums.WindowName.Icons).ShowModalMessage(Enums.ContainerType.Main, Enums.MessageType.Error, "Ошибка запуска", error);
+            });
         }
 
         string _imagePath;
@@ -34,7 +45,7 @@ namespace MyExplorer.ViewModel
             }
         }
 
-        string _appPath;
+        string _appPath = "";
         [DataMember]
         public string AppPath
         {
@@ -46,7 +57,7 @@ namespace MyExplorer.ViewModel
             }
         }
 
-        string _param;
+        string _param = "";
         [DataMember]
         public string Param
         {

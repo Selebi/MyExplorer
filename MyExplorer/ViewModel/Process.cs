@@ -58,7 +58,7 @@ namespace MyExplorer.ViewModel
                     }
                     Thread.Sleep((int)a.Delay);
                 }
-                Thread.Sleep(1000);
+                if(Actions.Count > 0) Thread.Sleep(1000);
             });
             Done?.Invoke();
         }
