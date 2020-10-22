@@ -56,7 +56,7 @@ namespace MyExplorer.Model
             {
                 RegEditor.RegWindowsExplorer();
                 Process.Start(@"C:\Windows\explorer.exe");
-                Thread.Sleep(500); // Костыли, переписать!
+                Thread.Sleep(1000); // Костыли, переписать!
                 RegEditor.RegSintekExplorer();
             }
             else

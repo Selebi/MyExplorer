@@ -1,6 +1,8 @@
 ﻿using MyExplorer.Services;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Security.Principal;
 using System.Windows;
 
 namespace MyExplorer
@@ -25,9 +27,24 @@ namespace MyExplorer
 
                 if (Model.Users.IsAdmin()) // Тест
                 {
-                    var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
-                    navigator.ShowWindow();
-                    splash.Close();
+                    if (RunAdmin())
+                    {
+                        splash.Close();
+                        return;
+                    }
+                    bool state = Model.ProcessWorker.IsProcessWork("explorer");
+                    if (state)
+                    {
+                        var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
+                        navigator.ShowWindow();
+                        splash.Close();
+                    }
+                    else
+                    {
+                        Model.ProcessWorker.StartExplorer();
+                        splash.Close();
+                        return;
+                    }
                 }
                 else
                 {
@@ -64,6 +81,29 @@ namespace MyExplorer
             {
                 ViewModel.Settings.GetInstance().Load();
             }
+        }
+
+        bool RunAdmin()
+        {
+            WindowsPrincipal pricipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            bool hasAdministrativeRight = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
+
+            if (hasAdministrativeRight == false)
+            {
+                ProcessStartInfo processInfo = new ProcessStartInfo(); //создаем новый процесс
+                processInfo.Verb = "runas"; 
+                processInfo.FileName = "Sintek Explorer.exe"; 
+                try
+                {
+                    Process.Start(processInfo); 
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"SintekExplorerPath - \"{Directory.GetCurrentDirectory()}\". {ex.Message}", "Ошибка запроса привелегий", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            return false;
         }
     }
 }
