@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.IO;
 
 namespace MyExplorer.Model
 {
@@ -31,10 +32,12 @@ namespace MyExplorer.Model
             {
                 var view64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
                 RegistryKey key = view64.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
-                key.SetValue("Shell", "MyExplorer.exe", RegistryValueKind.String);
+                key.SetValue("Shell", $"{Directory.GetCurrentDirectory()}\\Sintek Explorer.exe", RegistryValueKind.String);
                 view64.Close();
                 key.Close();
                 ExplorerRegistred = true;
+                File.WriteAllText($"{Environment.SystemDirectory}\\SintekExplorerPath", Directory.GetCurrentDirectory());
+                fl.Write($"SintekExplorerPath установлен - \"{Directory.GetCurrentDirectory()}\"", Enums.LogType.Info);
             }
             catch (System.Security.SecurityException)
             {
@@ -67,11 +70,11 @@ namespace MyExplorer.Model
             {
                 var view64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
                 RegistryKey key = view64.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
-                ExplorerRegistred = ((string)key.GetValue("Shell")).ToLower() == "myexplorer.exe";
+                ExplorerRegistred = ((string)key.GetValue("Shell")).Contains("Sintek");
                 view64.Close();
                 key.Close();
             }
-            catch(System.Security.SecurityException)
+            catch (System.Security.SecurityException)
             {
                 fl.Write("У пользователя нет прав на чтение реестра.", Enums.LogType.Info);
                 SecurityException?.Invoke();

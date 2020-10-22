@@ -1,5 +1,6 @@
 ﻿using MyExplorer.Services;
-using System.Threading;
+using System;
+using System.IO;
 using System.Windows;
 
 namespace MyExplorer
@@ -11,35 +12,46 @@ namespace MyExplorer
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Splash splash = new Splash();
-            splash.Show();
-
-            LoadSettings();
-            Model.Users.LoadAll();
-
-            if (Model.Users.IsAdmin()) // Тест
+            try
             {
-                var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
-                navigator.ShowWindow();
-                splash.Close();
-            }
-            else
-            {
-                var navigator = Navigator.CreateInstance(Enums.WindowName.Process);
-                navigator.ShowWindow();
-                splash.Close();
-
-                Model.HotkeyProcessor.MasterKeyDetected += () =>
+                Splash splash = new Splash();
+                splash.Show();
+                if (Directory.GetCurrentDirectory().ToLower().Contains("system32") || Directory.GetCurrentDirectory().ToLower().Contains("syswow64"))
                 {
-                    if (passNavigator == null || !passNavigator.IsLoaded())
+                    Directory.SetCurrentDirectory(File.ReadAllText($"{Environment.SystemDirectory}\\SintekExplorerPath"));
+                }
+                LoadSettings();
+                Model.Users.LoadAll();
+
+                if (Model.Users.IsAdmin()) // Тест
+                {
+                    var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
+                    navigator.ShowWindow();
+                    splash.Close();
+                }
+                else
+                {
+                    var navigator = Navigator.CreateInstance(Enums.WindowName.Process);
+                    navigator.ShowWindow();
+                    splash.Close();
+
+                    Model.HotkeyProcessor.MasterKeyDetected += () =>
                     {
-                        passNavigator = Navigator.CreateInstance(Enums.WindowName.Password);
-                        passNavigator.ShowWindow();
-                    }
-                };
+                        if (passNavigator == null || !passNavigator.IsLoaded())
+                        {
+                            passNavigator = Navigator.CreateInstance(Enums.WindowName.Password);
+                            passNavigator.ShowWindow();
+                        }
+                    };
+                }
+                hotkeyLocker = new Services.HotkeyLocker();
+                hotkeyLocker.SetHook();
             }
-            hotkeyLocker = new Services.HotkeyLocker();
-            hotkeyLocker.SetHook();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"SintekExplorerPath - \"{Directory.GetCurrentDirectory()}\". {ex.Message}", "Ошибка запуска", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
         }
 
         void LoadSettings()
