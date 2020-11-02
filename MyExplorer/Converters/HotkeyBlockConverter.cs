@@ -15,9 +15,9 @@ namespace MyExplorer.Converters
             if (value is bool v)
             {
                 if (v)
-                    return "Выкл блок клавиш";
+                    return "Выключить блокировку клавиш";
                 else
-                    return "Вкл блок клавиш";
+                    return "Включить блокировку клавиш";
             }
             return null;
         }

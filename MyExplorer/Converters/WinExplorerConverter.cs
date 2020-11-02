@@ -15,9 +15,9 @@ namespace MyExplorer.Converters
             if (value is bool v)
             {
                 if (v)
-                    return "Убить проводник";
+                    return "Закрыть Explorer";
                 else
-                    return "Запустить проводник";
+                    return "Запустить Explorer";
             }
             return null;
         }

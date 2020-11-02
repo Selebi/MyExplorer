@@ -19,5 +19,19 @@ namespace MyExplorer
             navigator.AddContainer(Enums.ContainerType.Main, Container);
             navigator.SetFrame(Enums.FrameName.Icons, Enums.ContainerType.Main);
         }
+
+        private void roll_up(object sender, RoutedEventArgs e)
+        {
+            if (this.Height > 200)
+            {
+                this.Height = 96;
+                roll_text.Text = "Развернуть";
+            }
+            else
+            {
+                this.Height = 500;
+                roll_text.Text = "Свернуть";
+            }
+        }
     }
 }

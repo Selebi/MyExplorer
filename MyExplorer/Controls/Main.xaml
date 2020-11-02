@@ -23,7 +23,7 @@
             <StackPanel Orientation="Vertical">
                 <Label Content="Меню" Margin="8, 16, 8, 8" Style="{DynamicResource LabelStyle}" FontSize="16"/>
                 <Button Content="Настройки" Margin="8, 8, 8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenSettings}"/>
-                <Button Content="Хоткеи" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenHotKeys}"/>
+                <Button Content="Горячие клавиши" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenHotKeys}"/>
                 <Button Content="Пользователи" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenUsers}"/>
                 <Button Content="Сценарий запуска" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenActions}"/>
                 <Button Content="Журнал" Margin="8, 4" Style="{StaticResource ButtonsMenu}" Command="{Binding OpenJournal}"/>
@@ -34,8 +34,8 @@
                 <Button Margin="8, 4" Style="{StaticResource ButtonsBlue}" Command="{Binding StartStopExplorer}">
                     <TextBlock Text="{Binding StartStopExplorerButtonState, Converter={StaticResource WinExplorerConverter}}"/>
                 </Button>
-                <Button Margin="8, 4" Style="{StaticResource ButtonsBlue}" Command="{Binding StartStopBlockHotkeys}">
-                    <TextBlock Text="{Binding StartStopBlockHotkeysState, Converter={StaticResource HotkeyBlockConverter}}"/>
+                <Button Margin="8, 4" Style="{StaticResource ButtonsBlue}" Command="{Binding StartStopBlockHotkeys}" Height="48">
+                    <TextBlock Text="{Binding StartStopBlockHotkeysState, Converter={StaticResource HotkeyBlockConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"/>
                 </Button>
             </StackPanel>
             <Border BorderBrush="Black" CornerRadius="2" Grid.Column="1" HorizontalAlignment="Stretch" Margin="2, 8" VerticalAlignment="Stretch" Background="#FF9DA4B8"/>
