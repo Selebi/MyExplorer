@@ -11,6 +11,8 @@ namespace MyExplorer
         public ProcessWindow(object ViewModel)
         {
             InitializeComponent();
+            if (MyExplorer.ViewModel.Settings.GetInstance().ShowSplash == false)
+                Visibility = Visibility.Hidden;
             DataContext = ViewModel;
             Loaded += ProcessWindow_Loaded;
         }

@@ -11,7 +11,17 @@ namespace MyExplorer
             InitializeComponent();
             DataContext = ViewModel;
 
+            Task.Run(() =>
+            {
+                for (int i = 200; i > 0; i--)
+                {
+                    this.Dispatcher.Invoke(() => { Langv.Text = System.Windows.Forms.InputLanguage.CurrentInputLanguage.Culture.ThreeLetterWindowsLanguageName; });
+                    Thread.Sleep(100);
+                }
+            });
+
             pb.Focus();
+
             Task.Run(() =>
             {
                 for (int i = 20; i > 0; i--)
@@ -21,6 +31,7 @@ namespace MyExplorer
                 }
                 this.Dispatcher.Invoke(() => { this.Close(); });
             });
+
         }
     }
 }

@@ -16,19 +16,36 @@ namespace MyExplorer
         {
             try
             {
-                Splash splash = new Splash();
-                splash.Show();
                 if (Directory.GetCurrentDirectory().ToLower().Contains("system32") || Directory.GetCurrentDirectory().ToLower().Contains("syswow64"))
                 {
                     Directory.SetCurrentDirectory(File.ReadAllText($"{Environment.SystemDirectory}\\SintekExplorerPath"));
                 }
-                LoadSettings();
+                Splash splash = new Splash();
+
+                var settings = ViewModel.Settings.GetInstance();
+
+                bool isFirstLoad = !LoadSettings();
+
+                if (settings.ShowSplash == true)
+                {
+                    splash.Show();
+                }
                 Model.Users.LoadAll();
+
+                if (Model.ProcessWorker.IsSExplorerAsAdmin())
+                {
+                    var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
+                    navigator.ShowWindow();
+                    splash.Close();
+                    return;
+                }
 
                 if (Model.Users.IsAdmin()) // Тест
                 {
-                    if (RunAdmin())
+                    if (Model.ProcessWorker.RunSExplorerAsAdmin())
                     {
+                        if (isFirstLoad)
+                            File.Delete("Settings.json");
                         splash.Close();
                         return;
                     }
@@ -48,18 +65,33 @@ namespace MyExplorer
                 }
                 else
                 {
-                    var navigator = Navigator.CreateInstance(Enums.WindowName.Process);
-                    navigator.ShowWindow();
-                    splash.Close();
-
-                    Model.HotkeyProcessor.MasterKeyDetected += () =>
+                    if (isFirstLoad)
                     {
-                        if (passNavigator == null || !passNavigator.IsLoaded())
+                        if (Model.ProcessWorker.RunSExplorerAsAdmin())
                         {
-                            passNavigator = Navigator.CreateInstance(Enums.WindowName.Password);
-                            passNavigator.ShowWindow();
+                            File.Delete("Settings.json");
+                            splash.Close();
+                            return;
                         }
-                    };
+                        var fnavigator = Navigator.CreateInstance(Enums.WindowName.Settings);
+                        fnavigator.ShowWindow();
+                        splash.Close();
+                    }
+                    else
+                    {
+                        var navigator = Navigator.CreateInstance(Enums.WindowName.Process);
+                        navigator.ShowWindow();
+                        splash.Close();
+
+                        Model.HotkeyProcessor.MasterKeyDetected += () =>
+                        {
+                            if (passNavigator == null || !passNavigator.IsLoaded())
+                            {
+                                passNavigator = Navigator.CreateInstance(Enums.WindowName.Password);
+                                passNavigator.ShowWindow();
+                            }
+                        };
+                    }
                 }
                 hotkeyLocker = new Services.HotkeyLocker();
                 hotkeyLocker.SetHook();
@@ -71,39 +103,18 @@ namespace MyExplorer
             }
         }
 
-        void LoadSettings()
+        bool LoadSettings()
         {
             if (!System.IO.File.Exists("Settings.json"))
             {
                 ViewModel.Settings.GetInstance().Save();
+                return false;
             }
             else
             {
                 ViewModel.Settings.GetInstance().Load();
+                return true;
             }
-        }
-
-        bool RunAdmin()
-        {
-            WindowsPrincipal pricipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
-            bool hasAdministrativeRight = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
-
-            if (hasAdministrativeRight == false)
-            {
-                ProcessStartInfo processInfo = new ProcessStartInfo(); //создаем новый процесс
-                processInfo.Verb = "runas"; 
-                processInfo.FileName = "Sintek Explorer.exe"; 
-                try
-                {
-                    Process.Start(processInfo); 
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"SintekExplorerPath - \"{Directory.GetCurrentDirectory()}\". {ex.Message}", "Ошибка запроса привелегий", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            return false;
         }
     }
 }

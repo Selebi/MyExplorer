@@ -27,12 +27,19 @@ namespace MyExplorer.ViewModel
             {
                 if(o is PasswordBox pb)
                 {
+                    Navigator.GetInstance(Enums.WindowName.Password).CloseWindow();
                     if(Model.Hash.CreateHash(pb.Password) == Settings.GetInstance().MasterPass)
                     {
-                        var settingNav = Navigator.CreateInstance(Enums.WindowName.Settings);
-                        settingNav.ShowWindow();
+                        if (Model.ProcessWorker.IsSExplorerAsAdmin())
+                        {
+                            var settingNav = Navigator.CreateInstance(Enums.WindowName.Settings);
+                            settingNav.ShowWindow();
+                        }
+                        else
+                        {
+                            Model.ProcessWorker.RunSExplorerAsAdmin();
+                        }
                     }
-                    Navigator.GetInstance(Enums.WindowName.Password).CloseWindow();
                 }
             });
         }

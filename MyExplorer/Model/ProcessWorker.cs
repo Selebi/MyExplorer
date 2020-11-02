@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading;
+using System.Windows;
 
 namespace MyExplorer.Model
 {
@@ -64,5 +67,34 @@ namespace MyExplorer.Model
         }
 
         public static Dictionary<string, Process> StartedProcesses { get; private set; } = new Dictionary<string, Process>();
+
+        public static bool RunSExplorerAsAdmin()
+        {
+            WindowsPrincipal pricipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            bool hasAdministrativeRight = pricipal.IsInRole(WindowsBuiltInRole.Administrator);
+
+            if (hasAdministrativeRight == false)
+            {
+                ProcessStartInfo processInfo = new ProcessStartInfo(); //создаем новый процесс
+                processInfo.Verb = "runas";
+                processInfo.FileName = "Sintek Explorer.exe";
+                try
+                {
+                    Process.Start(processInfo);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"SintekExplorerPath - \"{Directory.GetCurrentDirectory()}\". {ex.Message}", "Ошибка запроса привелегий", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            return false;
+        }
+
+        public static bool IsSExplorerAsAdmin()
+        {
+            WindowsPrincipal pricipal = new WindowsPrincipal(WindowsIdentity.GetCurrent());
+            return pricipal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
     }
 }

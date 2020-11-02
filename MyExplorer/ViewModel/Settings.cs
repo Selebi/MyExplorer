@@ -61,6 +61,7 @@ namespace MyExplorer.ViewModel
                 Icons = loaded.Icons;
                 MasterKey = loaded.MasterKey;
                 MasterPass = loaded.MasterPass;
+                ShowSplash = loaded.ShowSplash == null ? false : loaded.ShowSplash;
 
                 LoginChanged = false;
                 PasswordChanged = false;
@@ -132,6 +133,7 @@ namespace MyExplorer.ViewModel
         List<string> _hotKeys = new List<string>();
         List<Action> _actions = new List<Action>();
         List<Icon> _icons = new List<Icon>();
+        bool? _showSplash = false;
 
         [DataMember]
         public List<string> HotKeys 
@@ -192,6 +194,17 @@ namespace MyExplorer.ViewModel
             {
                 _actions = value;
                 ActionsChanged?.Invoke(_actions);
+                OnPropertyChanged();
+            }
+        }
+
+        [DataMember]
+        public bool? ShowSplash
+        {
+            get => _showSplash;
+            set
+            {
+                _showSplash = value;
                 OnPropertyChanged();
             }
         }
