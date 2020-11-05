@@ -55,15 +55,22 @@ namespace MyExplorer.Model
 
         public static void StartExplorer()
         {
-            if (RegEditor.IsSintekExplorerRegistred())
+            try
             {
-                RegEditor.RegWindowsExplorer();
-                Process.Start(@"C:\Windows\explorer.exe");
-                Thread.Sleep(1000); // Костыли, переписать!
-                RegEditor.RegSintekExplorer();
+                if (RegEditor.IsSintekExplorerRegistred())
+                {
+                    RegEditor.RegWindowsExplorer();
+                    Process.Start(@"C:\Windows\explorer.exe");
+                    Thread.Sleep(1000); // Костыли, переписать!
+                    RegEditor.RegSintekExplorer();
+                }
+                else
+                    Process.Start(@"C:\Windows\explorer.exe");
             }
-            else
-                Process.Start(@"C:\Windows\explorer.exe");
+            catch(Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Ошибка запуска проводника", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public static Dictionary<string, Process> StartedProcesses { get; private set; } = new Dictionary<string, Process>();

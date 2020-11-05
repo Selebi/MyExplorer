@@ -23,84 +23,119 @@ namespace MyExplorer
                 Splash splash = new Splash();
 
                 var settings = ViewModel.Settings.GetInstance();
-
+                // Первый ли запуск
                 bool isFirstLoad = !LoadSettings();
-
+                // Если надо показывать сплеш
                 if (settings.ShowSplash == true)
                 {
                     splash.Show();
                 }
+                // Загрузка юзеров
                 Model.Users.LoadAll();
 
-                if (Model.ProcessWorker.IsSExplorerAsAdmin())
-                {
-                    var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
-                    navigator.ShowWindow();
-                    splash.Close();
-                    return;
-                }
+                //if (Model.ProcessWorker.IsSExplorerAsAdmin())
+                //{
+                //    var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
+                //    navigator.ShowWindow();
+                //    splash.Close();
+                //    return;
+                //}
 
+                // Если запуск с пользователем админом
                 if (Model.Users.IsAdmin()) // Тест
                 {
+                    // Если запуск не с правами админа, то перезапуск от админа
                     if (Model.ProcessWorker.RunSExplorerAsAdmin())
                     {
+                        // Если первый запуск, сносим настройки
                         if (isFirstLoad)
                             File.Delete("Settings.json");
                         splash.Close();
                         return;
                     }
+                    // Запущен ли проводник
                     bool state = Model.ProcessWorker.IsProcessWork("explorer");
+                    // Если запущен
                     if (state)
                     {
+                        // Запускаем конфигуратор
                         var navigator = Navigator.CreateInstance(Enums.WindowName.Settings);
                         navigator.ShowWindow();
+                        StartHotkeyHook();
                         splash.Close();
                     }
+                    // Если не запущен
                     else
                     {
+                        // Запускаем проводник и вырубаемся
                         Model.ProcessWorker.StartExplorer();
                         splash.Close();
                         return;
                     }
                 }
+                // Если запуск с пользователем не админом
                 else
                 {
+                    // Если первый запуск
                     if (isFirstLoad)
                     {
+                        // Если запуск не с правами админа, то перезапуск от админа
                         if (Model.ProcessWorker.RunSExplorerAsAdmin())
                         {
+                            // Сносим настройки
                             File.Delete("Settings.json");
                             splash.Close();
                             return;
                         }
+                        // Запускам конфигуратор для настройки при первом запуске
                         var fnavigator = Navigator.CreateInstance(Enums.WindowName.Settings);
                         fnavigator.ShowWindow();
+                        StartHotkeyHook();
                         splash.Close();
                     }
+                    // Если не первый запуск
                     else
                     {
-                        var navigator = Navigator.CreateInstance(Enums.WindowName.Process);
-                        navigator.ShowWindow();
-                        splash.Close();
-
-                        Model.HotkeyProcessor.MasterKeyDetected += () =>
+                        // Если запущено от имени админа
+                        if (Model.ProcessWorker.IsSExplorerAsAdmin())
                         {
-                            if (passNavigator == null || !passNavigator.IsLoaded())
+                            var fnavigator = Navigator.CreateInstance(Enums.WindowName.Settings);
+                            fnavigator.ShowWindow();
+                            StartHotkeyHook();
+                            splash.Close();
+                        }
+                        // Если запущено не от имени админа
+                        else
+                        {
+                            // Запускаем заданный сценарий
+                            var navigator = Navigator.CreateInstance(Enums.WindowName.Process);
+                            navigator.ShowWindow();
+                            StartHotkeyHook();
+                            splash.Close();
+                            // Ловим нажатие МастерКея
+                            Model.HotkeyProcessor.MasterKeyDetected += () =>
                             {
-                                passNavigator = Navigator.CreateInstance(Enums.WindowName.Password);
-                                passNavigator.ShowWindow();
-                            }
-                        };
+                                if (passNavigator == null || !passNavigator.IsLoaded())
+                                {
+                                    passNavigator = Navigator.CreateInstance(Enums.WindowName.Password);
+                                    passNavigator.ShowWindow();
+                                }
+                            };
+                        }
                     }
                 }
-                hotkeyLocker = new Services.HotkeyLocker();
-                hotkeyLocker.SetHook();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"SintekExplorerPath - \"{Directory.GetCurrentDirectory()}\". {ex.Message}", "Ошибка запуска", MessageBoxButton.OK, MessageBoxImage.Error);
                 Application.Current.Shutdown();
             }
+        }
+
+        void StartHotkeyHook()
+        {
+            hotkeyLocker = new Services.HotkeyLocker();
+            hotkeyLocker.SetHook();
         }
 
         bool LoadSettings()
