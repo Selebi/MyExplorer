@@ -6,6 +6,7 @@ namespace MyExplorer.Services
 {
     public class FileLogger
     {
+        private int trynum = 1;
         public string Path { get; private set; }
         public List<(string, Enums.LogType)> Journal { get; private set; }
         public event Action<string, Enums.LogType> NewLog;
@@ -38,12 +39,29 @@ namespace MyExplorer.Services
 
         public void Write(string Message, Enums.LogType type)
         {
-            using (var stream = System.IO.File.AppendText(Path))
+            try
             {
-                Message = Message.Trim();
-                stream.WriteLine($"{DateTime.Now} [{Enum.GetName(typeof(Enums.LogType), type)}] - {Message}");
-                Journal.Add((Message, type));
-                NewLog?.Invoke(Message, type);
+                using (var stream = System.IO.File.AppendText(Path))
+                {
+                    Message = Message.Trim();
+                    stream.WriteLine($"{DateTime.Now} [{Enum.GetName(typeof(Enums.LogType), type)}] - {Message}");
+                    Journal.Add((Message, type));
+                    NewLog?.Invoke(Message, type);
+                }
+            }
+            catch(Exception ex)
+            {
+                if(trynum <= 5)
+                {
+                    trynum++;
+                    System.Threading.Thread.Sleep(200);
+                    Write(Message, type);
+                    trynum = 1;
+                }
+                else
+                {
+                    trynum = 1;
+                }
             }
         }
     }

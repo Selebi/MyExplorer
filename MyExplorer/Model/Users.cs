@@ -11,28 +11,32 @@ namespace MyExplorer.Model
     public static class Users
     {
         static Services.FileLogger fl = Services.FileLogger.GetInstance(ViewModel.Settings.GetInstance().LogFile);
-        static ViewModel.Settings Settings = ViewModel.Settings.GetInstance(); 
+        static ViewModel.Settings Settings = ViewModel.Settings.GetInstance();
         public static List<Data.User> UsersMembersDomainGroup { get; private set; } = new List<Data.User>();
         public static List<Data.User> UsersLocalGroup { get; private set; } = new List<Data.User>();
         public static Data.User SessionUser { get; private set; }
+        public static Data.User CurrentUser { get; private set; }
 
         public static void LoadAll()
         {
-            GetUsersMembersDomainGroup();
-            GetUsersLocalGroup();
             GetSessionUserName();
+            GetCurrentUser();
+            GetUsersLocalGroup();
+            GetUsersMembersDomainGroup();
         }
+
+        public static bool IsDispatcherUser() => $"{CurrentUser.Domain.ToLower()}/{CurrentUser.Name.ToLower()}" == Settings.DispatcherUser.ToLower();
 
         public static bool IsAdmin()
         {
             foreach(var u in UsersLocalGroup)
             {
-                if (u.Domain.ToLower().Contains(SessionUser.Domain.ToLower()) && u.Name.ToLower() == SessionUser.Name.ToLower())
+                if (u.Domain.ToLower().Contains(CurrentUser.Domain.ToLower()) && u.Name.ToLower() == CurrentUser.Name.ToLower())
                     return true;
             }
             foreach(var u in UsersMembersDomainGroup)
             {
-                if (u.Domain.ToLower().Contains(SessionUser.Domain.ToLower()) && u.Name.ToLower() == SessionUser.Name.ToLower())
+                if (u.Domain.ToLower().Contains(CurrentUser.Domain.ToLower()) && u.Name.ToLower() == CurrentUser.Name.ToLower())
                     return true;
             }
             return false;
@@ -122,6 +126,16 @@ namespace MyExplorer.Model
                 return result;
             }
             return null;
+        }
+
+        public static Data.User GetCurrentUser()
+        {
+            Data.User result = new Data.User();
+            var usr = System.Security.Principal.WindowsIdentity.GetCurrent();
+            result.Domain = usr.Name.Split(new char[] { '\\' })[0];
+            result.Name = usr.Name.Split(new char[] { '\\' })[1];
+            CurrentUser = result;
+            return result;
         }
 
         [DllImport("Wtsapi32.dll")]

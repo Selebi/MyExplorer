@@ -140,6 +140,7 @@
     <Compile Include="Converters\UintConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="Converters\WinExplorerConverter.cs" />
+    <Compile Include="Data\AdminData.cs" />
     <Compile Include="Data\Container.cs" />
     <Compile Include="Data\User.cs" />
     <Compile Include="Enums\ContainerType.cs" />

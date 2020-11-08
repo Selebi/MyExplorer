@@ -6,80 +6,112 @@
              xmlns:local="clr-namespace:MyExplorer.Controls"
              mc:Ignorable="d" 
              SnapsToDevicePixels="True" UseLayoutRounding ="True"
-             d:DesignHeight="380" d:DesignWidth="550">
+             d:DesignHeight="600" d:DesignWidth="550">
     <Grid Background="White">
         <Button Content="Назад" HorizontalAlignment="Right" Margin="0,0,10,10" 
             VerticalAlignment="Bottom" Width="160" Style="{StaticResource ButtonsMenu}" Command="{Binding Back}"/>
         <Button HorizontalAlignment="Left" Margin="10,0,0,10"  Content="Сохранить" Command="{Binding SaveSettings}"
             VerticalAlignment="Bottom" Width="160" Height="23" Style="{StaticResource ButtonsBlue}"/>
-        <Border HorizontalAlignment="Left" Height="213" Margin="10,10,0,0" 
+        <ScrollViewer Margin="0,0,0,40" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <Grid HorizontalAlignment="Center" Width="533">
+                <Border HorizontalAlignment="Left" Height="213" Margin="10,10,0,0" 
                 VerticalAlignment="Top" Width="247" Style="{DynamicResource BorderCard}">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
-            </Border.Effect>
-            <Grid>
-                <TextBlock TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
+                    </Border.Effect>
+                    <Grid>
+                        <TextBlock TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                        Text="Настройки домена" FontSize="14"/>
-                <TextBlock Margin="10,24,10,0" TextWrapping="NoWrap" Text="Домен" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
-                <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding DomainName}" 
+                        <TextBlock Margin="10,24,10,0" TextWrapping="NoWrap" Text="Домен" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
+                        <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding DomainName}" 
                          VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
-                <TextBlock Margin="10,70,10,0" TextWrapping="NoWrap" Text="Логин" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
-                <TextBox Height="23" Margin="10,85,10,0" TextWrapping="NoWrap" Text="{Binding DomainLogin}" 
+                        <TextBlock Margin="10,70,10,0" TextWrapping="NoWrap" Text="Логин" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
+                        <TextBox Height="23" Margin="10,85,10,0" TextWrapping="NoWrap" Text="{Binding DomainLogin}" 
                          VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
-                <TextBlock Margin="10,116,10,0" TextWrapping="NoWrap" Text="Пароль" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
-                <TextBox Height="23" Margin="10,131,10,0" TextWrapping="NoWrap" Text="{Binding DomainPassword}" 
+                        <TextBlock Margin="10,116,10,0" TextWrapping="NoWrap" Text="Пароль" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
+                        <TextBox Height="23" Margin="10,131,10,0" TextWrapping="NoWrap" Text="{Binding DomainPassword}" 
                          VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
-                <TextBlock Margin="10,162,10,0" TextWrapping="NoWrap" Text="Имя группы администраторов домена" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
-                <TextBox Height="23" Margin="10,177,10,0" TextWrapping="NoWrap" Text="{Binding DoaminAdminGroup}" 
+                        <TextBlock Margin="10,162,10,0" TextWrapping="NoWrap" Text="Имя группы администраторов домена" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
+                        <TextBox Height="23" Margin="10,177,10,0" TextWrapping="NoWrap" Text="{Binding DoaminAdminGroup}" 
                          VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
-            </Grid>
-        </Border>
-        <Border HorizontalAlignment="Left" Height="75" Margin="276,148,0,0" 
+                    </Grid>
+                </Border>
+                <Border HorizontalAlignment="Left" Height="75" Margin="276,148,0,0" 
                 VerticalAlignment="Top" Width="247" Style="{DynamicResource BorderCard}">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
-            </Border.Effect>
-            <Grid>
-                <TextBlock TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
+                    </Border.Effect>
+                    <Grid>
+                        <TextBlock TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                        Text="Локальные настройки" FontSize="14"/>
-                <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Имя группы администраторов" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
-                <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding LocalAdminGroup}" 
+                        <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Имя группы администраторов" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
+                        <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding LocalAdminGroup}" 
                          VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
-            </Grid>
-        </Border>
-        <Border HorizontalAlignment="Left" Height="115" Margin="276,10,0,0" 
+                    </Grid>
+                </Border>
+                <Border HorizontalAlignment="Left" Height="115" Margin="276,10,0,0" 
                 VerticalAlignment="Top" Width="247" Style="{DynamicResource BorderCard}">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
-            </Border.Effect>
-            <Grid>
-                <TextBlock TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
+                    </Border.Effect>
+                    <Grid>
+                        <TextBlock TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                        Text="Настройки программы" FontSize="14"/>
-                <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Файл логов" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
-                <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding LogFile}" 
+                        <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Файл логов" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
+                        <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding LogFile}" 
                          VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
-                <CheckBox Content="Писать логи в файл" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Foreground="#FF5D5D5D"
+                        <CheckBox Content="Писать логи в файл" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Foreground="#FF5D5D5D"
                           Style="{DynamicResource CheckBoxStyle}" IsChecked="{Binding LogEnabled}"/>
-            </Grid>
-        </Border>
-        <Border Style="{DynamicResource BorderCard}" Margin="10,237,0,0" Height="75" VerticalAlignment="Top" HorizontalAlignment="Left" Width="513">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
-            </Border.Effect>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                        <CheckBox Content="Показывать Splash перед запуском" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Foreground="#FF5D5D5D"
+                          Style="{DynamicResource CheckBoxStyle}" IsChecked="{Binding ShowSplash}"/>
+                    </Grid>
+                </Border>
+                <Border Style="{DynamicResource BorderCard}" Margin="10,237,0,0" Height="75" VerticalAlignment="Top" HorizontalAlignment="Left" Width="513">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                        Text="Настройки доступа" FontSize="14" Grid.ColumnSpan="2"/>
-                <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Комбинация клавиш для ввода мастер-ключа" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
-                <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding MasterKey}" 
+                        <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Комбинация клавиш для ввода мастер-ключа" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
+                        <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding MasterKey}" 
                          VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
-                <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Мастер-ключ" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D" Grid.Column="1"/>
-                <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding MasterPass}" 
+                        <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Мастер-ключ" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D" Grid.Column="1"/>
+                        <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding MasterPass}" 
                          VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center" Grid.Column="1"/>
+                    </Grid>
+                </Border>
+                <Border Style="{DynamicResource BorderCard}" Margin="10,328,0,0" Height="170" VerticalAlignment="Top" HorizontalAlignment="Left" Width="513">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Color="#FF006EB2"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock TextWrapping="NoWrap" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                       Text="Настройки учётных записей" FontSize="14" Grid.ColumnSpan="2"/>
+                        <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Учётная запись диспетчера (домен/имя)" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D"/>
+                        <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding DispatcherUser}" 
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center"/>
+                        <TextBlock Margin="10,24,10,0" TextWrapping="Wrap" Text="Учётная запись администратора : домен" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D" Grid.Column="1"/>
+                        <TextBox Height="23" Margin="10,39,10,0" TextWrapping="NoWrap" Text="{Binding AdminData.Domain}" 
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Margin="10,72,10,0" TextWrapping="Wrap" Text="Учётная запись администратора : имя" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D" Grid.Column="1"/>
+                        <TextBox Height="23" Margin="10,87,10,0" TextWrapping="NoWrap" Text="{Binding AdminData.Name}" 
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Margin="10,120,10,0" TextWrapping="Wrap" Text="Учётная запись администратора : пароль" VerticalAlignment="Top" FontSize="11" Foreground="#FF5D5D5D" Grid.Column="1"/>
+                        <TextBox Height="23" Margin="10,135,10,0" TextWrapping="NoWrap" Text="{Binding AdminData.Password}" 
+                         VerticalAlignment="Top" Style="{StaticResource TextBoxStyle}" VerticalContentAlignment="Center" Grid.Column="1"/>
+                    </Grid>
+                </Border>
+                <Border Margin="0,503,0,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="550"/>
             </Grid>
-        </Border>
+        </ScrollViewer>
     </Grid>
 </UserControl>

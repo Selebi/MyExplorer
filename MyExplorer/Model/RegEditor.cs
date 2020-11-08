@@ -32,12 +32,10 @@ namespace MyExplorer.Model
             {
                 var view64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
                 RegistryKey key = view64.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
-                key.SetValue("Shell", $"{Directory.GetCurrentDirectory()}\\Sintek Explorer.exe", RegistryValueKind.String);
+                key.SetValue("Shell", $"{Directory.GetCurrentDirectory()}\\{ViewModel.Settings.GetInstance().CurrentFileName}", RegistryValueKind.String);
                 view64.Close();
                 key.Close();
                 ExplorerRegistred = true;
-                File.WriteAllText($"{Environment.SystemDirectory}\\SintekExplorerPath", Directory.GetCurrentDirectory());
-                fl.Write($"SintekExplorerPath установлен - \"{Directory.GetCurrentDirectory()}\"", Enums.LogType.Info);
             }
             catch (System.Security.SecurityException)
             {
@@ -70,7 +68,7 @@ namespace MyExplorer.Model
             {
                 var view64 = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
                 RegistryKey key = view64.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon", true);
-                ExplorerRegistred = ((string)key.GetValue("Shell")).Contains("Sintek");
+                ExplorerRegistred = ((string)key.GetValue("Shell")).Contains(ViewModel.Settings.GetInstance().CurrentFileName);
                 view64.Close();
                 key.Close();
             }

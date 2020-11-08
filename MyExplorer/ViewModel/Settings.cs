@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyExplorer.Data;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -14,9 +15,11 @@ namespace MyExplorer.ViewModel
 
         public event Action<List<string>> HotkeysChanged;
         public event Action<List<Action>> ActionsChanged;
+        public string CurrentFileName { get; private set; }
 
         Settings()
         {
+            CurrentFileName = System.Diagnostics.Process.GetCurrentProcess().MainModule.ModuleName;
             Serializer = new Services.JsonSerializer<Settings>();
             HotKeys = _hotKeys;
         }
@@ -62,10 +65,13 @@ namespace MyExplorer.ViewModel
                 MasterKey = loaded.MasterKey;
                 MasterPass = loaded.MasterPass;
                 ShowSplash = loaded.ShowSplash == null ? false : loaded.ShowSplash;
+                DispatcherUser = loaded.DispatcherUser == null ? "" : loaded.DispatcherUser;
+                AdminData = loaded.AdminData == null ? new AdminData() : loaded.AdminData;
 
                 LoginChanged = false;
                 PasswordChanged = false;
                 MasterPassChanged = false;
+                AdminData.Reset();
             }
             else
             {
@@ -78,10 +84,14 @@ namespace MyExplorer.ViewModel
             if (LoginChanged) DomainLogin = Model.DesSecurity.Encrypt(DomainLogin);
             if (PasswordChanged) DomainPassword = Model.DesSecurity.Encrypt(DomainPassword);
             if (MasterPassChanged) MasterPass = Model.Hash.CreateHash(MasterPass);
+            if (AdminData.DomainChanged) AdminData.Domain = Model.DesSecurity.Encrypt(AdminData.Domain);
+            if (AdminData.NameChanged) AdminData.Name = Model.DesSecurity.Encrypt(AdminData.Name);
+            if (AdminData.PasswordChanged) AdminData.Password = Model.DesSecurity.Encrypt(AdminData.Password);
             Serializer.WriteToFile(_instance, "Settings.json");
             LoginChanged = false;
             PasswordChanged = false;
             MasterPassChanged = false;
+            AdminData.Reset();
         }
 
         public void AddHotkey(string hotkey)
@@ -134,6 +144,8 @@ namespace MyExplorer.ViewModel
         List<Action> _actions = new List<Action>();
         List<Icon> _icons = new List<Icon>();
         bool? _showSplash = false;
+        string _dispatcherUser = "";
+        AdminData _adminData = new AdminData();
 
         [DataMember]
         public List<string> HotKeys 
@@ -170,6 +182,28 @@ namespace MyExplorer.ViewModel
             set
             {
                 _masterKey = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [DataMember]
+        public AdminData AdminData
+        {
+            get => _adminData;
+            set
+            {
+                _adminData = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [DataMember]
+        public string DispatcherUser
+        {
+            get => _dispatcherUser;
+            set
+            {
+                _dispatcherUser = value;
                 OnPropertyChanged();
             }
         }

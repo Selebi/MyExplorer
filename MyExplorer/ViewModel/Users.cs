@@ -27,7 +27,7 @@ namespace MyExplorer.ViewModel
                 UserList.Add(u);
             });
             OnPropertyChanged("UserList");
-            User = $"{Model.Users.SessionUser.Domain}/{Model.Users.SessionUser.Name}";
+            User = $"{Model.Users.CurrentUser.Domain}/{Model.Users.CurrentUser.Name}";
         }
 
         public RelayCommand Back
